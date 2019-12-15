@@ -1,0 +1,36 @@
+<div *ngIf="novoArrayComposicao">
+  <table class="table table-striped table-sm table-condensed table-borderless">
+    <thead>
+      <tr>
+        <th>Documento</th>
+        <th>Obrigatório</th>
+        <th>Nome do Arquivo</th>
+        <th>Parte</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let composicao of novoArrayComposicao">
+        <td>{{tipoDocumento(composicao.tipoDocumentoComposicao)[0].documento}}</td>
+        <td class="text-center">
+          {{tipoDocumento(composicao.tipoDocumentoComposicao)[0].documentoObrigatorio |obrigatorio}}</td>
+        <td>{{composicao.tipoDocumentoComposicao.nomeDocumento | arquivo}}</td>
+        <td
+          *ngIf="composicao.tipoDocumentoComposicao.parteDocumento == 0 && composicao.tipoDocumentoComposicao.srcDocumento != null && composicao.tipoDocumentoComposicao.srcDocumento != ''">
+          Única</td>
+        <td
+          *ngIf="composicao.tipoDocumentoComposicao.srcDocumento == null && composicao.tipoDocumentoComposicao.parteDocumento == 0">
+          -</td>
+        <td *ngIf="composicao.tipoDocumentoComposicao.parteDocumento > 0">
+          {{composicao.tipoDocumentoComposicao.parteDocumento}}</td>
+        <td>
+          <button title="Visualizar Arquivo" class="btn btn-primary btn-sm"
+            (click)="visualizarArquivo(composicao.tipoDocumentoComposicao)"
+            *ngIf="composicao.tipoDocumentoComposicao.nomeDocumento">
+            <i class="fa fa-eye"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

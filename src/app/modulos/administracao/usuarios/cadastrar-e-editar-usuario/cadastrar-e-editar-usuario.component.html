@@ -1,0 +1,140 @@
+<nb-card class="status-success">
+    <nb-card-header>
+        <h3>Cadastrar Usuário</h3>
+    </nb-card-header>
+    <nb-card-body>
+        <!-- (ngSubmit)="salvarOuAlterar()" -->
+
+        <nb-card class="status-success">
+            <nb-card-header>
+                <h6>DADOS PESSOAIS</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <form>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                            <div class="form-group">
+                                <label class="col-form-label">* Login</label>
+                                <input name="hidden" class="form-control" value="objeto.login"
+                                    placeholder="Informe o Login" name="login" [(ngModel)]="objeto.login"
+                                    autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                            <div class="form-group">
+                                <label class="col-form-label">* Nome</label>
+                                <input autocomplete="off" class="form-control" placeholder="Nome" value="objeto.nome"
+                                    name="nome" [(ngModel)]="objeto.nome" uppercase>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <div class="form-group">
+                                <label class="col-form-label">* Email</label>
+                                <input autocomplete="off" class="form-control" placeholder="Email" value="objeto.email"
+                                    name="email" [(ngModel)]="objeto.email">
+                            </div>
+                        </div>
+                        <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                            <div class="form-group">
+                                <label class="col-form-label">* Senha</label>
+                                <input autocomplete="off" placeholder="Senha" type="password" [(ngModel)]="objeto.senha"
+                                    class="form-control" name="senha">
+                            </div>
+                        </div>
+                        <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                            <div class="form-group">
+                                <label class="col-form-label">Confirmar Senha</label>
+                                <input autocomplete="off" placeholder="Confirmar Senha" type="password"
+                                    class="form-control" name="confirmacaoSenha">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                <h6>PERFIS</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div *ngFor="let perfil of perfis; let i = index" class="checkbox-custom">
+                            <input type="checkbox" (change)='selecionarPerfil(perfil.id, $event.target.checked)'
+                                value='{{perfil.id}}' [checked]="verificarCheck(perfil.id)" id="checkbox{{i}}">
+                            <label for="checkbox{{i}}">
+                                <div>
+                                    <i class="fa fa-check"></i>
+                                </div> {{perfil.descricao}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
+                        class="fas fa-save"></i>
+                    Salvar Cadastro</button>
+                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
+                        class="fa fa-times"></i>
+                    Limpar</button>
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/administracao/usuarios']">
+                    <i class="fas fa-backward"></i>
+                    Voltar à Consulta de Usuários
+                </button>
+            </div>
+        </div>
+        <!-- </form> -->
+    </nb-card-body>
+</nb-card>
+
+<!--- Modal Confirmação de Exclusão -->
+<ng-template #confirmacao let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmação</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Deseja realmente excluir o usuário selecionado?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Sim</button>
+    </div>
+</ng-template>
+
+<!--- Modal Alterar Senha -->
+<ng-template #alterarSenha let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Resetar Senha </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <b>Usuário: {{usuario}}</b></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <br>
+                <div class="form-group">
+                    <label class="col-form-label">Nova Senha:</label>
+                    <input autocomplete="off" placeholder="Senha padrão: 1234567." class="form-control"
+                        [(ngModel)]="novaSenha">
+                </div>
+                <p class="help-block">
+                    <i class="fas fa-info-circle"></i> &nbsp; A senha deverá conter no mínimo 6 caracteres e no máximo
+                    8.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Confirmar</button>
+    </div>
+</ng-template>

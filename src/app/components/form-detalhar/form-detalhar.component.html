@@ -1,0 +1,19 @@
+<div class="form-group" [ngSwitch]="tipo">
+  <label class="col-form-label">{{label}}</label>
+  <div *ngSwitchCase="tipoDetalhes.PADRAO" [class.campoErrado]="erro && erro.customService[0]" class="text" id="{{id}}">
+    {{dado | blank }}</div>
+  <div *ngSwitchCase="tipoDetalhes.DATA" [class.campoErrado]="erro && erro.customService[0]" class="text" id="{{id}}">
+    {{dado | date: 'dd/MM/yyyy' | blank }}</div>
+  <div *ngSwitchCase="tipoDetalhes.DATA_HORA" [class.campoErrado]="erro && erro.customService[0]" class="text"
+    id="{{id}}">
+    {{dado | date: 'dd/MM/yyyy HH:mm' | blank }}</div>
+  <div *ngSwitchCase="tipoDetalhes.MOEDA" [class.campoErrado]="erro && erro.customService[0]" class="text" id="{{id}}">
+    {{dado | currency:'BRL' }}</div>
+  <div *ngSwitchCase="tipoDetalhes.CPF" [class.campoErrado]="erro && erro.customService[0]" class="text" id="{{id}}">
+    {{dado | cpf}}</div>
+  <div *ngSwitchCase="tipoDetalhes.CNPJ" [class.campoErrado]="erro && erro.customService[0]" class="text" id="{{id}}">
+    {{dado | cnpj}}</div>
+  <div *ngSwitchCase="tipoDetalhes.RG" [class.campoErrado]="erro && erro.customService[0]" class="text" id="{{id}}">
+    {{dado | rg}}</div>
+</div>
+<div *ngIf="erro" class="error-message">{{erro.customService[0]}}</div>

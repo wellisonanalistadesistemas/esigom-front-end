@@ -1,0 +1,8 @@
+export enum TipoDadosAdicionais {
+    LICITACAO = 1,
+    HOMOLOGACAO = 2,
+    INSTRUMENTO_CONTRATUAL = 3,
+    EXECUCAO_CONTRATUAL = 4,
+    ALTERACAO_CONTRATUAL = 5,
+    MEDICAO = 7,
+}

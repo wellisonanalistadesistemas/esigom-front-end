@@ -1,0 +1,85 @@
+stages:
+  - build
+  - deploy
+
+before_script:
+  - export COMMIT_TIME=$(git show -s --format=%ci $CI_COMMIT_SHA)
+  - docker info
+  - docker login -u $usuario_login_gitlab -p $senha_usuario_gitlab  git.tce.ms.gov.br:4567
+
+build-dev:
+  stage: build
+  script: 
+   - docker build --build-arg environment=development -t git.tce.ms.gov.br:4567/sistemas/tce-digital/modulo-remessa:dev .
+   - docker push git.tce.ms.gov.br:4567/sistemas/tce-digital/modulo-remessa:dev
+  only:
+  - master
+  when: manual
+
+build-qa:
+  stage: build
+  script: 
+   - docker build --build-arg environment=qa -t git.tce.ms.gov.br:4567/sistemas/tce-digital/modulo-remessa:qa .
+   - docker push git.tce.ms.gov.br:4567/sistemas/tce-digital/modulo-remessa:qa
+  only:
+  - master
+  when: manual
+
+build-trn:
+  stage: build
+  script: 
+   - docker build --build-arg environment=trn -t git.tce.ms.gov.br:4567/sistemas/tce-digital/modulo-remessa:trn .
+   - docker push git.tce.ms.gov.br:4567/sistemas/tce-digital/modulo-remessa:trn
+  only:
+  - master
+  when: manual
+
+deploy_dev:
+  stage: deploy
+  script: 
+   - sshpass -p "$SENHA_SERVIDOR_DEV" ssh -o  StrictHostKeyChecking=no $USUARIO_SERVIDOR_DEV@192.168.0.42 -t "
+     cd /containers/tcedigital/dev/tcedigital-dev && 
+     docker login gitlab.tce.ms.gov.br:4567 -u gitlab+deploy-token-25 -p BsEad47mDGL8tEeuheUq && 
+     docker-compose stop modulo-remessa-dev && 
+     docker-compose pull modulo-remessa-dev && 
+     docker-compose up -d modulo-remessa-dev; bash" 
+  environment:
+    name: dev
+    url:  http://tcedigital-protocolo-dev.tce.ms.gov.br/remessas
+  only:
+  - master
+  when: manual
+
+deploy_qa:
+  stage: deploy
+  script: 
+   - sshpass -p "$SENHA_SERVIDOR_QA" ssh -o  StrictHostKeyChecking=no $USUARIO_SERVIDOR_QA@192.168.0.49 -t "
+     cd /containers/qa/tcedigital-qa && 
+     docker login gitlab.tce.ms.gov.br:4567 -u gitlab+deploy-token-25 -p BsEad47mDGL8tEeuheUq && 
+     docker-compose stop modulo-remessa-qa && 
+     docker-compose pull modulo-remessa-qa && 
+     docker-compose up -d modulo-remessa-qa; bash" 
+  environment:
+    name: dev
+    url:  http://tcedigital-protocolo-qa.tce.ms.gov.br/remessas
+  only:
+  - master
+  when: manual
+
+deploy_trn:
+  stage: deploy
+  script: 
+   - sshpass -p "$SENHA_SERVIDOR_QA" ssh -o  StrictHostKeyChecking=no $USUARIO_SERVIDOR_QA@192.168.0.49 -t "
+     cd /containers/trn/tcedigital-trn && 
+     docker login gitlab.tce.ms.gov.br:4567 -u gitlab+deploy-token-25 -p BsEad47mDGL8tEeuheUq && 
+     docker-compose stop modulo-remessa-trn && 
+     docker-compose pull modulo-remessa-trn && 
+     docker-compose up -d modulo-remessa-trn; bash" 
+  environment:
+    name: dev
+    url:  http://tcedigital-protocolo-trn.tce.ms.gov.br/remessas
+  only:
+  - master
+  when: manual
+
+  

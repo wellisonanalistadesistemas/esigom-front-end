@@ -1,0 +1,53 @@
+<div class="form-group" [ngSwitch]="tipo" title="{{title}}">
+  <label class="col-form-label">{{label}}
+    <i *ngIf="title" class="fa fa-info-circle"></i>
+  </label>
+  <input id="{{label}}" *ngSwitchCase="tipoInput.PADRAO" maxlength="{{maxLength}}"
+    [class.campoErrado]="control.invalid && control.touched" class="form-control" [formControl]="control">
+
+  <input *ngSwitchCase="tipoInput.ANO" [class.campoErrado]="control.invalid && control.touched" class="form-control"
+    [formControl]="control" type="number" (change)="selecionar($event)" (blur)="validarAno($event)" mask="0000">
+
+  <ng-select *ngSwitchCase="tipoInput.SELECT" [class.campoErrado]="control.invalid && control.touched"
+    (change)="selecionar($event)" (open)="openEvent($event)" [items]="items" bindLabel="{{bindLabel}}"
+    bindValue="{{bindValue}}" notFoundText="Busca sem correspondência" [clearOnBackspace]="clearOnBackspace"
+    [clearable]="clearable" [formControl]="control">
+  </ng-select>
+
+  <textarea *ngSwitchCase="tipoInput.TEXT_AREA" maxlength="{{maxLength}}"
+    [class.campoErrado]="control.invalid && control.touched" class="form-control" [formControl]="control"
+    rows="{{rows}}" (blur)="validarComentario($event)" (change)="selecionar($event)"></textarea>
+
+  <div *ngSwitchCase="tipoInput.DATA">
+    <!-- <input [owlDateTimeTrigger]="dt1" (keyup)="setarData($event)" (blur)="validaDataManual($event)"
+      [class.campoErrado]="control.invalid && control.touched" [owlDateTime]="dt1" class="form-control"
+      [formControl]="control" (change)="selecionar($event)" [min]="min" [max]="max" />
+    <owl-date-time [pickerType]="'calendar'" [pickerMode]="'dialog'" #dt1 (afterPickerClosed)="setDate()">
+    </owl-date-time> -->
+    <input type="date" [formControl]="control" value="{{control.value | inputData}}" class="form-control"
+      [class.campoErrado]="control.invalid && control.touched">
+  </div>
+  <input *ngSwitchCase="tipoInput.CPF" [class.campoErrado]="control.invalid && control.touched" class="form-control"
+    [formControl]="control" mask="000.000.000-00" (change)="selecionar($event)">
+  <input *ngSwitchCase="tipoInput.CNPJ" [class.campoErrado]="control.invalid && control.touched" class="form-control"
+    [formControl]="control" mask="00.000.000/0000-00" (change)="selecionar($event)">
+
+  <input *ngSwitchCase="tipoInput.NUMERO_ORGAO" [class.campoErrado]="control.invalid && control.touched"
+    class="form-control" [formControl]="control" mask="00000000000" (change)="selecionar($event)">
+
+  <input *ngSwitchCase="tipoInput.MOEDA" [class.campoErrado]="control.invalid && control.touched" class="form-control"
+    [formControl]="control" maxlength="18" currencyMask (change)="selecionar($event)">
+
+  <div *ngSwitchCase="tipoInput.DATA_HORA">
+    <!-- <input [owlDateTimeTrigger]="dt1" [class.campoErrado]="control.invalid && control.touched" [owlDateTime]="dt1"
+      class="form-control" [formControl]="control" (change)="selecionar($event)" />
+    <owl-date-time [pickerType]="'both'" [pickerMode]="'dialog'" #dt1 (afterPickerClosed)="setDate()"></owl-date-time> -->
+    <input type="datetime-local" [formControl]="control" value="{{control.value | inputDatatime}}"
+      (change)="selecionar($event)" class="form-control" [class.campoErrado]="control.invalid && control.touched">
+  </div>
+
+  <input *ngSwitchCase="tipoInput.NUMERO" maxlength="{{maxLength}}"
+    [class.campoErrado]="control.invalid && control.touched" class="form-control" [formControl]="control" mask="0*"
+    (change)="selecionar($event)">
+</div>
+<app-control-messages [control]="control"></app-control-messages>

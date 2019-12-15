@@ -1,0 +1,19 @@
+.text{
+    background-color: #f5f5f5;
+    color: #888;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 0.375rem 0.75rem;
+    text-align: left;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -5px;
+}
+
+.campoErrado{
+    border: 1px solid red !important;
+    background-color: #f3c4c4 !important;
+}
