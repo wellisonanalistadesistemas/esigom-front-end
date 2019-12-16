@@ -1,15 +1,15 @@
 import { NbCardModule, NbTreeGridModule } from '@nebular/theme';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { Component } from '@angular/core';
-import { AdministracaoModule } from '../modulos/administracao.module';
 import { HomeComponent } from './home.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { AdministracaoModule } from '../modulos/administracao/administracao.module';
+import { OperadorModule } from '../modulos/operador/operador.module';
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
     NbTreeGridModule,
     AdministracaoModule,
+    OperadorModule,
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),
     BrowserAnimationsModule,
