@@ -14,28 +14,47 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class CadastrarEditarClienteComponent {
 
   public objeto = new Cliente;
-  public enderecos: any;
   public endereco = new Endereco();
   public telefone = new Telefone();
-  public telefones: any;
   closeResult: string;
 
   constructor(private animateScrollService: NgAnimateScrollService,
     private cd: ChangeDetectorRef, private toastr: ToastrService, private modalService: NgbModal) { }
 
 
-  /* ! Adicionar Telefone */
-  abrirModalAdicionarTelefone(template) {
-    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Dismissed ${this.adicionarTelefone()}`;
+  /* ! Adicionar/Excluir Telefone e/ou Endereço !  */
+  abrirModal(template, size, param) {
+    if (param) {
+      this.telefone = new Telefone();
+    } else {
+      this.endereco = new Endereco();
+    }
+    this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Dismissed ${this.adicionar(param)}`;
     }, (reason) => {
       this.closeResult = `Closed with: ${reason}`;
     });
   }
-  adicionarTelefone() {
-    console.log("Entrou no Adicionar.");
+  adicionar(param) {
+    if (param) {
+      this.objeto.telefones.push(this.telefone);
+    } else {
+      this.objeto.enderecos.push(this.endereco);
+    }
+  }
+  excluir(it, param) {
+    if (param) {
+      const index = this.objeto.telefones.indexOf(it);
+      this.objeto.telefones.splice(index, 1)
+    } else {
+      const index = this.objeto.enderecos.indexOf(it);
+      this.objeto.enderecos.splice(index, 1)
+    };
   }
 
-  /* ! Adicionar Endereço */
+  // TODO
+  buscarCep(){
+    console.log("Entrou aqui no busca cep");
+  }
 
 }
