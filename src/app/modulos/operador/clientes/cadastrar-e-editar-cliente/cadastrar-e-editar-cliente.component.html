@@ -15,30 +15,29 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
                                 <label class="col-form-label">* Nome</label>
-                                <input name="hidden" class="form-control" value="objeto.login"
-                                    placeholder="Informe o Nome" name="login" [(ngModel)]="objeto.login"
-                                    autocomplete="off">
+                                <input class="form-control" placeholder="Informe o Nome" name="login"
+                                    [(ngModel)]="objeto.nome" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
                                 <label class="col-form-label">CPF</label>
-                                <input autocomplete="off" class="form-control" placeholder="Nome" value="objeto.nome"
-                                    name="nome" [(ngModel)]="objeto.nome" uppercase>
+                                <input autocomplete="off" class="form-control" placeholder="CPF"
+                                    [(ngModel)]="objeto.cpf" uppercase>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
                                 <label class="col-form-label">Data de Nascimento</label>
                                 <input autocomplete="off" class="form-control" placeholder="Email" value="objeto.email"
                                     name="email" [(ngModel)]="objeto.email">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
                                 <label class="col-form-label">E-mail</label>
-                                <input autocomplete="off" class="form-control" placeholder="Email" value="objeto.email"
-                                    name="email" [(ngModel)]="objeto.email">
+                                <input autocomplete="off" class="form-control" placeholder="Email" name="email"
+                                    [(ngModel)]="objeto.email">
                             </div>
                         </div>
                     </div>
@@ -95,19 +94,21 @@
                                     <th class="text-center">Rua</th>
                                     <th class="text-center">Número</th>
                                     <th class="text-center">Bairro</th>
-                                    <th class="text-center">Cidade/Estado</th>
+                                    <th class="text-center">Cidade</th>
+                                    <th class="text-center">Estado</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let it of objeto.enderecos">
                                     <td scope="col" class="text-center">{{it.cep}}</td>
-                                    <td scope="col" class="text-center">{{it.rua}}</td>
+                                    <td scope="col" class="text-center">{{it.descricao}}</td>
                                     <td scope="col" class="text-center">{{it.numero}}</td>
                                     <td scope="col" class="text-center">{{it.bairro}}</td>
-                                    <td scope="col" class="text-center">{{it.cidade}}/{{it.uf}}</td>
+                                    <td scope="col" class="text-center">{{it.cidade}}</td>
+                                    <td scope="col" class="text-center">{{it.uf}}</td>
                                     <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
+                                            (click)="excluir(it)"> <i class="far fa-trash-alt"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -117,7 +118,7 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarCadastro()"> <i
                         class="fas fa-save"></i>
                     Salvar Cadastro</button>
                 <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
@@ -144,8 +145,8 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="form-group">
                 <label class="col-form-label">Número</label>
-                <input [(ngModel)]="telefone.numero" autocomplete="off" placeholder="Telefone" class="form-control"
-                    name="numeroTelefone">
+                <input ui-br-phone-number [(ngModel)]="telefone.numero" autocomplete="off" placeholder="Telefone"
+                    class="form-control" name="numeroTelefone">
             </div>
         </div>
     </div>
@@ -175,8 +176,8 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                 <div class="form-group">
                     <label class="col-form-label">Rua</label>
-                    <input [(ngModel)]="endereco.rua" autocomplete="off" placeholder="Telefone" class="form-control"
-                        name="rua">
+                    <input [(ngModel)]="endereco.descricao" autocomplete="off" placeholder="Telefone"
+                        class="form-control" name="rua">
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">

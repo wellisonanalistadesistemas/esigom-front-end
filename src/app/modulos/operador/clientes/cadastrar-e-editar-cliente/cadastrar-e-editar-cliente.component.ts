@@ -5,6 +5,9 @@ import { Cliente } from 'src/app/model/cliente';
 import { NgAnimateScrollService } from 'ng-animate-scroll';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
+import { Cep } from 'src/app/model/cep';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-cadastrar-e-editar-cliente',
@@ -18,8 +21,8 @@ export class CadastrarEditarClienteComponent {
   public telefone = new Telefone();
   closeResult: string;
 
-  constructor(private animateScrollService: NgAnimateScrollService,
-    private cd: ChangeDetectorRef, private toastr: ToastrService, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private animateScrollService: NgAnimateScrollService,
+    private cd: ChangeDetectorRef, private toastr: ToastrService, private modalService: NgbModal, private _clienteService: ClienteService) { }
 
 
   /* ! Adicionar/Excluir Telefone e/ou Endereço !  */
@@ -52,9 +55,22 @@ export class CadastrarEditarClienteComponent {
     };
   }
 
-  // TODO
-  buscarCep(){
-    console.log("Entrou aqui no busca cep");
+  /* Buscar CEP */
+  buscarCep() {
+    this.http.get(`https://viacep.com.br/ws/${this.endereco.cep}/json/`).subscribe((data: Cep) => {
+      // aplicar retorno aos inputs  
+      this.endereco.descricao = data.logradouro;
+      this.endereco.bairro = data.bairro;
+      this.endereco.cidade = data.localidade;
+      this.endereco.uf = data.uf;
+    });
   }
 
+  salvarCadastro() {
+    console.log("O que será passado:" + this.objeto);
+    this._clienteService.salvar(this.objeto)
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
 }
