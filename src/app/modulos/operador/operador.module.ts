@@ -13,9 +13,10 @@ import { PipeModule } from 'src/app/pipe/pipe.module';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { CadastrarEditarClienteComponent } from './clientes/cadastrar-e-editar-cliente/cadastrar-e-editar-cliente.component';
+import { ListarClienteComponent } from './clientes/listar-cliente/listar-cliente.component';
 
 @NgModule({
-  declarations: [ClientesComponent, CadastrarEditarClienteComponent],
+  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent],
   imports: [
     CommonModule,
     ComponentsModule,
