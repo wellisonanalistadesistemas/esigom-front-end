@@ -1,1 +1,42 @@
-<p>listar-cliente works!</p>
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th style="cursor: pointer;" title="Ordenar pelo Código" class="text-center" (click)="ordenar('id')"> Código</th>
+        <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center" (click)="ordenar('nome')">
+          Nome do Usuário</th>
+        <th style="cursor: pointer;" title="Ordenar pelo Login" class="text-center" (click)="ordenar('login')">Login</th>
+        <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')"> Email</th>
+        <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
+          (click)="ordenar('dthInclusao')">Data Última Alteração</th>
+        <th class="text-center">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let it of lista.lista">
+        <td scope="col" class="text-center">{{it.id}}</td>
+        <td scope="col">{{it.nome}}</td>
+        <td scope="col">{{it.login}}</td>
+        <td scope="col">{{it.email}}</td>
+        <td scope="col" class="text-center">{{it.dthInclusao | date: 'dd/MM/yyyy h:mm:ss'}}</td>
+        <td scope="col" class="text-center">
+          <!-- <button class="m-1 btn btn-sm btn-primary"> <i class="fas fa-user"></i></button> -->
+          <button class="m-1 btn btn-sm btn-info" (click)="alterarSenha(it.id,it.nome)"> <i
+              class="fas fa-retweet"></i></button>
+          <button class="m-1 btn btn-sm btn-success" [routerLink]="['/administracao/usuarios/editar/',it.id]"> <i
+              class="fas fa-pencil-alt"></i></button>
+          <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i class="far fa-trash-alt"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row p-2">
+    <div class="col" style="margin-left: 5px">
+      <pagination [totalItems]="lista.recordsTotal" (pageChanged)="search($event)" previousText="&lsaquo;"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5" class="pagination-sm"
+        [boundaryLinks]="true" [itemsPerPage]="10" [(ngModel)]="paginaAtual"></pagination>
+    </div>
+    <div class="col-md-6 text-right">
+      Exibindo {{parametrosPaginacao.offset+1}} - {{lista.lista.length + parametrosPaginacao.offset }} de
+      {{lista.recordsTotal}} registro(s) encontrado(s).
+    </div>
+  </div>
