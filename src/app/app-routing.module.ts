@@ -7,6 +7,8 @@ import { UsuariosComponent } from './modulos/administracao/usuarios/usuarios.com
 import { CadastrarEditarUsuarioComponent } from './modulos/administracao/usuarios/cadastrar-e-editar-usuario/cadastrar-e-editar-usuario.component';
 import { ClientesComponent } from './modulos/operador/clientes/clientes.component';
 import { CadastrarEditarClienteComponent } from './modulos/operador/clientes/cadastrar-e-editar-cliente/cadastrar-e-editar-cliente.component';
+import { PerfilComponent } from './modulos/administracao/perfil/perfil.component';
+import { CadastrarEEditarPerfilComponent } from './modulos/administracao/perfil/cadastrar-e-editar-perfil/cadastrar-e-editar-perfil.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
@@ -36,6 +38,32 @@ const routes: Routes = [
 
     ]
   },
+
+
+  {
+    path: 'administracao/perfis',
+    data: {
+      breadcrumbs: 'Perfis'
+    },
+    children: [
+      {
+        path: '', component: PerfilComponent
+      },
+      {
+        path: 'cadastrar',
+        data: {
+          breadcrumbs: 'Novo Perfil'
+        },
+        component: CadastrarEEditarPerfilComponent
+      },
+      {
+        path: 'editar/:id',
+        component: CadastrarEEditarPerfilComponent
+      },
+
+    ]
+  },
+
   {
     path: 'operador/clientes',
     data: {
@@ -52,10 +80,14 @@ const routes: Routes = [
         },
         component: CadastrarEditarClienteComponent
       },
-   
+      {
+        path: 'editar/:id',
+        component: CadastrarEditarClienteComponent
+      },
+
     ]
   },
-  
+
 ];
 
 @NgModule({

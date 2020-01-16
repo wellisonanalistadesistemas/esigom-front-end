@@ -1,43 +1,36 @@
 <nb-card class="status-success">
     <nb-card-header>
-        <h3>Cadastrar Cliente</h3>
+        <h5>CADASTRAR CLIENTE</h5>
     </nb-card-header>
     <nb-card-body>
         <!-- (ngSubmit)="salvarOuAlterar()" -->
-
         <nb-card class="status-success">
             <nb-card-header>
-                <h6>DADOS PESSOAIS</h6>
+                <h6>Dados Pessoais:</h6>
             </nb-card-header>
             <nb-card-body>
                 <form>
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
                                 <label class="col-form-label">* Nome</label>
-                                <input class="form-control" placeholder="Informe o Nome" name="login"
+                                <input class="form-control" placeholder="Informe o Nome" name="nome" value="objeto.nome"
                                     [(ngModel)]="objeto.nome" autocomplete="off">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
                                 <label class="col-form-label">CPF</label>
-                                <input autocomplete="off" class="form-control" placeholder="CPF"
-                                    [(ngModel)]="objeto.cpf" uppercase>
+                                <input autocomplete="off" class="form-control" placeholder="CPF" name="cpf"
+                                    value="objeto.cpf" [(ngModel)]="objeto.cpf" uppercase>
                             </div>
                         </div>
-                        <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                            <div class="form-group">
-                                <label class="col-form-label">Data de Nascimento</label>
-                                <input autocomplete="off" class="form-control" placeholder="Email" value="objeto.email"
-                                    name="email" [(ngModel)]="objeto.email">
-                            </div>
-                        </div> -->
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
                                 <label class="col-form-label">E-mail</label>
                                 <input autocomplete="off" class="form-control" placeholder="Email" name="email"
-                                    [(ngModel)]="objeto.email">
+                                    value="objeto.email" [(ngModel)]="objeto.email">
                             </div>
                         </div>
                     </div>
@@ -46,7 +39,7 @@
         </nb-card>
         <nb-card>
             <nb-card-header>
-                <h6>TELEFONE(S)</h6>
+                <h6>Telefone(s):</h6>
             </nb-card-header>
             <nb-card-body>
                 <div class="row">
@@ -77,7 +70,7 @@
         </nb-card>
         <nb-card>
             <nb-card-header>
-                <h6>ENDEREÇO(S)</h6>
+                <h6>Endereço(s):</h6>
             </nb-card-header>
             <nb-card-body>
                 <div class="row">
@@ -118,13 +111,13 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarCadastro()"> <i
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
                         class="fas fa-save"></i>
                     Salvar Cadastro</button>
                 <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
                         class="fa fa-times"></i>
                     Limpar</button>
-                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/administracao/usuarios']">
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/clientes']">
                     <i class="fas fa-backward"></i>
                     Voltar à Consulta de Clientes
                 </button>

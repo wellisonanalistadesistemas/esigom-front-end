@@ -15,11 +15,14 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CadastrarEditarUsuarioComponent } from './usuarios/cadastrar-e-editar-usuario/cadastrar-e-editar-usuario.component';
 import { ListarUsuarioComponent } from './usuarios/listar-usuario/listar-usuario.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { PerfilComponent } from './perfil/perfil.component';
+import { ListarPerfilComponent } from './perfil/listar-perfil/listar-perfil.component';
+import { CadastrarEEditarPerfilComponent } from './perfil/cadastrar-e-editar-perfil/cadastrar-e-editar-perfil.component';
 
 @NgModule({
   declarations: [
     UsuariosComponent,
-    CadastrarEditarUsuarioComponent, ListarUsuarioComponent],
+    CadastrarEditarUsuarioComponent, ListarUsuarioComponent, PerfilComponent, ListarPerfilComponent, CadastrarEEditarPerfilComponent],
   imports: [
     CommonModule,
     ComponentsModule,
@@ -38,7 +41,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     NbListModule,
   ],
   exports: [
-    UsuariosComponent
+    UsuariosComponent,
+    PerfilComponent
   ]
 })
 export class AdministracaoModule { }

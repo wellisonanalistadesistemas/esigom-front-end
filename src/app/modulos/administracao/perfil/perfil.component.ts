@@ -1,38 +1,31 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { NgAnimateScrollService } from 'ng-animate-scroll';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClienteService } from 'src/app/services/cliente.service';
+import { PerfilService } from 'src/app/services/perfil.service';
 
 @Component({
-  selector: 'app-clientes',
-  templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.scss']
+  selector: 'app-perfis',
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.scss']
 })
 
-export class ClientesComponent implements OnInit {
-  constructor(private _clienteService: ClienteService, private animateScrollService: NgAnimateScrollService,
-    private cd: ChangeDetectorRef, private toastr: ToastrService, private modalService: NgbModal) { }
+export class PerfilComponent implements OnInit {
+  constructor(private _perfilService: PerfilService, private cd: ChangeDetectorRef, private toastr: ToastrService, private modalService: NgbModal) { }
 
-  buscaForm = ({}) as ClienteBuscaEntity;
-  listaClientes: any;
+  buscaForm = ({}) as PerfilBuscaEntity;
+  listaPerfis: any;
   paginaAtual: any;
   modalConfirmacao: any;
   idExcluir: any;
   closeResult: string;
 
-  /* Modal Alterar Senha*/
-  usuario: string;
-  novaSenha: string;
-
   ngOnInit() {
     this.novoForm();
-    this.buscarClientes();
+    this.buscarPerfis();
   }
 
   novoForm() {
-    this.buscaForm = new ClienteBuscaEntity();
+    this.buscaForm = new PerfilBuscaEntity();
     this.buscaForm.offset = 0;
     this.buscaForm.limit = 10;
     this.buscaForm.coluna = "id";
@@ -41,12 +34,12 @@ export class ClientesComponent implements OnInit {
 
   iniciarForm() {
     this.novoForm;
-    this.buscarClientes();
+    this.buscarPerfis();
   }
 
-  buscarClientes() {
-    this._clienteService.pesquisar(this.buscaForm).subscribe(data => {
-      this.listaClientes = data;
+  buscarPerfis() {
+    this._perfilService.pesquisar(this.buscaForm).subscribe(data => {
+      this.listaPerfis = data;
     });
   }
 
@@ -57,17 +50,14 @@ export class ClientesComponent implements OnInit {
     } else {
       this.buscaForm.tipoOrdenacao = "desc"
     }
-    this.buscarClientes();
+    this.buscarPerfis();
   }
 
   public paginar(params) {
-    // this.buscaForm.offset = 10 * (params.page - 1);
     this.buscaForm.offset = (params.page - 1);
     this.paginaAtual = params.page;
-    this.buscarClientes();
+    this.buscarPerfis();
   }
-
-
 
   public abrirModalExclusao(Id, template) {
     this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -78,23 +68,17 @@ export class ClientesComponent implements OnInit {
   }
 
   public excluir(id) {
-    this._clienteService.excluir(id).subscribe(data => {
-      this.buscarClientes();
-      this.toastr.success('Cliente excluído com sucesso.');
+    this._perfilService.excluir(id).subscribe(data => {
+      this.buscarPerfis();
+      this.toastr.success('Perfil excluído com sucesso.');
     });
   }
-
-
 }
 
-export class ClienteBuscaEntity {
+export class PerfilBuscaEntity {
   offset: number;
   limit: number;
   coluna?: string;
   tipoOrdenacao?: string;
-  descricao?: string;
   nome: number;
-  login: string;
-  dthInclusao: string;
-  email: string;
 }

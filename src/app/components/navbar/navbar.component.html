@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-  <div class="container col-md-9">
+  <div class="container col-md-7">
     <a class="navbar-brand" href="#">
       <img src="https://getbootstrap.com.br/docs/4.1/assets/img/bootstrap-stack.png" width="30" height="30"
         class="d-inline-block align-top" alt="">
@@ -10,44 +10,40 @@
     </button>
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+
         <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Gerenciar Clientes
+            Operações
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/operador/clientes/cadastrar">Novo Cliente</a>
-            <a class="dropdown-item" href="/operador/clientes">Consulta</a>
+            <a class="dropdown-item" href="#">Orçamento e Venda</a>
+            <a class="dropdown-item" href="#">Entradas de Produtos</a>
+            <a class="dropdown-item" href="#">Pedidos a Fornecedores</a>
+            <a class="dropdown-item" href="#">Devoluções a Fornecedor</a>
+            <a class="dropdown-item" href="#">Contas a Pagar</a>
           </div>
         </li>
         <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Gerenciar Vendas
+            Estoque
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Nova Venda</a>
             <a class="dropdown-item" href="#">Consulta</a>
           </div>
         </li>
         <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Gerenciar Estoque
+            Financeiro
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Novo Lançamento</a>
-            <a class="dropdown-item" href="#">Consulta</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Controle de Acesso
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/administracao/usuarios/cadastrar">Novo Usuário</a>
-            <a class="dropdown-item" href="/administracao/usuarios">Consulta</a>
+            <a class="dropdown-item" href="#">Demonstrativo Gerencial</a>
+            <a class="dropdown-item" href="#">Nota Fiscal</a>
           </div>
         </li>
         <li class="nav-item dropdown active">
@@ -56,11 +52,20 @@
             Cadastros
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Mercadorias</a>
+            <a class="dropdown-item" href="/operador/clientes">Clientes</a>
+            <a class="dropdown-item" href="#">Produtos</a>
+            <a class="dropdown-item" href="#">Serviços</a>
           </div>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Próximas Cobranças</a>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Controle de Acesso
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/administracao/usuarios">Usuários</a>
+            <a class="dropdown-item" href="/administracao/perfis">Perfis</a>
+          </div>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="#">Relatórios</a>
@@ -68,7 +73,8 @@
       </ul>
     </div>
   </div>
-  <div class="container col-md-3">
+  <div class="container col-md-5">
+
     <ul class="navbar-nav ml-auto text-right">
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true">
@@ -80,5 +86,6 @@
         </div>
       </li>
     </ul>
+
   </div>
 </nav>
