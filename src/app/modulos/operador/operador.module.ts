@@ -14,9 +14,18 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { CadastrarEditarClienteComponent } from './clientes/cadastrar-e-editar-cliente/cadastrar-e-editar-cliente.component';
 import { ListarClienteComponent } from './clientes/listar-cliente/listar-cliente.component';
+import { ProdutosComponent } from './produtos/produtos.component';
+import { ListarServicoComponent } from './servicos/listar-servico/listar-servico.component';
+import { CadastrarEEditarServicoComponent } from './servicos/cadastrar-e-editar-servico/cadastrar-e-editar-servico.component';
+import { ListarProdutoComponent } from './produtos/listar-produto/listar-produto.component';
+import { CadastrarEEditarProdutoComponent } from './produtos/cadastrar-e-editar-produto/cadastrar-e-editar-produto.component';
+import { ServicoComponent } from './servicos/servicos.component';
+import { OrcamentoComponent } from './orcamento/orcamento.component';
+import { CadastrarEEditarOrcamentoComponent } from './orcamento/cadastrar-e-editar-orcamento/cadastrar-e-editar-orcamento.component';
+import { ListarOrcamentoComponent } from './orcamento/listar-orcamento/listar-orcamento.component';
 
 @NgModule({
-  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent],
+  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent, ServicoComponent, ProdutosComponent, ListarServicoComponent, CadastrarEEditarServicoComponent, ListarProdutoComponent, CadastrarEEditarProdutoComponent, OrcamentoComponent, CadastrarEEditarOrcamentoComponent, ListarOrcamentoComponent],
   imports: [
     CommonModule,
     ComponentsModule,

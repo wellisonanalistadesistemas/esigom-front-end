@@ -1,0 +1,196 @@
+<nb-card class="status-success">
+    <nb-card-header>
+        <h5>CADASTRAR ORÇAMENTO</h5>
+    </nb-card-header>
+    <nb-card-body>
+        <!-- (ngSubmit)="salvarOuAlterar()" -->
+        <nb-card class="status-success">
+            <nb-card-header>
+                <h6>Dados Básicos:</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <form>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <div class="form-group">
+                                <label class="col-form-label">* Nome</label>
+                                <input class="form-control" placeholder="Informe o Nome" name="nome" value="objeto.nome"
+                                    [(ngModel)]="objeto.nome" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                <h6>Produto(s):</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="m-1 btn btn-sm btn-info btn-pesquisar"
+                            (click)="abrirModal(addTelefone, 'sm', 1)"> <i class="fas fa-plus"></i>
+                            Adicionar Produto</button>
+                    </div>
+                    <div *ngIf="objeto.telefones.length > 0" class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Número Telefone</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let it of objeto.telefones">
+                                    <td scope="col" class="text-center">{{it.numero}}</td>
+                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                            (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                <h6>Serviço(s):</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="m-1 btn btn-sm btn-info btn-pesquisar" (click)="abrirModal(addEndereco,'lg')"> <i
+                                class="fas fa-plus"></i>
+                            Adicionar Serviço</button>
+                    </div>
+                    <div *ngIf="objeto.enderecos.length > 0" class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">CEP</th>
+                                    <th class="text-center">Rua</th>
+                                    <th class="text-center">Número</th>
+                                    <th class="text-center">Bairro</th>
+                                    <th class="text-center">Cidade</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let it of objeto.enderecos">
+                                    <td scope="col" class="text-center">{{it.cep}}</td>
+                                    <td scope="col" class="text-center">{{it.descricao}}</td>
+                                    <td scope="col" class="text-center">{{it.numero}}</td>
+                                    <td scope="col" class="text-center">{{it.bairro}}</td>
+                                    <td scope="col" class="text-center">{{it.cidade}}</td>
+                                    <td scope="col" class="text-center">{{it.uf}}</td>
+                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                            (click)="excluir(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
+                        class="fas fa-save"></i>
+                    Salvar Cadastro</button>
+                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
+                        class="fa fa-times"></i>
+                    Limpar</button>
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/clientes']">
+                    <i class="fas fa-backward"></i>
+                    Voltar à Consulta de Clientes
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<!--- Modal Adicionar Telefone -->
+<ng-template #addTelefone let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Adicionar Telefone</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="form-group">
+                <label class="col-form-label">Número</label>
+                <input ui-br-phone-number [(ngModel)]="telefone.numero" autocomplete="off" placeholder="Telefone"
+                    class="form-control" name="numeroTelefone">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Adicionar</button>
+    </div>
+</ng-template>
+
+
+<!--- Modal Adicionar Endereço -->
+<ng-template #addEndereco let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Adicionar Endereço</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="col-form-label">CEP</label>
+                    <input (blur)="buscarCep()" [(ngModel)]="endereco.cep" autocomplete="off" placeholder="Telefone"
+                        class="form-control" name="cep">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                <div class="form-group">
+                    <label class="col-form-label">Rua</label>
+                    <input [(ngModel)]="endereco.descricao" autocomplete="off" placeholder="Telefone"
+                        class="form-control" name="rua">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="col-form-label">Número</label>
+                    <input [(ngModel)]="endereco.numero" autocomplete="off" placeholder="Telefone" class="form-control"
+                        name="numero">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="col-form-label">Bairro</label>
+                    <input [(ngModel)]="endereco.bairro" autocomplete="off" placeholder="Telefone" class="form-control"
+                        name="bairro">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="col-form-label">Cidade</label>
+                    <input [(ngModel)]="endereco.cidade" autocomplete="off" placeholder="Telefone" class="form-control"
+                        name="cidade">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="col-form-label">UF</label>
+                    <input [(ngModel)]="endereco.uf" autocomplete="off" placeholder="Telefone" class="form-control"
+                        name="uf">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Adicionar</button>
+    </div>
+</ng-template>
