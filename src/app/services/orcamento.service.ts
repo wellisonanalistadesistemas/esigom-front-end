@@ -28,7 +28,7 @@ export class OrcamentoService {
   }
 
   buscarPeloId(id: number) {
-    return this.http.get<Perfil>(`orcamentos/` + id);
+    return this.http.get<Orcamento>(`orcamentos/` + id);
   }
 
 }

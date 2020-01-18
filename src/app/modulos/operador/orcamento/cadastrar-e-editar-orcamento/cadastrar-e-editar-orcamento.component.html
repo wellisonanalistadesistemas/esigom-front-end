@@ -3,97 +3,279 @@
         <h5>CADASTRAR ORÇAMENTO</h5>
     </nb-card-header>
     <nb-card-body>
-        <!-- (ngSubmit)="salvarOuAlterar()" -->
-        <nb-card class="status-success">
-            <nb-card-header>
-                <h6>Dados Básicos:</h6>
-            </nb-card-header>
-            <nb-card-body>
-                <form>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                            <div class="form-group">
-                                <label class="col-form-label">* Nome</label>
-                                <input class="form-control" placeholder="Informe o Nome" name="nome" value="objeto.nome"
-                                    [(ngModel)]="objeto.nome" autocomplete="off">
+        <div class="row">
+            <div class="col-md-6">
+                <nb-card class="status-success">
+                    <nb-card-header>
+                        <h6>Dados do Cliente:</h6>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">CPF:</label>
+                                    <input class="form-control" placeholder="999.999.999-99" name="nome"
+                                        value="objeto.nome" [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8">
+                                <div class="form-group">
+                                    <label class="col-form-label">Nome:</label>
+                                    <input class="form-control" placeholder="Nome" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">E-mail:</label>
+                                    <input class="form-control" placeholder="E-mail" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                                <div class="form-group">
+                                    <label class="col-form-label">Telefone:</label>
+                                    <input class="form-control" placeholder="Telefone" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                                <div class="form-group">
+                                    <label class="col-form-label">Celular:</label>
+                                    <input class="form-control" placeholder="Celular" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </nb-card-body>
-        </nb-card>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <div class="col-md-6">
+                <nb-card class="status-success">
+                    <nb-card-header>
+                        <h6>Dados do Veículo:</h6>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                                <div class="form-group">
+                                    <label class="col-form-label">Veículo Placa:</label>
+                                    <input class="form-control" placeholder="AAA-0000" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                                <div class="form-group">
+                                    <label class="col-form-label">Marca:</label>
+                                    <input class="form-control" placeholder="Marca" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                                <div class="form-group">
+                                    <label class="col-form-label">Modelo:</label>
+                                    <input class="form-control" placeholder="Modelo" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Cor:</label>
+                                    <input class="form-control" placeholder="Cor" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Ano:</label>
+                                    <input class="form-control" placeholder="Ano" name="nome" value="objeto.nome"
+                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                                <div class="form-group">
+                                    <label class="col-form-label">Quilometragem:</label>
+                                    <input class="form-control" placeholder="Quilometragem" name="nome"
+                                        value="objeto.nome" [(ngModel)]="objeto.nome" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-12">
+                                <label class="col-form-label">Observações:</label>
+                                <textarea class="form-control" rows="3" [(ngModel)]="objeto.nome"></textarea>
+                            </div>
+                        </div> -->
+
+                    </nb-card-body>
+                </nb-card>
+            </div>
+        </div>
         <nb-card>
             <nb-card-header>
-                <h6>Produto(s):</h6>
+                <h6>Itens:</h6>
             </nb-card-header>
             <nb-card-body>
+                <nb-card>
+                    <nb-card-header>
+                        <h6>Produto(s):</h6>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="m-1 btn btn-sm btn-info btn-pesquisar"
+                                    (click)="abrirModal(addProduto, 'sm', 1)">
+                                    <i class="fas fa-plus"></i>
+                                    Adicionar Produto</button>
+                            </div>
+                            <!-- <div *ngIf="objeto.produtos.length > 0" class="col-md-12">
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th class="text-center">Número Telefone</th>
+                                                        <th class="text-center">Ações</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let it of objeto.produtos">
+                                                        <td scope="col" class="text-center">{{it.numero}}</td>
+                                                        <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                                                (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
+                                                    </tr>
+                                                </tbody> 
+                                            </table>
+                                        </div> -->
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+                <nb-card>
+                    <nb-card-header>
+                        <h6>Serviço(s):</h6>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="m-1 btn btn-sm btn-info btn-pesquisar"
+                                    (click)="abrirModal(addServico,'lg')"> <i class="fas fa-plus"></i>
+                                    Adicionar Serviço</button>
+                            </div>
+                            <!-- <div *ngIf="objeto.servicos.length > 0" class="col-md-12">
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th class="text-center">CEP</th>
+                                                        <th class="text-center">Rua</th>
+                                                        <th class="text-center">Número</th>
+                                                        <th class="text-center">Bairro</th>
+                                                        <th class="text-center">Cidade</th>
+                                                        <th class="text-center">Estado</th>
+                                                        <th class="text-center">Ações</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let it of objeto.servicos">
+                                                        <td scope="col" class="text-center">{{it.cep}}</td>
+                                                        <td scope="col" class="text-center">{{it.descricao}}</td>
+                                                        <td scope="col" class="text-center">{{it.numero}}</td>
+                                                        <td scope="col" class="text-center">{{it.bairro}}</td>
+                                                        <td scope="col" class="text-center">{{it.cidade}}</td>
+                                                        <td scope="col" class="text-center">{{it.uf}}</td>
+                                                        <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                                                (click)="excluir(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                                    </tr>
+                                                </tbody> 
+                                            </table>
+                                        </div> -->
+                        </div>
+                    </nb-card-body>
+                </nb-card>
                 <div class="row">
-                    <div class="col-md-12">
-                        <button class="m-1 btn btn-sm btn-info btn-pesquisar"
-                            (click)="abrirModal(addTelefone, 'sm', 1)"> <i class="fas fa-plus"></i>
-                            Adicionar Produto</button>
-                    </div>
-                    <div *ngIf="objeto.telefones.length > 0" class="col-md-12">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="text-center">Número Telefone</th>
-                                    <th class="text-center">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let it of objeto.telefones">
-                                    <td scope="col" class="text-center">{{it.numero}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="col-md-12 text-right">Total Geral: R$0,00</div>
                 </div>
             </nb-card-body>
         </nb-card>
         <nb-card>
             <nb-card-header>
-                <h6>Serviço(s):</h6>
+                <h6>Dados Adicionais:</h6>
             </nb-card-header>
             <nb-card-body>
                 <div class="row">
-                    <div class="col-md-12">
-                        <button class="m-1 btn btn-sm btn-info btn-pesquisar" (click)="abrirModal(addEndereco,'lg')"> <i
-                                class="fas fa-plus"></i>
-                            Adicionar Serviço</button>
+                    <div class="col-md-6">
+                        <label class="col-form-label">Ação sob o Orçamento:</label>
+                        <div class="checkbox">
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes1"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Gerar Nota Fiscal
+                            </label>
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Aguardar Aprovação
+                            </label>
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Aplicar Situação de Recusa
+                            </label>
+                        </div>
                     </div>
-                    <div *ngIf="objeto.enderecos.length > 0" class="col-md-12">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="text-center">CEP</th>
-                                    <th class="text-center">Rua</th>
-                                    <th class="text-center">Número</th>
-                                    <th class="text-center">Bairro</th>
-                                    <th class="text-center">Cidade</th>
-                                    <th class="text-center">Estado</th>
-                                    <th class="text-center">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let it of objeto.enderecos">
-                                    <td scope="col" class="text-center">{{it.cep}}</td>
-                                    <td scope="col" class="text-center">{{it.descricao}}</td>
-                                    <td scope="col" class="text-center">{{it.numero}}</td>
-                                    <td scope="col" class="text-center">{{it.bairro}}</td>
-                                    <td scope="col" class="text-center">{{it.cidade}}</td>
-                                    <td scope="col" class="text-center">{{it.uf}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluir(it)"> <i class="far fa-trash-alt"></i></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="col-md-6">
+                        <label class="col-form-label">Forma de Pagamento:</label>
+                        <div class="checkbox">
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes1"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Cartão de Crédito
+                            </label>
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Cartão de Débito
+                            </label>
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Dinheiro
+                            </label>
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Cheque
+                            </label>
+                            <label>
+                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
+                                    [(ngModel)]="objeto.nome">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span> Outros
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="col-form-label">Observações:</label>
+                        <textarea class="form-control" rows="3" [(ngModel)]="objeto.nome"></textarea>
                     </div>
                 </div>
             </nb-card-body>
         </nb-card>
+
         <div class="row">
             <div class="col-md-12">
                 <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
@@ -102,17 +284,17 @@
                 <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
                         class="fa fa-times"></i>
                     Limpar</button>
-                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/clientes']">
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/orcamentos']">
                     <i class="fas fa-backward"></i>
                     Voltar à Consulta de Clientes
                 </button>
             </div>
+
         </div>
     </nb-card-body>
 </nb-card>
 
-<!--- Modal Adicionar Telefone -->
-<ng-template #addTelefone let-modal>
+<ng-template #addProduto let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Adicionar Telefone</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -134,8 +316,8 @@
 </ng-template>
 
 
-<!--- Modal Adicionar Endereço -->
-<ng-template #addEndereco let-modal>
+
+<ng-template #addServico let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Adicionar Endereço</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

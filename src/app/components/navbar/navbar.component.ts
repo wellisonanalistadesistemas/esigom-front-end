@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +32,7 @@ export class NavbarComponent implements OnInit {
 
   public menu: any;
 
-  constructor() { 
+  constructor(private router: Router, private route: ActivatedRoute) { 
     this.menu = this.menuTemas.engenharia;
   }
 

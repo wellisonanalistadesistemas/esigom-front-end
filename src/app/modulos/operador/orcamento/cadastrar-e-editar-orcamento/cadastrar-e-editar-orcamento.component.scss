@@ -1,0 +1,90 @@
+.badge-1 {
+    background-color: #999999;
+  }
+  
+  .badge-2 {
+    background-color: #7eaede;
+  }
+  
+  .badge-3 {
+    background-color: #006ba5;
+  }
+  
+  .badge-4 {
+    background-color: #ffc107;
+  }
+  
+  .badge-5 {
+    background-color: #F04A4A;
+  }
+  
+  .badge-6 {
+    background-color: #4dbd74;
+  }
+  
+  .badge-7 {
+    background-color: #FF9999;
+  }
+  
+  .table {
+    text-align: initial;
+  }
+  
+  .table .td-actions .btn {
+    padding: 5px;
+  }
+  
+  .td-actions {
+    padding: 15px;
+  }
+  
+  .info-pagination{
+    margin: 20px 0;
+    text-align: right;
+  }
+  
+  .btn {
+    color: #FFF;
+  }
+  
+  .badge {
+    padding: 10px 30px;
+    width: 80%;
+    color: #FFF;
+  }
+  
+  .input-checkbox {
+    margin: 10px 5px 10px 10px;
+  }
+  
+  .btn-pesquisar {
+    margin: 0px 3px;
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .btn-size {
+      width: 80%;
+      margin-bottom: 6px;
+    }
+  
+    .badge {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 1440px) {
+    .badge {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 4k) {
+    .badge {
+      padding: 15px 30px;
+      width: 60%;
+    }
+  }
+  
+  .visible{
+    visibility: hidden !important;
+  }

@@ -20,7 +20,7 @@
             Operações
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/operador/orcamentos">Orçamento e Venda</a>
+            <a class="dropdown-item" [routerLink]="['/operador/orcamentos/cadastrar']">Orçamento e Venda</a>
             <a class="dropdown-item" href="#">Entradas de Produtos</a>
             <a class="dropdown-item" href="#">Pedidos a Fornecedores</a>
             <a class="dropdown-item" href="#">Devoluções a Fornecedor</a>
@@ -52,9 +52,9 @@
             Cadastros
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/operador/clientes">Clientes</a>
-            <a class="dropdown-item" href="/operador/produtos">Produtos</a>
-            <a class="dropdown-item" href="/operador/servicos">Serviços</a>
+            <a class="dropdown-item" [routerLink]="['/operador/clientes']">Clientes</a>
+            <a class="dropdown-item" [routerLink]="['/operador/produtos']">Produtos</a>
+            <a class="dropdown-item" [routerLink]="['/operador/servicos']">Serviços</a>
           </div>
         </li>
         <li class="nav-item dropdown active">
@@ -63,8 +63,8 @@
             Controle de Acesso
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/administracao/usuarios">Usuários</a>
-            <a class="dropdown-item" href="/administracao/perfis">Perfis</a>
+            <a class="dropdown-item" [routerLink]="['/administracao/usuarios']">Usuários</a>
+            <a class="dropdown-item" [routerLink]="['/administracao/perfis']">Perfis</a>
           </div>
         </li>
         <li class="nav-item active">

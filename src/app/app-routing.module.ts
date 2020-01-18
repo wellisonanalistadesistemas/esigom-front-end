@@ -31,22 +31,22 @@ const routes: Routes = [
     },
     children: [
       {
-        path: '', component: CadastrarEEditarOrcamentoComponent
+        path: '', component: OrcamentoComponent
       },
-      // {
-      //   path: 'cadastrar',
-      //   data: {
-      //     breadcrumbs: 'Novo Orçamento'
-      //   },
-      //   component: CadastrarEEditarOrcamentoComponent
-      // },
-      // {
-      //   path: 'editar/:id',
-      //   data: {
-      //     breadcrumbs: 'Editar Orçamento'
-      //   },
-      //   component: CadastrarEEditarOrcamentoComponent
-      // },
+      {
+        path: 'cadastrar',
+        data: {
+          breadcrumbs: 'Novo Orçamento'
+        },
+        component: CadastrarEEditarOrcamentoComponent
+      },
+      {
+        path: 'editar/:id',
+        data: {
+          breadcrumbs: 'Editar Orçamento'
+        },
+        component: CadastrarEEditarOrcamentoComponent
+      },
 
     ]
   },
