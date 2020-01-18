@@ -1,6 +1,7 @@
 import { Produto } from './produto';
 import { Servico } from './servico';
 import { Cliente } from './cliente';
+import { FormaPagamento } from './formaPagamento';
 
 export class Orcamento {
     public id: number;
@@ -18,6 +19,7 @@ export class Orcamento {
     public formaPagamento: number;
     produtos = new Array<Produto>();
     servicos = new Array<Servico>();
+    formasPagamento = new Array<FormaPagamento>();
 
     constructor() {
         this.id = null;
@@ -30,11 +32,12 @@ export class Orcamento {
         this.obs = null;
         this.gerouOs = null;
         this.data = null;
-        this.cliente = null;
+        this.cliente = new Cliente();
         this.codStatus = null;
         this.formaPagamento = null;
         this.produtos = [];
         this.servicos = [];
+        this.formasPagamento = [];
     }
 
 }

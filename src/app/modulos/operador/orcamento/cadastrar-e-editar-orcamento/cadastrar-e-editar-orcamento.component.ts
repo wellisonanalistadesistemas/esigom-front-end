@@ -13,6 +13,8 @@ import { Orcamento } from 'src/app/model/orcamento';
 import { Produto } from 'src/app/model/produto';
 import { Servico } from 'src/app/model/servico';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
+import { FormaPagamento } from 'src/app/model/formaPagamento';
+import { FormaPagamentoService } from 'src/app/services/formaPagamento';
 
 @Component({
   selector: 'app-cadastrar-e-editar-orcamento',
@@ -22,14 +24,22 @@ import { OrcamentoService } from 'src/app/services/orcamento.service';
 export class CadastrarEEditarOrcamentoComponent {
   public msgAction: string;
   public objeto = new Orcamento;
+  public cliente: any;
   public produto = new Produto();
   public servico = new Servico();
-  closeResult: string;
+  public closeResult: string;
+  public formaPagamento = new FormaPagamento();
+  public formasPagamento: any;
 
   constructor(private http: HttpClient,
-    private cd: ChangeDetectorRef, private modalService: NgbModal, private _orcamentoService: OrcamentoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
+    private cd: ChangeDetectorRef, private modalService: NgbModal, private _formaPagamentoService: FormaPagamentoService, private _clienteService: ClienteService, private _orcamentoService: OrcamentoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    // Obter Formas de pagamento
+    this._formaPagamentoService.pesquisar().subscribe(data => {
+      this.formasPagamento = data
+    });
+    // Obter pelo ID
     this.route.params.subscribe(params => {
       if (params.id != null) {
         this._orcamentoService.buscarPeloId(params.id).subscribe(data => this.objeto = data);
@@ -37,14 +47,26 @@ export class CadastrarEEditarOrcamentoComponent {
     })
   }
 
-  /* ! Adicionar/Excluir Telefone e/ou Endereço !  */
+  public adicionarFormaPagamento(obj) {
+    // Se já existe, remover
+    const index = this.objeto.formasPagamento.indexOf(obj);
+    if (index != -1) {
+      this.objeto.formasPagamento.splice(index, 1)
+    } else {
+      // Senão adicionar
+      this.formaPagamento = new FormaPagamento();
+      this.formaPagamento = obj;
+      this.objeto.formasPagamento.push(this.formaPagamento);
+    }
+    console.log(this.objeto);
+  }
+
   abrirModal(template, size, param) {
     if (param) {
       this.produto = new Produto();
     } else {
       this.servico = new Servico();
     }
-
     this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Dismissed ${this.adicionar(param)}`;
     }, (reason) => {
@@ -70,42 +92,35 @@ export class CadastrarEEditarOrcamentoComponent {
     };
   }
 
-  /* 
-  buscarCep() {
-    this.http.get(`https://viacep.com.br/ws/${this.endereco.cep}/json/`).subscribe((data: Cep) => {
-      // aplicar retorno aos inputs  
-      this.endereco.descricao = data.logradouro;
-      this.endereco.bairro = data.bairro;
-      this.endereco.cidade = data.localidade;
-      this.endereco.uf = data.uf;
-    });
-  }*/
 
-  public salvarOuAlterar() {
-    if (this.objeto.id) {
-      this._orcamentoService.alterar(this.objeto.id, this.objeto)
-        .subscribe(retorno => {
-          if (!retorno) {
-            this.redirencionar('Orçamento editado com sucesso.');
-          } else {
-            this.toastr.error('Erro ao cadastrar.');
-          }
-        });
-    } else {
-      this._orcamentoService.salvar(this.objeto).subscribe(retorno => {
-        if (!retorno) {
-          this.redirencionar('Orçamento cadastrado com sucesso.');
-        } else {
-          this.toastr.error('Erro ao cadastrar.');
-        }
-      });
-    }
-  }
 
   redirencionar(string) {
     this.toastr.success(string);
     this.router.navigate(['/operador/orcamentos']);
   }
 
+  /* Buscar Cliente*/
+  buscarCliente() {
+    this._clienteService.buscarPeloCpf(this.objeto.cliente.cpf).subscribe((data: Cliente) => {
+      if (data) {
+        this.objeto.cliente = data;
+      } else {
+        // TODO:
+        console.log("Não Encontrado");
+      }
+    });
+  }
+
+  salvarOuAlterar() {
+    this._orcamentoService.salvar(this.objeto).subscribe(retorno => {
+      if (!retorno) {
+        this.redirencionar('Orçamento cadastrado com sucesso.');
+      } else {
+        this.toastr.error('Erro ao cadastrar.');
+      }
+    });
+  }
+
 
 }
+

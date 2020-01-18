@@ -29,6 +29,10 @@ export class ClienteService {
         return this.http.get<Cliente>(`clientes/` + id);
     }
 
+    buscarPeloCpf(cpf: string) {
+        return this.http.get<Cliente>(`clientes/getByCpf/` + cpf);
+    }
+
     alterarSenha(id: number, novaSenha: String) {
         return this.http.put(`clientes/alterarSenha/` + id, novaSenha);
     }

@@ -14,36 +14,22 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                                 <div class="form-group">
                                     <label class="col-form-label">CPF:</label>
-                                    <input class="form-control" placeholder="999.999.999-99" name="nome"
-                                        value="objeto.nome" [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf" autocomplete="off"
+                                        placeholder="999.999.999-99" class="form-control" name="cpf">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8">
                                 <div class="form-group">
                                     <label class="col-form-label">Nome:</label>
-                                    <input class="form-control" placeholder="Nome" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="Nome" name="nome"
+                                        [(ngModel)]="objeto.cliente.nome" autocomplete="off">
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <div class="form-group">
                                     <label class="col-form-label">E-mail:</label>
-                                    <input class="form-control" placeholder="E-mail" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                                <div class="form-group">
-                                    <label class="col-form-label">Telefone:</label>
-                                    <input class="form-control" placeholder="Telefone" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                                <div class="form-group">
-                                    <label class="col-form-label">Celular:</label>
-                                    <input class="form-control" placeholder="Celular" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="E-mail" name="email"
+                                        [(ngModel)]="objeto.cliente.email" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -60,53 +46,46 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                                 <div class="form-group">
                                     <label class="col-form-label">Veículo Placa:</label>
-                                    <input class="form-control" placeholder="AAA-0000" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="AAA-0000" name="veiculoPlaca"
+                                        [(ngModel)]="objeto.veiculoPlaca" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                                 <div class="form-group">
                                     <label class="col-form-label">Marca:</label>
-                                    <input class="form-control" placeholder="Marca" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="Marca" name="marca"
+                                        [(ngModel)]="objeto.marca" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                                 <div class="form-group">
                                     <label class="col-form-label">Modelo:</label>
-                                    <input class="form-control" placeholder="Modelo" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="Modelo" name="Modelo"
+                                        [(ngModel)]="objeto.Modelo" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Cor:</label>
-                                    <input class="form-control" placeholder="Cor" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="Cor" name="cor" [(ngModel)]="objeto.cor"
+                                        autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Ano:</label>
-                                    <input class="form-control" placeholder="Ano" name="nome" value="objeto.nome"
-                                        [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="Ano" name="ano" [(ngModel)]="objeto.ano"
+                                        autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                                 <div class="form-group">
                                     <label class="col-form-label">Quilometragem:</label>
-                                    <input class="form-control" placeholder="Quilometragem" name="nome"
-                                        value="objeto.nome" [(ngModel)]="objeto.nome" autocomplete="off">
+                                    <input class="form-control" placeholder="Quilometragem" name="km"
+                                        [(ngModel)]="objeto.km" autocomplete="off">
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="col-md-12">
-                                <label class="col-form-label">Observações:</label>
-                                <textarea class="form-control" rows="3" [(ngModel)]="objeto.nome"></textarea>
-                            </div>
-                        </div> -->
-
                     </nb-card-body>
                 </nb-card>
             </div>
@@ -128,23 +107,24 @@
                                     <i class="fas fa-plus"></i>
                                     Adicionar Produto</button>
                             </div>
-                            <!-- <div *ngIf="objeto.produtos.length > 0" class="col-md-12">
-                                            <table class="table">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th class="text-center">Número Telefone</th>
-                                                        <th class="text-center">Ações</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let it of objeto.produtos">
-                                                        <td scope="col" class="text-center">{{it.numero}}</td>
-                                                        <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                                                (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
-                                                    </tr>
-                                                </tbody> 
-                                            </table>
-                                        </div> -->
+                            <div *ngIf="objeto.produtos.length > 0" class="col-md-12">
+                                <table class="table">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-center">Descrição</th>
+                                            <th class="text-center">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let it of objeto.produtos">
+                                            <td scope="col" class="text-center">{{it.descricao}}</td>
+                                            <td scope="col" class="text-center"><button
+                                                    class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 1)"> <i
+                                                        class="far fa-trash-alt"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </nb-card-body>
                 </nb-card>
@@ -159,33 +139,24 @@
                                     (click)="abrirModal(addServico,'lg')"> <i class="fas fa-plus"></i>
                                     Adicionar Serviço</button>
                             </div>
-                            <!-- <div *ngIf="objeto.servicos.length > 0" class="col-md-12">
-                                            <table class="table">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th class="text-center">CEP</th>
-                                                        <th class="text-center">Rua</th>
-                                                        <th class="text-center">Número</th>
-                                                        <th class="text-center">Bairro</th>
-                                                        <th class="text-center">Cidade</th>
-                                                        <th class="text-center">Estado</th>
-                                                        <th class="text-center">Ações</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let it of objeto.servicos">
-                                                        <td scope="col" class="text-center">{{it.cep}}</td>
-                                                        <td scope="col" class="text-center">{{it.descricao}}</td>
-                                                        <td scope="col" class="text-center">{{it.numero}}</td>
-                                                        <td scope="col" class="text-center">{{it.bairro}}</td>
-                                                        <td scope="col" class="text-center">{{it.cidade}}</td>
-                                                        <td scope="col" class="text-center">{{it.uf}}</td>
-                                                        <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                                                (click)="excluir(it)"> <i class="far fa-trash-alt"></i></button></td>
-                                                    </tr>
-                                                </tbody> 
-                                            </table>
-                                        </div> -->
+                            <div *ngIf="objeto.servicos.length > 0" class="col-md-12">
+                                <table class="table">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th class="text-center">Descrição</th>
+                                            <th class="text-center">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let it of objeto.servicos">
+                                            <td scope="col" class="text-center">{{it.descricao}}</td>
+                                            <td scope="col" class="text-center"><button
+                                                    class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
+                                                        class="far fa-trash-alt"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </nb-card-body>
                 </nb-card>
@@ -204,7 +175,7 @@
                         <label class="col-form-label">Ação sob o Orçamento:</label>
                         <div class="checkbox">
                             <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes1"
+                                <input class="input-radio" type="checkbox" name="optionsCheckboxes1"
                                     [(ngModel)]="objeto.nome">
                                 <span class="checkbox-material">
                                     <span class="check"></span>
@@ -222,47 +193,18 @@
                                     [(ngModel)]="objeto.nome">
                                 <span class="checkbox-material">
                                     <span class="check"></span>
-                                </span> Aplicar Situação de Recusa
+                                </span> Aplicar Situação de Desistência
                             </label>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="col-form-label">Forma de Pagamento:</label>
+                        <label class="col-form-label">Forma(s) de Pagamento:</label>
                         <div class="checkbox">
-                            <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes1"
-                                    [(ngModel)]="objeto.nome">
+                            <label *ngFor="let it of formasPagamento">
+                                <input class="input-checkbox" type="checkbox" (change)="adicionarFormaPagamento(it)">
                                 <span class="checkbox-material">
                                     <span class="check"></span>
-                                </span> Cartão de Crédito
-                            </label>
-                            <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
-                                    [(ngModel)]="objeto.nome">
-                                <span class="checkbox-material">
-                                    <span class="check"></span>
-                                </span> Cartão de Débito
-                            </label>
-                            <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
-                                    [(ngModel)]="objeto.nome">
-                                <span class="checkbox-material">
-                                    <span class="check"></span>
-                                </span> Dinheiro
-                            </label>
-                            <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
-                                    [(ngModel)]="objeto.nome">
-                                <span class="checkbox-material">
-                                    <span class="check"></span>
-                                </span> Cheque
-                            </label>
-                            <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
-                                    [(ngModel)]="objeto.nome">
-                                <span class="checkbox-material">
-                                    <span class="check"></span>
-                                </span> Outros
+                                </span> {{it.descricao}}
                             </label>
                         </div>
                     </div>
@@ -270,7 +212,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label class="col-form-label">Observações:</label>
-                        <textarea class="form-control" rows="3" [(ngModel)]="objeto.nome"></textarea>
+                        <textarea class="form-control" rows="3" [(ngModel)]="objeto.obs"></textarea>
                     </div>
                 </div>
             </nb-card-body>
@@ -296,7 +238,7 @@
 
 <ng-template #addProduto let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Adicionar Telefone</h4>
+        <h4 class="modal-title" id="modal-basic-title">Adicionar Produto</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -305,8 +247,8 @@
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="form-group">
                 <label class="col-form-label">Número</label>
-                <input ui-br-phone-number [(ngModel)]="telefone.numero" autocomplete="off" placeholder="Telefone"
-                    class="form-control" name="numeroTelefone">
+                <input ui-br-phone-number [(ngModel)]="produto.descricao" autocomplete="off" placeholder="Telefone"
+                    class="form-control" name="descricaoProduto">
             </div>
         </div>
     </div>
@@ -319,7 +261,7 @@
 
 <ng-template #addServico let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Adicionar Endereço</h4>
+        <h4 class="modal-title" id="modal-basic-title">Adicionar Serviço</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -329,45 +271,8 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                 <div class="form-group">
                     <label class="col-form-label">CEP</label>
-                    <input (blur)="buscarCep()" [(ngModel)]="endereco.cep" autocomplete="off" placeholder="Telefone"
-                        class="form-control" name="cep">
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                <div class="form-group">
-                    <label class="col-form-label">Rua</label>
-                    <input [(ngModel)]="endereco.descricao" autocomplete="off" placeholder="Telefone"
-                        class="form-control" name="rua">
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                <div class="form-group">
-                    <label class="col-form-label">Número</label>
-                    <input [(ngModel)]="endereco.numero" autocomplete="off" placeholder="Telefone" class="form-control"
-                        name="numero">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                <div class="form-group">
-                    <label class="col-form-label">Bairro</label>
-                    <input [(ngModel)]="endereco.bairro" autocomplete="off" placeholder="Telefone" class="form-control"
-                        name="bairro">
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                <div class="form-group">
-                    <label class="col-form-label">Cidade</label>
-                    <input [(ngModel)]="endereco.cidade" autocomplete="off" placeholder="Telefone" class="form-control"
-                        name="cidade">
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                <div class="form-group">
-                    <label class="col-form-label">UF</label>
-                    <input [(ngModel)]="endereco.uf" autocomplete="off" placeholder="Telefone" class="form-control"
-                        name="uf">
+                    <input (blur)="buscarCep()" [(ngModel)]="servico.descricao" autocomplete="off"
+                        placeholder="Telefone" class="form-control" name="cep">
                 </div>
             </div>
         </div>
