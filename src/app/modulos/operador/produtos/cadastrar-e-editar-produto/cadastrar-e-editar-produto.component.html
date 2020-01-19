@@ -13,8 +13,15 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
                                 <label class="col-form-label">* Descrição</label>
-                                <input autocomplete="off" class="form-control" placeholder="Nome do Produto" value="objeto.descricao"
-                                    name="nome" [(ngModel)]="objeto.descricao" uppercase>
+                                <input autocomplete="off" class="form-control" placeholder="Nome do Produto"
+                                    value="objeto.descricao" name="nome" [(ngModel)]="objeto.descricao" uppercase>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <div class="form-group">
+                                <label class="col-form-label">* Valor</label>
+                                <input currencyMask autocomplete="off" class="form-control" placeholder="Valor do Produto"
+                                    value="objeto.valor" name="valor" [(ngModel)]="objeto.valor" uppercase>
                             </div>
                         </div>
                     </div>

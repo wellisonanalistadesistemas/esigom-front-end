@@ -15,6 +15,8 @@ import { Servico } from 'src/app/model/servico';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
 import { FormaPagamento } from 'src/app/model/formaPagamento';
 import { FormaPagamentoService } from 'src/app/services/formaPagamento';
+import { ProdutoService } from 'src/app/services/produto';
+import { ServicoService } from 'src/app/services/servico';
 
 @Component({
   selector: 'app-cadastrar-e-editar-orcamento',
@@ -30,9 +32,11 @@ export class CadastrarEEditarOrcamentoComponent {
   public closeResult: string;
   public formaPagamento = new FormaPagamento();
   public formasPagamento: any;
+  public listaProdutos: any;
+  public listaServicos: any;
 
   constructor(private http: HttpClient,
-    private cd: ChangeDetectorRef, private modalService: NgbModal, private _formaPagamentoService: FormaPagamentoService, private _clienteService: ClienteService, private _orcamentoService: OrcamentoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
+    private cd: ChangeDetectorRef, private _produtoService: ProdutoService, private _servicoService: ServicoService, private modalService: NgbModal, private _formaPagamentoService: FormaPagamentoService, private _clienteService: ClienteService, private _orcamentoService: OrcamentoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     // Obter Formas de pagamento
@@ -45,6 +49,11 @@ export class CadastrarEEditarOrcamentoComponent {
         this._orcamentoService.buscarPeloId(params.id).subscribe(data => this.objeto = data);
       }
     })
+  }
+
+  public aplicarAcaoOrcamento(parametro) {
+    this.objeto.codStatus = parametro;
+    console.log(this.objeto);
   }
 
   public adicionarFormaPagamento(obj) {
@@ -63,15 +72,28 @@ export class CadastrarEEditarOrcamentoComponent {
 
   abrirModal(template, size, param) {
     if (param) {
+      // Obter Lista de Produtos
+      this._produtoService.getAll().subscribe(data => this.listaProdutos = data);
       this.produto = new Produto();
     } else {
+      // Obter Lista de Serviços
+      this._servicoService.getAll().subscribe(data => this.listaServicos = data);
       this.servico = new Servico();
     }
+
     this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Dismissed ${this.adicionar(param)}`;
     }, (reason) => {
       this.closeResult = `Closed with: ${reason}`;
     });
+  }
+
+  selecionarProdutoOuServico(objSelecionado, param) {
+    if (param) {
+      this.servico = objSelecionado;
+    } else {
+      this.produto = objSelecionado;
+    }
   }
 
   adicionar(param) {
@@ -91,8 +113,6 @@ export class CadastrarEEditarOrcamentoComponent {
       this.objeto.servicos.splice(index, 1)
     };
   }
-
-
 
   redirencionar(string) {
     this.toastr.success(string);

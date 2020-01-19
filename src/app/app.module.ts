@@ -44,8 +44,7 @@ registerLocaleData(localePt);
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbEvaIconsModule,
-    RouterModule,
-
+    RouterModule
   ],
   providers: [
     {

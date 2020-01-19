@@ -15,7 +15,7 @@
                                 <div class="form-group">
                                     <label class="col-form-label">CPF:</label>
                                     <input (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf" autocomplete="off"
-                                        placeholder="999.999.999-99" class="form-control" name="cpf">
+                                        placeholder="CPF" class="form-control" name="cpf">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8">
@@ -46,7 +46,7 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                                 <div class="form-group">
                                     <label class="col-form-label">Veículo Placa:</label>
-                                    <input class="form-control" placeholder="AAA-0000" name="veiculoPlaca"
+                                    <input class="form-control" placeholder="Placa" name="veiculoPlaca"
                                         [(ngModel)]="objeto.veiculoPlaca" autocomplete="off">
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <button class="m-1 btn btn-sm btn-info btn-pesquisar"
-                                    (click)="abrirModal(addProduto, 'sm', 1)">
+                                    (click)="abrirModal(addProduto, 'lg', 1)">
                                     <i class="fas fa-plus"></i>
                                     Adicionar Produto</button>
                             </div>
@@ -112,14 +112,22 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th class="text-center">Descrição</th>
+                                            <th class="text-center">Quantidade</th>
+                                            <th class="text-center">Valor</th>
+                                            <th class="text-center">Valor Total</th>
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let it of objeto.produtos">
                                             <td scope="col" class="text-center">{{it.descricao}}</td>
+                                            <td scope="col" class="text-center">{{it.quantidade}}</td>
+                                            <td scope="col" class="text-center">
+                                                {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+                                            <td scope="col" class="text-center">
+                                                {{it.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center"><button
-                                                    class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 1)"> <i
+                                                    class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
                                                         class="far fa-trash-alt"></i></button></td>
                                         </tr>
                                     </tbody>
@@ -144,12 +152,20 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th class="text-center">Descrição</th>
+                                            <th class="text-center">Quantidade</th>
+                                            <th class="text-center">Valor</th>
+                                            <th class="text-center">Valor Total</th>
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let it of objeto.servicos">
                                             <td scope="col" class="text-center">{{it.descricao}}</td>
+                                            <td scope="col" class="text-center">{{it.quantidade}}</td>
+                                            <td scope="col" class="text-center">
+                                                {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+                                            <td scope="col" class="text-center">
+                                                {{it.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center"><button
                                                     class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
                                                         class="far fa-trash-alt"></i></button></td>
@@ -174,26 +190,20 @@
                     <div class="col-md-6">
                         <label class="col-form-label">Ação sob o Orçamento:</label>
                         <div class="checkbox">
-                            <label>
-                                <input class="input-radio" type="checkbox" name="optionsCheckboxes1"
-                                    [(ngModel)]="objeto.nome">
-                                <span class="checkbox-material">
-                                    <span class="check"></span>
-                                </span> Gerar Nota Fiscal
+                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(1)" type="radio"
+                                name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <label class="check-label" for="exampleRadios1">
+                                Gerar Nota Fiscal
                             </label>
-                            <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
-                                    [(ngModel)]="objeto.nome">
-                                <span class="checkbox-material">
-                                    <span class="check"></span>
-                                </span> Aguardar Aprovação
+                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(2)" type="radio"
+                                name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                Aguardar Aprovação
                             </label>
-                            <label>
-                                <input class="input-checkbox" type="checkbox" name="optionsCheckboxes2"
-                                    [(ngModel)]="objeto.nome">
-                                <span class="checkbox-material">
-                                    <span class="check"></span>
-                                </span> Aplicar Situação de Desistência
+                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(3)" type="radio"
+                                name="exampleRadios" id="exampleRadios3" value="option2">
+                            <label class="form-check-label" for="exampleRadios3">
+                                Armazenar como Negado
                             </label>
                         </div>
                     </div>
@@ -236,6 +246,7 @@
     </nb-card-body>
 </nb-card>
 
+<!-- Modal Adicionar Produto -->
 <ng-template #addProduto let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Adicionar Produto</h4>
@@ -244,11 +255,22 @@
         </button>
     </div>
     <div class="modal-body">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="form-group">
-                <label class="col-form-label">Número</label>
-                <input ui-br-phone-number [(ngModel)]="produto.descricao" autocomplete="off" placeholder="Telefone"
-                    class="form-control" name="descricaoProduto">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-9">
+                <div class="form-group">
+                    <label class="col-form-label">Produto</label>
+                    <ng-select (change)="selecionarProdutoOuServico($event)" [items]="listaProdutos"
+                        [selectOnTab]="true" bindLabel="descricao" bindValue="id"
+                        notFoundText="Busca sem correspondência" name="produto">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="col-form-label">Quantidade</label>
+                    <input ui-br-phone-number [(ngModel)]="produto.quantidade" autocomplete="off" placeholder="Telefone"
+                        class="form-control" name="descricaoProduto">
+                </div>
             </div>
         </div>
     </div>
@@ -257,8 +279,7 @@
     </div>
 </ng-template>
 
-
-
+<!-- Modal Adicionar Serviço -->
 <ng-template #addServico let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Adicionar Serviço</h4>
@@ -268,11 +289,20 @@
     </div>
     <div class="modal-body">
         <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-9">
+                <div class="form-group">
+                    <label class="col-form-label">Serviço</label>
+                    <ng-select (change)="selecionarProdutoOuServico($event,1)" [items]="listaServicos"
+                        [selectOnTab]="true" bindLabel="descricao" bindValue="id"
+                        notFoundText="Busca sem correspondência" name="produto">
+                    </ng-select>
+                </div>
+            </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                 <div class="form-group">
-                    <label class="col-form-label">CEP</label>
-                    <input (blur)="buscarCep()" [(ngModel)]="servico.descricao" autocomplete="off"
-                        placeholder="Telefone" class="form-control" name="cep">
+                    <label class="col-form-label">Quantidade</label>
+                    <input ui-br-phone-number [(ngModel)]="servico.quantidade" autocomplete="off" placeholder="Telefone"
+                        class="form-control" name="descricaoProduto">
                 </div>
             </div>
         </div>

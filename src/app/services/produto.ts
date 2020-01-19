@@ -12,8 +12,12 @@ import { Produto } from '../model/produto';
 export class ProdutoService {
   constructor(private http: HttpClient) { }
 
-  pesquisar(params) {
+  pesquisar(params?) {
     return this.http.get(`produtos`, { params });
+  }
+
+  getAll() {
+    return this.http.get(`produtos/`);
   }
 
   alterar(id: number, dto: Produto) {
@@ -29,7 +33,7 @@ export class ProdutoService {
   }
 
   buscarPeloId(id: number) {
-    return this.http.get<Perfil>(`produtos/` + id);
+    return this.http.get<Produto>(`produtos/` + id);
   }
 
 }

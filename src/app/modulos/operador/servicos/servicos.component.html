@@ -13,8 +13,15 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
                                 <label class="col-form-label">Nome do Serviço</label>
-                                <input autocomplete="off" placeholder="Nome do Serviço" class="form-control"
-                                    name="nome" [(ngModel)]="buscaForm.descricao">
+                                <input autocomplete="off" placeholder="Nome do Serviço" class="form-control" name="nome"
+                                    [(ngModel)]="buscaForm.descricao">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Valor do Serviço</label>
+                                <input autocomplete="off" placeholder="Valor do Serviço" class="form-control"
+                                    name="valor" [(ngModel)]="buscaForm.valor">
                             </div>
                         </div>
                     </div>
@@ -38,8 +45,8 @@
         <div class="row">
             <div class="col-md-12">
                 <nb-card class="status-success" *ngIf="listaServicos">
-                    <div class="alert alert-primary" style="margin: 5px" *ngIf="listaServicos && listaServicos.total == 0"
-                        role="alert">
+                    <div class="alert alert-primary" style="margin: 5px"
+                        *ngIf="listaServicos && listaServicos.total == 0" role="alert">
                         Nenhum serviço encontrado!
                     </div>
                     <nb-card-header>

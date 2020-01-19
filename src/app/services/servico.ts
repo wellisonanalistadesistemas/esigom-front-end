@@ -12,7 +12,7 @@ export class ServicoService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Servico> {
-    return this.http.get<Servico>(`servicos/todos`);
+    return this.http.get<Servico>(`servicos/`);
   }
   pesquisar(params) {
     return this.http.get(`servicos`, { params });
@@ -33,5 +33,6 @@ export class ServicoService {
   buscarPeloId(id: number) {
     return this.http.get<Servico>(`servicos/` + id);
   }
+
 
 }

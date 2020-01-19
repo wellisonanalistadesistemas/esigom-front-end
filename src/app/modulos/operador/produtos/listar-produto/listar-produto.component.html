@@ -6,6 +6,9 @@
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
                 (click)="ordenar('descricao')">
                 Nome do Produto</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
+                (click)="ordenar('descricao')">
+                Valor do Produto</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
@@ -13,6 +16,7 @@
         <tr *ngFor="let it of lista.lista">
             <td scope="col" class="text-center">{{it.id}}</td>
             <td scope="col">{{it.descricao}}</td>
+            <td scope="col">{{it.valor}}</td>
             <td scope="col" class="text-center">
                 <button class="m-1 btn btn-sm btn-success" [routerLink]="['/operador/produtos/editar/',it.id]"> <i
                         class="fas fa-pencil-alt"></i></button>

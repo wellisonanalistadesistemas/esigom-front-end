@@ -22,6 +22,7 @@ export class CadastrarEEditarProdutoComponent implements OnInit {
       if (params.id != null) {
         this.visualizar = true;
         this._produtoService.buscarPeloId(params.id).subscribe(data => this.objeto = data);
+
       }
     })
   }

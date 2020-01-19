@@ -33,12 +33,10 @@ export class Orcamento {
         this.gerouOs = null;
         this.data = null;
         this.cliente = new Cliente();
-        this.codStatus = null;
+        this.codStatus = 1;
         this.formaPagamento = null;
         this.produtos = [];
         this.servicos = [];
         this.formasPagamento = [];
     }
-
 }
-
