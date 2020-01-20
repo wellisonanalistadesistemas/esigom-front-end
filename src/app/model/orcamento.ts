@@ -2,6 +2,8 @@ import { Produto } from './produto';
 import { Servico } from './servico';
 import { Cliente } from './cliente';
 import { FormaPagamento } from './formaPagamento';
+import { OrcamentoProduto } from './orcamentoProduto';
+import { OrcamentoServico } from './OrcamentoServico';
 
 export class Orcamento {
     public id: number;
@@ -12,14 +14,13 @@ export class Orcamento {
     public km: string;
     public ano: number;
     public obs: string;
-    public gerouOs: boolean;
-    public data: Date;
+    public dataInclusao: Date;
     public cliente: Cliente;
     public codStatus: number;
     public formaPagamento: number;
-    produtos = new Array<Produto>();
-    servicos = new Array<Servico>();
     formasPagamento = new Array<FormaPagamento>();
+    produtos = new Array<OrcamentoProduto>();
+    servicos = new Array<OrcamentoServico>();
 
     constructor() {
         this.id = null;
@@ -30,8 +31,7 @@ export class Orcamento {
         this.km = null;
         this.ano = null;
         this.obs = null;
-        this.gerouOs = null;
-        this.data = null;
+        this.dataInclusao = new Date();
         this.cliente = new Cliente();
         this.codStatus = 1;
         this.formaPagamento = null;

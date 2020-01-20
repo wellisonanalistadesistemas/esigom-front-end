@@ -1,12 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Endereco } from 'src/app/model/endereco';
-import { Telefone } from 'src/app/model/telefone';
 import { Cliente } from 'src/app/model/cliente';
-import { NgAnimateScrollService } from 'ng-animate-scroll';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
-import { Cep } from 'src/app/model/cep';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Orcamento } from 'src/app/model/orcamento';
@@ -17,6 +13,8 @@ import { FormaPagamento } from 'src/app/model/formaPagamento';
 import { FormaPagamentoService } from 'src/app/services/formaPagamento';
 import { ProdutoService } from 'src/app/services/produto';
 import { ServicoService } from 'src/app/services/servico';
+import { OrcamentoProduto } from 'src/app/model/orcamentoProduto';
+import { OrcamentoServico } from 'src/app/model/OrcamentoServico';
 
 @Component({
   selector: 'app-cadastrar-e-editar-orcamento',
@@ -27,13 +25,17 @@ export class CadastrarEEditarOrcamentoComponent {
   public msgAction: string;
   public objeto = new Orcamento;
   public cliente: any;
-  public produto = new Produto();
-  public servico = new Servico();
+  public orcamentoProduto = new OrcamentoProduto();
+  public orcamentoServico = new OrcamentoServico();
   public closeResult: string;
   public formaPagamento = new FormaPagamento();
   public formasPagamento: any;
-  public listaProdutos: any;
-  public listaServicos: any;
+  public listaOrcamentoProdutos: any;
+  public listaOrcamentoServicos: any;
+  // Total
+  public valorTotalGeral = 0;
+  public valorTotalProdutos = 0;
+  public valorTotalServicos = 0;
 
   constructor(private http: HttpClient,
     private cd: ChangeDetectorRef, private _produtoService: ProdutoService, private _servicoService: ServicoService, private modalService: NgbModal, private _formaPagamentoService: FormaPagamentoService, private _clienteService: ClienteService, private _orcamentoService: OrcamentoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
@@ -73,12 +75,12 @@ export class CadastrarEEditarOrcamentoComponent {
   abrirModal(template, size, param) {
     if (param) {
       // Obter Lista de Produtos
-      this._produtoService.getAll().subscribe(data => this.listaProdutos = data);
-      this.produto = new Produto();
+      this._produtoService.getAll().subscribe(data => this.listaOrcamentoProdutos = data);
+      this.orcamentoProduto = new OrcamentoProduto();
     } else {
       // Obter Lista de Serviços
-      this._servicoService.getAll().subscribe(data => this.listaServicos = data);
-      this.servico = new Servico();
+      this._servicoService.getAll().subscribe(data => this.listaOrcamentoServicos = data);
+      this.orcamentoServico = new OrcamentoServico();
     }
 
     this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -90,27 +92,33 @@ export class CadastrarEEditarOrcamentoComponent {
 
   selecionarProdutoOuServico(objSelecionado, param) {
     if (param) {
-      this.servico = objSelecionado;
+      this.orcamentoServico.servico = objSelecionado;
     } else {
-      this.produto = objSelecionado;
+      this.orcamentoProduto.produto = objSelecionado;
     }
   }
 
+  // Adicionar e Somar
   adicionar(param) {
     if (param) {
-      this.objeto.produtos.push(this.produto);
+      this.objeto.produtos.push(this.orcamentoProduto);
+      this.valorTotalProdutos += Number(this.orcamentoProduto.produto.valor * this.orcamentoProduto.quantidade);
     } else {
-      this.objeto.servicos.push(this.servico);
+      this.objeto.servicos.push(this.orcamentoServico);
+      this.valorTotalServicos += Number(this.orcamentoServico.servico.valor * this.orcamentoServico.quantidade);
     }
   }
 
+  // Excluir e Subtrair da Soma
   excluir(it, param) {
     if (param) {
       const index = this.objeto.produtos.indexOf(it);
       this.objeto.produtos.splice(index, 1)
+      this.valorTotalProdutos -= Number(this.orcamentoProduto.produto.valor * this.orcamentoProduto.quantidade);
     } else {
       const index = this.objeto.servicos.indexOf(it);
       this.objeto.servicos.splice(index, 1)
+      this.valorTotalServicos -= Number(this.orcamentoServico.servico.valor * this.orcamentoServico.quantidade);
     };
   }
 
@@ -125,18 +133,20 @@ export class CadastrarEEditarOrcamentoComponent {
       if (data) {
         this.objeto.cliente = data;
       } else {
-        // TODO:
-        console.log("Não Encontrado");
+        // Inexistente
+        this.objeto.cliente = new Cliente();
+        this.toastr.error("CPF Inválido.");
       }
     });
   }
 
   salvarOuAlterar() {
+    console.log(this.objeto);
     this._orcamentoService.salvar(this.objeto).subscribe(retorno => {
       if (!retorno) {
-        this.redirencionar('Orçamento cadastrado com sucesso.');
+        //this.redirencionar('Orçamento cadastrado com sucesso.');
       } else {
-        this.toastr.error('Erro ao cadastrar.');
+        //this.toastr.error('Erro ao cadastrar.');
       }
     });
   }

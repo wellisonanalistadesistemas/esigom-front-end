@@ -22,14 +22,14 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Nome:</label>
                                     <input class="form-control" placeholder="Nome" name="nome"
-                                        [(ngModel)]="objeto.cliente.nome" autocomplete="off">
+                                        [(ngModel)]="objeto.cliente.nome" autocomplete="off" disabled>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <div class="form-group">
                                     <label class="col-form-label">E-mail:</label>
                                     <input class="form-control" placeholder="E-mail" name="email"
-                                        [(ngModel)]="objeto.cliente.email" autocomplete="off">
+                                        [(ngModel)]="objeto.cliente.email" autocomplete="off" disabled>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Modelo:</label>
                                     <input class="form-control" placeholder="Modelo" name="Modelo"
-                                        [(ngModel)]="objeto.Modelo" autocomplete="off">
+                                        [(ngModel)]="objeto.modelo" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
@@ -113,26 +113,30 @@
                                         <tr>
                                             <th class="text-center">Descrição</th>
                                             <th class="text-center">Quantidade</th>
-                                            <th class="text-center">Valor</th>
+                                            <th class="text-center">Valor Unitário</th>
                                             <th class="text-center">Valor Total</th>
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let it of objeto.produtos">
-                                            <td scope="col" class="text-center">{{it.descricao}}</td>
+                                            <td scope="col" class="text-center">{{it.produto.descricao}}</td>
                                             <td scope="col" class="text-center">{{it.quantidade}}</td>
                                             <td scope="col" class="text-center">
-                                                {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+                                                {{it.produto.valor | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center">
-                                                {{it.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
+                                                {{it.produto.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center"><button
-                                                    class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
+                                                    class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 1)"> <i
                                                         class="far fa-trash-alt"></i></button></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">Total:
+                                {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</div>
                         </div>
                     </nb-card-body>
                 </nb-card>
@@ -153,19 +157,19 @@
                                         <tr>
                                             <th class="text-center">Descrição</th>
                                             <th class="text-center">Quantidade</th>
-                                            <th class="text-center">Valor</th>
+                                            <th class="text-center">Valor Unitário</th>
                                             <th class="text-center">Valor Total</th>
                                             <th class="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let it of objeto.servicos">
-                                            <td scope="col" class="text-center">{{it.descricao}}</td>
+                                        <tr *ngFor="let it of objeto.servicos  ">
+                                            <td scope="col" class="text-center">{{it.servico.descricao}}</td>
                                             <td scope="col" class="text-center">{{it.quantidade}}</td>
                                             <td scope="col" class="text-center">
-                                                {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+                                                {{it.servico.valor | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center">
-                                                {{it.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
+                                                {{it.servico.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center"><button
                                                     class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
                                                         class="far fa-trash-alt"></i></button></td>
@@ -174,10 +178,15 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12 text-right">Total:
+                                {{valorTotalServicos | currency:'BRL':true:'1.2-2'}}</div>
+                        </div>
                     </nb-card-body>
                 </nb-card>
                 <div class="row">
-                    <div class="col-md-12 text-right">Total Geral: R$0,00</div>
+                    <div class="col-md-12 text-right totalGeral">TOTAL GERAL:
+                        {{valorTotalServicos+valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</div>
                 </div>
             </nb-card-body>
         </nb-card>
@@ -238,7 +247,7 @@
                     Limpar</button>
                 <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/orcamentos']">
                     <i class="fas fa-backward"></i>
-                    Voltar à Consulta de Clientes
+                    Voltar à Consulta de Orçamentos
                 </button>
             </div>
 
@@ -259,7 +268,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-9">
                 <div class="form-group">
                     <label class="col-form-label">Produto</label>
-                    <ng-select (change)="selecionarProdutoOuServico($event)" [items]="listaProdutos"
+                    <ng-select (change)="selecionarProdutoOuServico($event)" [items]="listaOrcamentoProdutos"
                         [selectOnTab]="true" bindLabel="descricao" bindValue="id"
                         notFoundText="Busca sem correspondência" name="produto">
                     </ng-select>
@@ -268,7 +277,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                 <div class="form-group">
                     <label class="col-form-label">Quantidade</label>
-                    <input ui-br-phone-number [(ngModel)]="produto.quantidade" autocomplete="off" placeholder="Telefone"
+                    <input ui-br-phone-number [(ngModel)]="orcamentoProduto.quantidade" autocomplete="off" placeholder="Telefone"
                         class="form-control" name="descricaoProduto">
                 </div>
             </div>
@@ -292,7 +301,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-9">
                 <div class="form-group">
                     <label class="col-form-label">Serviço</label>
-                    <ng-select (change)="selecionarProdutoOuServico($event,1)" [items]="listaServicos"
+                    <ng-select (change)="selecionarProdutoOuServico($event,1)" [items]="listaOrcamentoServicos"
                         [selectOnTab]="true" bindLabel="descricao" bindValue="id"
                         notFoundText="Busca sem correspondência" name="produto">
                     </ng-select>
@@ -301,7 +310,7 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                 <div class="form-group">
                     <label class="col-form-label">Quantidade</label>
-                    <input ui-br-phone-number [(ngModel)]="servico.quantidade" autocomplete="off" placeholder="Telefone"
+                    <input ui-br-phone-number [(ngModel)]="orcamentoServico.quantidade" autocomplete="off" placeholder="Telefone"
                         class="form-control" name="descricaoProduto">
                 </div>
             </div>
