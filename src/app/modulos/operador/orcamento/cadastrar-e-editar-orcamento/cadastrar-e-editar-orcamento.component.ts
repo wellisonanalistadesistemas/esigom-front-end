@@ -77,10 +77,12 @@ export class CadastrarEEditarOrcamentoComponent {
       // Obter Lista de Produtos
       this._produtoService.getAll().subscribe(data => this.listaOrcamentoProdutos = data);
       this.orcamentoProduto = new OrcamentoProduto();
+
     } else {
       // Obter Lista de Serviços
       this._servicoService.getAll().subscribe(data => this.listaOrcamentoServicos = data);
       this.orcamentoServico = new OrcamentoServico();
+      
     }
 
     this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {

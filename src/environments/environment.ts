@@ -4,6 +4,6 @@
 
 export const environment = {
   production: false,
-  apiUrlService: 'http://localhost:8080/api/',
+  apiUrlService: 'http://localhost:8082/api/',
   apiUrlIdentity: 'http://tcedigital-protocolo-dev.tce.ms.gov.br/',
 };

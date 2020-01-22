@@ -1,15 +1,16 @@
-import { Orcamento } from './orcamento';
 import { Produto } from './produto';
 import { Servico } from './servico';
 
 export class OrcamentoServico {
 
-    public orcamento: Orcamento;
+    public id: number;
+    public orcamento: any
     public servico: Servico;
     public quantidade: number;
 
     constructor() {
-        this.orcamento = new Orcamento();
+        this.id = null;
+        this.orcamento = null;
         this.servico = new Servico();
         this.quantidade = null
     }

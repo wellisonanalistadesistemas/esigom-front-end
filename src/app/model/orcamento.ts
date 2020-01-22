@@ -35,8 +35,8 @@ export class Orcamento {
         this.cliente = new Cliente();
         this.codStatus = 1;
         this.formaPagamento = null;
-        this.produtos = [];
-        this.servicos = [];
-        this.formasPagamento = [];
+        this.servicos = new Array<OrcamentoServico>();
+        this.produtos = new Array<OrcamentoProduto>();
+        this.formasPagamento = new Array<FormaPagamento>();
     }
 }
