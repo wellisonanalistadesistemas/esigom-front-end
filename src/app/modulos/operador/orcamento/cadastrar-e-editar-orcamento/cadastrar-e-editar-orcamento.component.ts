@@ -48,14 +48,25 @@ export class CadastrarEEditarOrcamentoComponent {
     // Obter pelo ID
     this.route.params.subscribe(params => {
       if (params.id != null) {
-        this._orcamentoService.buscarPeloId(params.id).subscribe(data => this.objeto = data);
-      }
-    })
+        this._orcamentoService.buscarPeloId(params.id).subscribe(
+          data => {
+            this.objeto = data;
+            // Obter soma de produtos
+            this.objeto.produtos.forEach(obj => {
+              this.valorTotalProdutos += Number(obj.produto.valor * obj.quantidade);
+            });
+            // Obter soma de serviços
+            this.objeto.servicos.forEach(obj => {
+              this.valorTotalServicos += Number(obj.servico.valor * obj.quantidade);
+            });
+          }
+        );
+      };
+    });
   }
 
   public aplicarAcaoOrcamento(parametro) {
     this.objeto.codStatus = parametro;
-    console.log(this.objeto);
   }
 
   public adicionarFormaPagamento(obj) {
@@ -69,7 +80,6 @@ export class CadastrarEEditarOrcamentoComponent {
       this.formaPagamento = obj;
       this.objeto.formasPagamento.push(this.formaPagamento);
     }
-    console.log(this.objeto);
   }
 
   abrirModal(template, size, param) {
@@ -82,9 +92,7 @@ export class CadastrarEEditarOrcamentoComponent {
       // Obter Lista de Serviços
       this._servicoService.getAll().subscribe(data => this.listaOrcamentoServicos = data);
       this.orcamentoServico = new OrcamentoServico();
-      
     }
-
     this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Dismissed ${this.adicionar(param)}`;
     }, (reason) => {
@@ -115,12 +123,20 @@ export class CadastrarEEditarOrcamentoComponent {
   excluir(it, param) {
     if (param) {
       const index = this.objeto.produtos.indexOf(it);
-      this.objeto.produtos.splice(index, 1)
-      this.valorTotalProdutos -= Number(this.orcamentoProduto.produto.valor * this.orcamentoProduto.quantidade);
+      this.objeto.produtos.splice(index, 1);
+      if (!this.objeto.id) {
+        this.valorTotalProdutos -= Number(this.orcamentoProduto.produto.valor * this.orcamentoProduto.quantidade);
+      } else {
+        this.valorTotalProdutos -= Number(it.produto.valor * it.quantidade);
+      }
     } else {
       const index = this.objeto.servicos.indexOf(it);
       this.objeto.servicos.splice(index, 1)
-      this.valorTotalServicos -= Number(this.orcamentoServico.servico.valor * this.orcamentoServico.quantidade);
+      if (!this.objeto.id) {
+        this.valorTotalServicos -= Number(this.orcamentoServico.servico.valor * this.orcamentoServico.quantidade);
+      } else {
+        this.valorTotalServicos -= Number(it.servico.valor * it.quantidade);
+      }
     };
   }
 
@@ -143,12 +159,13 @@ export class CadastrarEEditarOrcamentoComponent {
   }
 
   salvarOuAlterar() {
-    console.log(this.objeto);
     this._orcamentoService.salvar(this.objeto).subscribe(retorno => {
-      if (!retorno) {
-        //this.redirencionar('Orçamento cadastrado com sucesso.');
+      if (!retorno && !this.objeto.id) {
+        this.redirencionar('Orçamento cadastrado com sucesso.');
+      } else if (!retorno && this.objeto.id) {
+        this.redirencionar('Orçamento editado com sucesso.');
       } else {
-        //this.toastr.error('Erro ao cadastrar.');
+        this.toastr.error('Erro ao cadastrar.');
       }
     });
   }

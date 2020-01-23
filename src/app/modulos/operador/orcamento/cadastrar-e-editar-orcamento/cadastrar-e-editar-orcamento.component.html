@@ -218,8 +218,8 @@
                     </div>
                     <div class="col-md-6">
                         <label class="col-form-label">Forma(s) de Pagamento:</label>
-                        <div class="checkbox">
-                            <label *ngFor="let it of formasPagamento">
+                        <div *ngFor="let it of formasPagamento" class="checkbox">
+                            <label>
                                 <input class="input-checkbox" type="checkbox" (change)="adicionarFormaPagamento(it)">
                                 <span class="checkbox-material">
                                     <span class="check"></span>
@@ -277,8 +277,8 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                 <div class="form-group">
                     <label class="col-form-label">Quantidade</label>
-                    <input ui-br-phone-number [(ngModel)]="orcamentoProduto.quantidade" autocomplete="off" placeholder="Telefone"
-                        class="form-control" name="descricaoProduto">
+                    <input ui-br-phone-number [(ngModel)]="orcamentoProduto.quantidade" autocomplete="off"
+                        placeholder="Telefone" class="form-control" name="descricaoProduto">
                 </div>
             </div>
         </div>
@@ -310,8 +310,8 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                 <div class="form-group">
                     <label class="col-form-label">Quantidade</label>
-                    <input ui-br-phone-number [(ngModel)]="orcamentoServico.quantidade" autocomplete="off" placeholder="Telefone"
-                        class="form-control" name="descricaoProduto">
+                    <input ui-br-phone-number [(ngModel)]="orcamentoServico.quantidade" autocomplete="off"
+                        placeholder="Telefone" class="form-control" name="descricaoProduto">
                 </div>
             </div>
         </div>

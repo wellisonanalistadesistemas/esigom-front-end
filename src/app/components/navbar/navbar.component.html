@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-  <div class="container col-md-7">
+  <div class="container col-md-12 bg-grey">
     <a class="navbar-brand" href="#">
       <img src="https://getbootstrap.com.br/docs/4.1/assets/img/bootstrap-stack.png" width="30" height="30"
         class="d-inline-block align-top" alt="">
@@ -11,17 +11,15 @@
     <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
+          <a mdbWavesEffect class="nav-link" href="#"><i class="fas fa-chart-line"></i> Home</a>
         </li>
-
         <li class="nav-item dropdown active">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Operações
+          <a mdbWavesEffect class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i> Operações
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/operador/orcamentos/cadastrar']">Orçamento</a>
-            <a class="dropdown-item" href="#">Ordem de Serviço</a>
+            <a mdbWavesEffect class="dropdown-item" [routerLink]="['/operador/orcamentos']">Orçamento</a>
+            <a mdbWavesEffect class="dropdown-item" href="#">Ordem de Serviço</a>
             <a class="dropdown-item" href="#">Entradas de Produtos</a>
             <a class="dropdown-item" href="#">Pedidos a Fornecedores</a>
             <a class="dropdown-item" href="#">Devoluções a Fornecedor</a>
@@ -31,7 +29,7 @@
         <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Estoque
+            <i class="fas fa-cubes"></i> Estoque
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Consulta</a>
@@ -39,8 +37,7 @@
         </li>
         <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Financeiro
+            aria-haspopup="true" aria-expanded="false"><i class="fas fa-dollar-sign"></i> Financeiro
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Demonstrativo Gerencial</a>
@@ -48,8 +45,7 @@
         </li>
         <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Cadastros
+            aria-haspopup="true" aria-expanded="false"><i class="fas fa-tools"></i> Cadastros
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" [routerLink]="['/operador/clientes']">Clientes</a>
@@ -59,33 +55,21 @@
         </li>
         <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Controle de Acesso
+            aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> Controle de Acesso
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/administracao/usuarios']">Usuários</a>
-            <a class="dropdown-item" [routerLink]="['/administracao/perfis']">Perfis</a>
+            <a class="dropdown-item" [routerLink]="['/administracao/usuarios']">Gerenciar Usuários</a>
+            <a class="dropdown-item" [routerLink]="['/administracao/perfis']">Gerenciar Perfis</a>
           </div>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="#">Relatórios</a>
+          <a class="nav-link" href="#"><i class="far fa-file-pdf"></i> Relatórios</a>
         </li>
       </ul>
     </div>
-  </div>
-  <div class="container col-md-5">
 
-    <ul class="navbar-nav ml-auto text-right">
-      <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true">
-          Bem Vindo(a), <i style="color:blue;">WELLISON ALVES DA SILVA</i>
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Sair</a>
-          <a class="dropdown-item" href="#">Alterar Senha</a>
-        </div>
-      </li>
-    </ul>
-
+    <nb-user [name]="user.nome" [nbContextMenu]="items" nbContextMenuTag="my-context-menu"
+      title="Analista Desenvolvedor" [picture]="base64image">
+    </nb-user>
   </div>
 </nav>

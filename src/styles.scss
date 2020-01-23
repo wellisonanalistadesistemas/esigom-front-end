@@ -9,6 +9,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #000000;
+  background-color: #f8f9fa;
+}
+
 .ng-select .ng-select-container {
   border: 1px solid #e4e7ea;
 }
