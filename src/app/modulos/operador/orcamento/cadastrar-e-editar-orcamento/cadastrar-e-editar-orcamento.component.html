@@ -1,6 +1,6 @@
 <nb-card class="status-success">
     <nb-card-header>
-        <h5>CADASTRAR ORÇAMENTO</h5>
+        <h5>CADASTRAR ORÇAMENTO DE VENDA</h5>
     </nb-card-header>
     <nb-card-body>
         <div class="row">
@@ -197,29 +197,34 @@
             <nb-card-body>
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="col-form-label">Ação sob o Orçamento:</label>
+                        <label class="col-form-label">Situação do Orçamento:</label>
                         <div class="checkbox">
                             <input class="input-checkbox" (change)="aplicarAcaoOrcamento(1)" type="radio"
                                 name="exampleRadios" id="exampleRadios1" value="option1" checked>
                             <label class="check-label" for="exampleRadios1">
-                                Gerar Nota Fiscal
+                                Vendido
                             </label>
                             <input class="input-checkbox" (change)="aplicarAcaoOrcamento(2)" type="radio"
                                 name="exampleRadios" id="exampleRadios2" value="option2">
                             <label class="form-check-label" for="exampleRadios2">
-                                Aguardar Aprovação
+                                Aguardando Retorno
                             </label>
                             <input class="input-checkbox" (change)="aplicarAcaoOrcamento(3)" type="radio"
-                                name="exampleRadios" id="exampleRadios3" value="option2">
+                                name="exampleRadios" id="exampleRadios3" value="option3">
                             <label class="form-check-label" for="exampleRadios3">
-                                Armazenar como Negado
+                                Sem Comunicação
+                            </label>
+                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(4)" type="radio"
+                                name="exampleRadios" id="exampleRadios4" value="option4">
+                            <label class="form-check-label" for="exampleRadios4">
+                                Sem Interesse
                             </label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label class="col-form-label">Forma(s) de Pagamento:</label>
-                        <div *ngFor="let it of formasPagamento" class="checkbox">
-                            <label>
+                        <div class="checkbox">
+                            <label *ngFor="let it of formasPagamento">
                                 <input class="input-checkbox" type="checkbox" (change)="adicionarFormaPagamento(it)">
                                 <span class="checkbox-material">
                                     <span class="check"></span>

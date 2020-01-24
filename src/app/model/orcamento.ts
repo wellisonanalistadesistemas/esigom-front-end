@@ -1,5 +1,3 @@
-import { Produto } from './produto';
-import { Servico } from './servico';
 import { Cliente } from './cliente';
 import { FormaPagamento } from './formaPagamento';
 import { OrcamentoProduto } from './orcamentoProduto';
