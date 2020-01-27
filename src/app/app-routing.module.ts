@@ -16,15 +16,14 @@ import { CadastrarEEditarServicoComponent } from './modulos/operador/servicos/ca
 import { OrcamentoComponent } from './modulos/operador/orcamento/orcamento.component';
 import { CadastrarEEditarOrcamentoComponent } from './modulos/operador/orcamento/cadastrar-e-editar-orcamento/cadastrar-e-editar-orcamento.component';
 import { OrdemServicoComponent } from './modulos/operador/ordem-servico/ordem-servico.component';
+import { ConcluirOrdemServicoComponent } from './modulos/operador/ordem-servico/concluir-ordem-servico/concluir-ordem-servico.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
   // { path: 'home', component: UsuariosComponent },
   // { path: 'auth', component: AuthComponent },
 
-
-
-  /* Operações */
+  // Operações
   {
     path: 'operador/orcamentos',
     data: {
@@ -61,21 +60,13 @@ const routes: Routes = [
       {
         path: '', component: OrdemServicoComponent
       },
-      // {
-      //   path: 'cadastrar',
-      //   data: {
-      //     breadcrumbs: 'Novo Orçamento'
-      //   },
-      //   component: CadastrarEEditarOrcamentoComponent
-      // },
-      // {
-      //   path: 'editar/:id',
-      //   data: {
-      //     breadcrumbs: 'Editar Orçamento'
-      //   },
-      //   component: CadastrarEEditarOrcamentoComponent
-      // },
-
+      {
+        path: 'concluir/:id',
+        data: {
+          breadcrumbs: 'Novo Orçamento'
+        },
+        component: ConcluirOrdemServicoComponent
+      }
     ]
   },
 

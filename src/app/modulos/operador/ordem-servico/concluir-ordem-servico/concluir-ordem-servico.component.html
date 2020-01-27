@@ -1,0 +1,175 @@
+<nb-card class="status-success">
+    <nb-card-header>
+        <h5>CONCLUIR ORDEM DE SERVIÇO (Número {{numeroOrdemDeServico}})</h5>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-card>
+            <nb-card-header>
+                <h6>Informações do Orçamento:</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-md-12">
+                        <nb-card class="status-success">
+                            <nb-card-header>
+                                <h6>Dados Básicos:</h6>
+                            </nb-card-header>
+                            <nb-card-body>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Número:</label>
+                                            <span scope="col" class="form-control fundo">
+                                                {{ordemServico.orcamento.id}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Data de Geração:</label>
+                                            <span scope="col" class="form-control fundo">
+                                                {{ordemServico.orcamento.dataInclusao | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Cliente</label>
+                                            <span scope="col" class="form-control fundo">
+                                                {{ordemServico.orcamento.cliente.nome}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Veículo</label>
+                                            <span scope="col" class="form-control fundo">
+                                                {{ordemServico.orcamento.marca+" "+ordemServico.orcamento.modelo+" "+ordemServico.orcamento.ano+" (Placa: "+ordemServico.orcamento.veiculoPlaca+")"}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
+                                        <div class="form-group">
+                                            <label class="col-form-label">KM</label>
+                                            <span scope="col" class="form-control fundo">
+                                                {{ordemServico.orcamento.km }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Observações</label>
+                                            <textarea class="form-control" rows="3"
+                                                [(ngModel)]="ordemServico.orcamento.obs" disabled></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nb-card-body>
+                        </nb-card>
+                    </div>
+                </div>
+                <nb-card>
+                    <nb-card-header>
+                        <h6>Itens:</h6>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nb-card>
+                                    <nb-card-header>
+                                        <h6>Serviço(s):</h6>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <table class="table">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th class="text-center">Descrição</th>
+                                                            <th class="text-center">Quantidade</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let it of ordemServico.orcamento.servicos">
+                                                            <td scope="col">{{it.servico.descricao}}
+                                                            </td>
+                                                            <td scope="col" class="text-center">{{it.quantidade}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                            <div class="col-md-6">
+                                <nb-card>
+                                    <nb-card-header>
+                                        <h6>Produto(s):</h6>
+                                    </nb-card-header>
+                                    <nb-card-body>
+                                        <div class="row">
+                                            <div *ngIf="ordemServico.orcamento.produtos.length > 0" class="col-md-12">
+                                                <table class="table">
+                                                    <thead class="thead-light">
+                                                        <tr>
+                                                            <th class="text-center">Descrição</th>
+                                                            <th class="text-center">Quantidade</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let it of ordemServico.orcamento.produtos">
+                                                            <td scope="col">{{it.produto.descricao}}
+                                                            </td>
+                                                            <td scope="col" class="text-center">{{it.quantidade}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </nb-card-body>
+                                </nb-card>
+                            </div>
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                <h6>Resumo da Execução da Ordem de Serviço:</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="col-form-label">Relatório Técnico:</label>
+                        <textarea class="form-control" placeholder="Relatório Técnico" rows="5"
+                            [(ngModel)]="ordemServico.relatorioTecnico"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="form-group">
+                            <label class="col-form-label">Tempo de Garantia do Serviço:</label>
+                            <input class="form-control" placeholder="Tempo de Garantia do Serviço" name="veiculoPlaca"
+                                [(ngModel)]="ordemServico.tempoGarantia" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvar()"> <i
+                        class="fas fa-save"></i>
+                    Concluir Ordem de Serviço</button>
+                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
+                        class="fa fa-times"></i>
+                    Limpar Campos</button>
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar"
+                    [routerLink]="['/operador/ordens-servicos']">
+                    <i class="fas fa-backward"></i>
+                    Voltar
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

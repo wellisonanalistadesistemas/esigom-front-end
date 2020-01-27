@@ -3,37 +3,41 @@
         <tr>
             <th style="cursor: pointer;" title="Ordenar pelo Código" class="text-center" (click)="ordenar('id')"> Código
             </th>
-            <!-- <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center"
+            <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center"
                 (click)="ordenar('nome')">
-                Nome do Cliente</th>
+                Código Orçamento</th>
             <th style="cursor: pointer;" title="Ordenar pelo Login" class="text-center" (click)="ordenar('login')">
                 Status</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')"> Data
                 Inclusão</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')"> Data
+                Conclusão</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
-                Valor Conta</th>
-            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
-                (click)="ordenar('dthInclusao')">Valor Final</th> -->
+                Veículo</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
+                Placa</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let it of lista.lista">
             <td scope="col" class="text-center">{{it.id}}</td>
-            <!-- <td scope="col">{{it.cliente.nome}}</td>
-            <td scope="col">{{it.status}}</td>
-            <td scope="col" class="text-center">{{it.dataInclusao | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-            <td scope="col" class="text-center">{{it.valorConta}}</td>
-            <td scope="col" class="text-center">{{it.valorFinal}}</td> -->
+            <td scope="col" class="text-center"><i [routerLink]="['/operador/orcamentos/editar', it.orcamento.id]"
+                    style="cursor: pointer;" class="fas fa-search lupa"></i>
+                {{it.orcamento.id}}</td>
+            <td scope="col" class="text-center"><i *ngIf="it.codStatus == 2" style="cursor: pointer;"
+                    class="fas fa-sync-alt lupa"></i>
+                {{it.status}}</td>
+            <td scope="col" class="text-center">{{it.dataAbertura | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+            <td scope="col" class="text-center">{{it.dataEntrega | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+            <td scope="col" class="text-center">{{it.veiculo}}</td>
+            <td scope="col" class="text-center">{{it.orcamento.veiculoPlaca}}</td>
             <td scope="col" class="text-center" nowrap>
-                <button class="m-1 btn btn-sm btn-success" [routerLink]="['/operador/orcamentos/editar/',it.id]"> <i
-                        class="fas fa-pencil-alt"></i></button>
-                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
-                        class="far fa-trash-alt"></i></button>
-                <button class="m-1 btn btn-sm btn-info" (click)="excluir(it.id)"> <i class="fas fa-eye"></i></button>
-                <button class="m-1 btn btn-sm btn-secondary" (click)="excluir(it.id)"> <i
+                <button *ngIf="it.codStatus == 1" class="m-1 btn btn-sm btn-success" [routerLink]="['/operador/ordens-servicos/concluir', it.id]"> <i
+                        class="fas fa-check"></i></button>
+                <button *ngIf="it.codStatus == 2" class="m-1 btn btn-sm btn-warning" (click)="excluir(it.id)"> <i
                         class="fas fa-envelope-open-text"></i></button>
-                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
+                <button *ngIf="it.codStatus == 2" class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
                         class="fas fa-file-pdf"></i></button>
             </td>
         </tr>
