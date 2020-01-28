@@ -18,12 +18,8 @@
             aria-haspopup="true" aria-expanded="false"><i class="fas fa-bars"></i> Operações
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/operador/orcamentos']">Orçamento de Venda</a>
-            <a class="dropdown-item" [routerLink]="['operador/ordens-servicos']">Ordem de Serviço</a>
-            <a class="dropdown-item" href="#">Entradas de Produtos</a>
-            <a class="dropdown-item" href="#">Pedidos a Fornecedores</a>
-            <a class="dropdown-item" href="#">Devoluções a Fornecedor</a>
-            <a class="dropdown-item" href="#">Contas a Pagar</a>
+            <a class="dropdown-item" [routerLink]="['/operador/orcamentos']">Orçamentos</a>
+            <a class="dropdown-item" [routerLink]="['operador/ordens-servicos']">Ordens de Serviços</a>
           </div>
         </li>
         <li class="nav-item dropdown active">
@@ -32,6 +28,7 @@
             <i class="fas fa-cubes"></i> Estoque
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Entradas de Produtos</a>
             <a class="dropdown-item" href="#">Consulta</a>
           </div>
         </li>
@@ -40,7 +37,9 @@
             aria-haspopup="true" aria-expanded="false"><i class="fas fa-dollar-sign"></i> Financeiro
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Demonstrativo Gerencial</a>
+            <a class="dropdown-item" [routerLink]="['/operador/contas-a-pagar-receber']">Contas à Pagar e Receber</a>
+            <a class="dropdown-item" href="#">Pedidos à Fornecedores</a>
+            <a class="dropdown-item" href="#">Demonstrativos Gerenciais</a>
           </div>
         </li>
         <li class="nav-item dropdown active">
@@ -58,8 +57,8 @@
             aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-cog"></i> Controle de Acesso
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['/administracao/usuarios']">Gerenciar Usuários</a>
-            <a class="dropdown-item" [routerLink]="['/administracao/perfis']">Gerenciar Perfis</a>
+            <a class="dropdown-item" [routerLink]="['/administracao/usuarios']">Usuários</a>
+            <a class="dropdown-item" [routerLink]="['/administracao/perfis']">Perfis</a>
           </div>
         </li>
         <li class="nav-item active">

@@ -3,38 +3,42 @@
         <tr>
             <th style="cursor: pointer;" title="Ordenar pelo Código" class="text-center" (click)="ordenar('id')"> Código
             </th>
+            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
+                (click)="ordenar('dthInclusao')">Tipo de Conta</th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center"
                 (click)="ordenar('nome')">
-                Nome do Cliente</th>
+                Descrição</th>
             <th style="cursor: pointer;" title="Ordenar pelo Login" class="text-center" (click)="ordenar('login')">
-                Status</th>
-            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')"> Data
-                Inclusão</th>
+                Cliente
+            </th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
-                Valor Conta</th>
+                Data de Vencimento</th>
             <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
-                (click)="ordenar('dthInclusao')">Valor Final</th>
+                (click)="ordenar('dthInclusao')">Valor Pago</th>
+
+            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
+                (click)="ordenar('dthInclusao')">Situação</th>
+
             <th class="text-center">Ações</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let it of lista.lista">
             <td scope="col" class="text-center">{{it.id}}</td>
+            <td scope="col" class="text-center">{{it.tipo}}</td>
+            <td scope="col">{{it.descricao}}</td>
             <td scope="col">{{it.cliente.nome}}</td>
-            <td scope="col">{{it.status}}</td>
-            <td scope="col" class="text-center">{{it.dataInclusao | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-            <td scope="col" class="text-center">{{it.valorConta}}</td>
-            <td scope="col" class="text-center">{{it.valorFinal}}</td>
-            <td scope="col" class="text-center" nowrap>
-                <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/orcamentos/editar/',it.id]"> <i
+            <td scope="col" class="text-center">{{it.dataVencimento | date: 'dd/MM/yyyy h:mm:ss'}}</td>
+            <td scope="col" class="text-center">{{it.valorPago | currency:'BRL':true:'1.2-2'}}</td>
+               <td scope="col" class="text-center">{{it.situacao}}</td>
+            <td scope="col" class="text-center">
+                <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/clientes/editar/',it.id]"> <i
                         class="fas fa-pencil-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
                         class="far fa-trash-alt"></i></button>
-                <!-- <button class="m-1 btn btn-sm btn-info" (click)="excluir(it.id)"> <i class="fas fa-eye"></i></button> -->
-                <button class="m-1 btn btn-sm btn-success" (click)="excluir(it.id)"> <i
-                        class="fas fa-envelope-open-text"></i></button>
-                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
-                        class="fas fa-file-pdf"></i></button>
+                <button class="m-1 btn btn-sm btn-success" [routerLink]="['/operador/clientes/editar/',it.id]"> <i
+                        class="fas fa-check"></i></button>
+                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i class="fa fa-times"></i></button>
             </td>
         </tr>
     </tbody>

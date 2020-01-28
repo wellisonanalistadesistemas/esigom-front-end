@@ -1,6 +1,6 @@
 <nb-card class="status-success">
     <nb-card-header>
-        <h5>CONSULTAR ORÇAMENTOS</h5>
+        <h5>CONSULTAR CONTAS À PAGAR E RECEBER</h5>
     </nb-card-header>
     <nb-card-body>
         <nb-card class="status-success">
@@ -8,13 +8,27 @@
                 <h6>Filtros de Busca:</h6>
             </nb-card-header>
             <nb-card-body>
-                <form (ngSubmit)="buscarProdutos()">
+                <form (ngSubmit)="buscarContas()">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
-                                <label class="col-form-label">Nome do Orçamento</label>
-                                <input autocomplete="off" placeholder="Nome do Produto" class="form-control" name="nome"
-                                    [(ngModel)]="buscaForm.descricao">
+                                <label class="col-form-label">Nome do Funcionário</label>
+                                <input autocomplete="off" placeholder="Nome do Funcionário" class="form-control"
+                                    name="nome" [(ngModel)]="buscaForm.nome">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                            <div class="form-group">
+                                <label class="col-form-label">CPF</label>
+                                <input autocomplete="off" placeholder="CPF" class="form-control" name="cpf"
+                                    [(ngModel)]="buscaForm.cpf">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                            <div class="form-group">
+                                <label class="col-form-label">Email</label>
+                                <input autocomplete="off" placeholder="Email" class="form-control" name="email"
+                                    [(ngModel)]="buscaForm.email">
                             </div>
                         </div>
                     </div>
@@ -28,7 +42,7 @@
                                 Limpar</button>
                             <button class=" m-1 btn btn-sm btn-success btn-pesquisar" [routerLink]="'cadastrar'">
                                 <i class="fa fa-user"></i>
-                                Cadastrar Orçamento
+                                Cadastrar Conta
                             </button>
                         </div>
                     </div>
@@ -37,20 +51,21 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <nb-card class="status-success" *ngIf="listaOrcamentos">
-                    <div class="alert alert-primary" style="margin: 5px"
-                        *ngIf="listaOrcamentos && listaOrcamentos.total == 0" role="alert">
-                        Nenhum produto encontrado!
+                <nb-card class="status-success" *ngIf="listaContas">
+                    <div class="alert alert-primary" style="margin: 5px" *ngIf="listaContas && listaContas.total == 0"
+                        role="alert">
+                        Nenhuma remessa encontrada!
                     </div>
                     <nb-card-header>
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
                         <div class="col-m2-12">
-                            <app-listar-orcamento [lista]="listaOrcamentos" (eventoOrdenar)="ordenar($event)"
+                            <app-listar-conta-pagar-receber [lista]="listaContas" (eventoOrdenar)="ordenar($event)"
+                                (eventoAlterarSenha)="abrirModalAlterarSenha($event, alterarSenha)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
-                            </app-listar-orcamento>
+                            </app-listar-conta-pagar-receber>
                         </div>
                     </nb-card-body>
                 </nb-card>
@@ -58,7 +73,6 @@
         </div>
     </nb-card-body>
 </nb-card>
-
 <ng-template #confirmacao let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Confirmação</h4>
@@ -67,7 +81,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <p>Deseja realmente excluir o orçamento selecionado?</p>
+        <p>Deseja realmente excluir a conta selecionada?</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Sim</button>

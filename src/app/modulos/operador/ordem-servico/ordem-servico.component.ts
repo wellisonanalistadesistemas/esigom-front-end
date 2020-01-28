@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, OnInit } from '@angular/cor
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServicoBuscaEntity } from '../servicos/servicos.component';
-import { OrdemServicoService } from 'src/app/services/OrdemServico.service';
+import { OrdemServicoService } from 'src/app/services/ordemServico';
 
 @Component({
   selector: 'app-ordem-servico',

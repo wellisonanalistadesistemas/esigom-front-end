@@ -17,6 +17,8 @@ import { OrcamentoComponent } from './modulos/operador/orcamento/orcamento.compo
 import { CadastrarEEditarOrcamentoComponent } from './modulos/operador/orcamento/cadastrar-e-editar-orcamento/cadastrar-e-editar-orcamento.component';
 import { OrdemServicoComponent } from './modulos/operador/ordem-servico/ordem-servico.component';
 import { ConcluirOrdemServicoComponent } from './modulos/operador/ordem-servico/concluir-ordem-servico/concluir-ordem-servico.component';
+import { ContasPagarReceberComponent } from './modulos/operador/contas-pagar-receber/contas-pagar-receber.component';
+import { CadastrarEEditarContaPagarReceberComponent } from './modulos/operador/contas-pagar-receber/cadastrar-e-editar-conta-pagar-receber/cadastrar-e-editar-conta-pagar-receber.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
@@ -70,6 +72,34 @@ const routes: Routes = [
     ]
   },
 
+
+
+    // Financeiro
+    {
+      path: 'operador/contas-a-pagar-receber',
+      data: {
+        breadcrumbs: 'Contas à Pagar ou Receber'
+      },
+      children: [
+        {
+          path: '', component: ContasPagarReceberComponent
+        },
+        {
+          path: 'cadastrar',
+          data: {
+            breadcrumbs: 'Nova Conta'
+          },
+          component: CadastrarEEditarContaPagarReceberComponent
+        },
+        {
+          path: 'editar/:id',
+          data: {
+            breadcrumbs: 'Editar Conta'
+          },
+          component: CadastrarEEditarContaPagarReceberComponent
+        },
+        ]
+    },
 
   /* Cadastros */
   {

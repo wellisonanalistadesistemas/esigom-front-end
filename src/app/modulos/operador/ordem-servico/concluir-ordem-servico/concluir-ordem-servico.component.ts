@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdemServicoService } from 'src/app/services/OrdemServico.service';
+import { OrdemServicoService } from 'src/app/services/ordemServico';
 import { OrdemServico } from 'src/app/model/ordemServico';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';

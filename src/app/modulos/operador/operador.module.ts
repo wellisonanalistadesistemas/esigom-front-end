@@ -26,9 +26,12 @@ import { ListarOrcamentoComponent } from './orcamento/listar-orcamento/listar-or
 import { OrdemServicoComponent } from './ordem-servico/ordem-servico.component';
 import { ListarOrdemServicoComponent } from './ordem-servico/listar-ordem-servico/listar-ordem-servico.component';
 import { ConcluirOrdemServicoComponent } from './ordem-servico/concluir-ordem-servico/concluir-ordem-servico.component';
+import { ContasPagarReceberComponent } from './contas-pagar-receber/contas-pagar-receber.component';
+import { ListarContaPagarReceberComponent } from './contas-pagar-receber/listar-conta-pagar-receber/listar-conta-pagar-receber.component';
+import { CadastrarEEditarContaPagarReceberComponent } from './contas-pagar-receber/cadastrar-e-editar-conta-pagar-receber/cadastrar-e-editar-conta-pagar-receber.component';
 
 @NgModule({
-  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent, ServicoComponent, ProdutosComponent, ListarServicoComponent, CadastrarEEditarServicoComponent, ListarProdutoComponent, CadastrarEEditarProdutoComponent, OrcamentoComponent, CadastrarEEditarOrcamentoComponent, ListarOrcamentoComponent, OrdemServicoComponent, ListarOrdemServicoComponent, ConcluirOrdemServicoComponent],
+  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent, ServicoComponent, ProdutosComponent, ListarServicoComponent, CadastrarEEditarServicoComponent, ListarProdutoComponent, CadastrarEEditarProdutoComponent, OrcamentoComponent, CadastrarEEditarOrcamentoComponent, ListarOrcamentoComponent, OrdemServicoComponent, ListarOrdemServicoComponent, ConcluirOrdemServicoComponent, ContasPagarReceberComponent, ListarContaPagarReceberComponent, CadastrarEEditarContaPagarReceberComponent],
   imports: [
     CommonModule,
     ComponentsModule,

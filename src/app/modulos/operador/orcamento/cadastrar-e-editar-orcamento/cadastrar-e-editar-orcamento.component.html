@@ -120,7 +120,7 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let it of objeto.produtos">
-                                            <td scope="col" class="text-center">{{it.produto.descricao}}</td>
+                                            <td scope="col">{{it.produto.descricao}}</td>
                                             <td scope="col" class="text-center">{{it.quantidade}}</td>
                                             <td scope="col" class="text-center">
                                                 {{it.produto.valor | currency:'BRL':true:'1.2-2'}}</td>
@@ -164,7 +164,7 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let it of objeto.servicos  ">
-                                            <td scope="col" class="text-center">{{it.servico.descricao}}</td>
+                                            <td scope="col">{{it.servico.descricao}}</td>
                                             <td scope="col" class="text-center">{{it.quantidade}}</td>
                                             <td scope="col" class="text-center">
                                                 {{it.servico.valor | currency:'BRL':true:'1.2-2'}}</td>
