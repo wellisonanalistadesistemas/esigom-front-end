@@ -19,6 +19,8 @@ import { OrdemServicoComponent } from './modulos/operador/ordem-servico/ordem-se
 import { ConcluirOrdemServicoComponent } from './modulos/operador/ordem-servico/concluir-ordem-servico/concluir-ordem-servico.component';
 import { ContasPagarReceberComponent } from './modulos/operador/contas-pagar-receber/contas-pagar-receber.component';
 import { CadastrarEEditarContaPagarReceberComponent } from './modulos/operador/contas-pagar-receber/cadastrar-e-editar-conta-pagar-receber/cadastrar-e-editar-conta-pagar-receber.component';
+import { EntradaProdutoComponent } from './modulos/operador/entrada-produto/entrada-produto.component';
+import { CadastrarEditarEntradaProdutoComponent } from './modulos/operador/entrada-produto/cadastrar-editar-entrada-produto/cadastrar-editar-entrada-produto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
@@ -173,6 +175,33 @@ const routes: Routes = [
 
     ]
   },
+
+
+  /* Cadastros */
+  {
+    path: 'operador/entrada-produtos',
+    data: {
+      breadcrumbs: 'Entrada de Produtos'
+    },
+    children: [
+      {
+        path: '', component: EntradaProdutoComponent
+      },
+      {
+        path: 'cadastrar',
+        data: {
+          breadcrumbs: 'Novo Usuario'
+        },
+        component: CadastrarEditarEntradaProdutoComponent
+      },
+      {
+        path: 'editar/:id',
+        component: CadastrarEditarEntradaProdutoComponent
+      },
+
+    ]
+  },
+
 
   /* Controle de Acesso */
   {

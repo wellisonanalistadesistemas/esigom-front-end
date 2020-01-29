@@ -5,20 +5,20 @@
             </th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
                 (click)="ordenar('descricao')">
-                Nome do Produto</th>
+                Valor da Entrada</th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
                 (click)="ordenar('descricao')">
-                Valor do Produto</th>
+                Qtde. Produtos</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let it of lista.lista">
             <td scope="col" class="text-center">{{it.id}}</td>
-            <td scope="col">{{it.descricao}}</td>
-            <td scope="col" class="text-center">{{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+            <td scope="col">{{it.id}}</td>
+            <td scope="col">{{it.id}}</td>
             <td scope="col" class="text-center">
-                <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/produtos/editar/',it.id]"> <i
+                <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/entrada-produtos/editar/',it.id]"> <i
                         class="fas fa-pencil-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
                         class="far fa-trash-alt"></i></button>

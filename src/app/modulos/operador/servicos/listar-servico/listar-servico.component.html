@@ -16,9 +16,9 @@
         <tr *ngFor="let it of lista.lista">
             <td scope="col" class="text-center">{{it.id}}</td>
             <td scope="col">{{it.descricao}}</td>
-            <td scope="col">{{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+            <td scope="col" class="text-center">{{it.valor | currency:'BRL':true:'1.2-2'}}</td>
             <td scope="col" class="text-center">
-                <button class="m-1 btn btn-sm btn-success" [routerLink]="['/operador/servicos/editar/',it.id]"> <i
+                <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/servicos/editar/',it.id]"> <i
                         class="fas fa-pencil-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
                         class="far fa-trash-alt"></i></button>

@@ -1,0 +1,153 @@
+<nb-card class="status-success">
+    <nb-card-header>
+        <h5>CADASTRAR ENTRADA EM ESTOQUE</h5>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-card>
+            <nb-card-header>
+                <h6>Listagem de Produto(s):</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="m-1 btn btn-sm btn-info btn-pesquisar" (click)="abrirModal(addProduto, 'lg')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Produto</button>
+                    </div>
+                    <div *ngIf="objeto.produtos.length > 0" class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Descrição</th>
+                                    <th class="text-center">Quantidade</th>
+                                    <th class="text-center">Valor Pago por Unidade</th>
+                                    <th class="text-center">Valor Total</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let it of objeto.produtos">
+                                    <td scope="col">{{it.produto.descricao}}</td>
+                                    <td scope="col" class="text-center">{{it.quantidade}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.valorUnitario | currency:'BRL':true:'1.2-2'}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.valorUnitario*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
+                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                            (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-12 text-right">Total:
+                        {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</div>
+                </div> -->
+            </nb-card-body>
+        </nb-card>
+
+        <nb-card>
+            <nb-card-header>
+                <h6>Informações Adicionais:</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="col-form-label">Data Entrada:</label>
+                            <input [(ngModel)]="objeto.dataEntrada" autocomplete="off" placeholder="Data Entrada"
+                                class="form-control" name="dataEntrada">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="col-form-label">Número Nota Fiscal:</label>
+                            <input [(ngModel)]="objeto.notaFiscal" autocomplete="off" placeholder="Número Nota Fiscal"
+                                class="form-control" name="notaFiscal">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                        <div class="form-group">
+                            <label class="col-form-label">Fornecedor</label>
+                            <ng-select (change)="selecionarFornecedor($event)" [items]="listFornecedores"
+                                [selectOnTab]="true" bindLabel="descricao" placeholder="Busque por um Fornecedor"
+                                bindValue="id" notFoundText="Busca sem correspondência" name="fornecedor">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="col-form-label">Qtde de Produtos:</label>
+                            <span scope="col" class="form-control fundo">
+                                {{qtdeTotalProdutos}}</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="col-form-label">Total Geral:</label>
+                            <span scope="col" class="form-control fundo">
+                                {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
+                        class="fas fa-save"></i>
+                    Salvar Cadastro</button>
+                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
+                        class="fa fa-times"></i>
+                    Limpar</button>
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar"
+                    [routerLink]="['/operador/entrada-produtos']">
+                    <i class="fas fa-backward"></i>
+                    Voltar
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+<!-- Modal Adicionar Produto -->
+<ng-template #addProduto let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Adicionar Produto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-7">
+                <div class="form-group">
+                    <label class="col-form-label">Produto</label>
+                    <ng-select (change)="selecionarProduto($event)" [items]="listaEntradaProdutos" [selectOnTab]="true"
+                        bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
+                        placeholder="Busque por um produto" name="produto">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                <div class="form-group">
+                    <label class="col-form-label">Quantidade</label>
+                    <input ui-br-phone-number [(ngModel)]="entradaProduto.quantidade" autocomplete="off"
+                        placeholder="Telefone" class="form-control" name="descricaoProduto">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="col-form-label">Valor Pago por Unidade</label>
+                    <input ui-br-phone-number [(ngModel)]="entradaProduto.valorUnitario" autocomplete="off"
+                        placeholder="Valor Unitário" class="form-control" name="valorUnitario">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Adicionar</button>
+    </div>
+</ng-template>

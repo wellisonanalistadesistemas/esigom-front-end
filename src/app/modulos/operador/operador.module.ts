@@ -29,9 +29,12 @@ import { ConcluirOrdemServicoComponent } from './ordem-servico/concluir-ordem-se
 import { ContasPagarReceberComponent } from './contas-pagar-receber/contas-pagar-receber.component';
 import { ListarContaPagarReceberComponent } from './contas-pagar-receber/listar-conta-pagar-receber/listar-conta-pagar-receber.component';
 import { CadastrarEEditarContaPagarReceberComponent } from './contas-pagar-receber/cadastrar-e-editar-conta-pagar-receber/cadastrar-e-editar-conta-pagar-receber.component';
+import { EntradaProdutoComponent } from './entrada-produto/entrada-produto.component';
+import { ListEntradaProdutoComponent } from './entrada-produto/list-entrada-produto/list-entrada-produto.component';
+import { CadastrarEditarEntradaProdutoComponent } from './entrada-produto/cadastrar-editar-entrada-produto/cadastrar-editar-entrada-produto.component';
 
 @NgModule({
-  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent, ServicoComponent, ProdutosComponent, ListarServicoComponent, CadastrarEEditarServicoComponent, ListarProdutoComponent, CadastrarEEditarProdutoComponent, OrcamentoComponent, CadastrarEEditarOrcamentoComponent, ListarOrcamentoComponent, OrdemServicoComponent, ListarOrdemServicoComponent, ConcluirOrdemServicoComponent, ContasPagarReceberComponent, ListarContaPagarReceberComponent, CadastrarEEditarContaPagarReceberComponent],
+  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent, ServicoComponent, ProdutosComponent, ListarServicoComponent, CadastrarEEditarServicoComponent, ListarProdutoComponent, CadastrarEEditarProdutoComponent, OrcamentoComponent, CadastrarEEditarOrcamentoComponent, ListarOrcamentoComponent, OrdemServicoComponent, ListarOrdemServicoComponent, ConcluirOrdemServicoComponent, ContasPagarReceberComponent, ListarContaPagarReceberComponent, CadastrarEEditarContaPagarReceberComponent, EntradaProdutoComponent, ListEntradaProdutoComponent, CadastrarEditarEntradaProdutoComponent],
   imports: [
     CommonModule,
     ComponentsModule,
