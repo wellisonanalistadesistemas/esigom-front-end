@@ -21,6 +21,11 @@ import { ContasPagarReceberComponent } from './modulos/operador/contas-pagar-rec
 import { CadastrarEEditarContaPagarReceberComponent } from './modulos/operador/contas-pagar-receber/cadastrar-e-editar-conta-pagar-receber/cadastrar-e-editar-conta-pagar-receber.component';
 import { EntradaProdutoComponent } from './modulos/operador/entrada-produto/entrada-produto.component';
 import { CadastrarEditarEntradaProdutoComponent } from './modulos/operador/entrada-produto/cadastrar-editar-entrada-produto/cadastrar-editar-entrada-produto.component';
+import { CentroCustoComponent } from './modulos/operador/centro-custo/centro-custo.component';
+import { CadastrarEEditarCentroCustoComponent } from './modulos/operador/centro-custo/cadastrar-e-editar-centro-custo/cadastrar-e-editar-centro-custo.component';
+import { FornecedorComponent } from './modulos/operador/fornecedor/fornecedor.component';
+import { CadastrarEEditarFornecedorComponent } from './modulos/operador/fornecedor/cadastrar-e-editar-fornecedor/cadastrar-e-editar-fornecedor.component';
+import { CaixaComponent } from './modulos/operador/caixa/caixa.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
@@ -76,32 +81,46 @@ const routes: Routes = [
 
 
 
-    // Financeiro
-    {
-      path: 'operador/contas-a-pagar-receber',
-      data: {
-        breadcrumbs: 'Contas à Pagar ou Receber'
-      },
-      children: [
-        {
-          path: '', component: ContasPagarReceberComponent
-        },
-        {
-          path: 'cadastrar',
-          data: {
-            breadcrumbs: 'Nova Conta'
-          },
-          component: CadastrarEEditarContaPagarReceberComponent
-        },
-        {
-          path: 'editar/:id',
-          data: {
-            breadcrumbs: 'Editar Conta'
-          },
-          component: CadastrarEEditarContaPagarReceberComponent
-        },
-        ]
+  // Financeiro
+  {
+    path: 'operador/contas-a-pagar-receber',
+    data: {
+      breadcrumbs: 'Contas à Pagar ou Receber'
     },
+    children: [
+      {
+        path: '', component: ContasPagarReceberComponent
+      },
+      {
+        path: 'cadastrar',
+        data: {
+          breadcrumbs: 'Nova Conta'
+        },
+        component: CadastrarEEditarContaPagarReceberComponent
+      },
+      {
+        path: 'editar/:id',
+        data: {
+          breadcrumbs: 'Editar Conta'
+        },
+        component: CadastrarEEditarContaPagarReceberComponent
+      },
+    ]
+  },
+
+
+  {
+    path: 'operador/acompanhar-caixa',
+    data: {
+      breadcrumbs: 'Acompanhar Caixa'
+    },
+    children: [
+      {
+        path: '', component: CaixaComponent
+      },
+    ]
+  },
+
 
   /* Cadastros */
   {
@@ -201,6 +220,62 @@ const routes: Routes = [
 
     ]
   },
+
+  {
+    path: 'operador/centro-custo',
+    data: {
+      breadcrumbs: 'Centro de Custos'
+    },
+    children: [
+      {
+        path: '', component: CentroCustoComponent
+      },
+      {
+        path: 'cadastrar',
+        data: {
+          breadcrumbs: 'Novo Centro Custo'
+        },
+        component: CadastrarEEditarCentroCustoComponent
+      },
+      {
+        path: 'editar/:id',
+        data: {
+          breadcrumbs: 'Editar Centro Custo'
+        },
+        component: CadastrarEEditarCentroCustoComponent
+      },
+
+    ]
+  },
+
+  {
+    path: 'operador/fornecedores',
+    data: {
+      breadcrumbs: 'Fornecedores'
+    },
+    children: [
+      {
+        path: '', component: FornecedorComponent
+      },
+      {
+        path: 'cadastrar',
+        data: {
+          breadcrumbs: 'Novo Fornecedor'
+        },
+        component: CadastrarEEditarFornecedorComponent
+      },
+      {
+        path: 'editar/:id',
+        data: {
+          breadcrumbs: 'Editar Fornecedor'
+        },
+        component: CadastrarEEditarFornecedorComponent
+      },
+
+    ]
+  },
+
+
 
 
   /* Controle de Acesso */

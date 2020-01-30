@@ -1,0 +1,41 @@
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th style="cursor: pointer;" title="Ordenar pelo Código" class="text-center" (click)="ordenar('id')"> Código
+            </th>
+            <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center"
+                (click)="ordenar('nome')">
+                Descrição</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Login" class="text-center" (click)="ordenar('login')">Data
+                Pagamento</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">Valor
+            </th>
+            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">Tipo
+            </th>
+            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
+                Centro de Custo
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let it of lista.lista">
+            <td scope="col" class="text-center">{{it.id}}</td>
+            <td scope="col">{{it.descricao}}</td>
+            <td scope="col" class="text-center">{{it.dataPagamento  | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+            <td scope="col" class="text-center">{{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+            <td scope="col" class="text-center">{{it.tipo}}</td>
+            <td scope="col">{{it.centroCusto.descricao}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="row p-2">
+    <div class="col" style="margin-left: 5px">
+        <pagination [totalItems]="lista.recordsTotal" (pageChanged)="search($event)" previousText="&lsaquo;"
+            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5" class="pagination-sm"
+            [boundaryLinks]="true" [itemsPerPage]="10" [(ngModel)]="paginaAtual"></pagination>
+    </div>
+    <div class="col-md-6 text-right">
+        Exibindo {{parametrosPaginacao.offset+1}} - {{lista.lista.length + parametrosPaginacao.offset }} de
+        {{lista.recordsTotal}} registro(s) encontrado(s).
+    </div>
+</div>

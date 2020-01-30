@@ -31,8 +31,10 @@
             <i class="fas fa-cubes"></i> Estoque
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#"><i class="fas fa-search"></i> Acompanhar Estoque</a>
-            <a class="dropdown-item" [routerLink]="['/operador/entrada-produtos']"><i class="fas fa-plus-circle"></i> Entrada</a>
+            <a class="dropdown-item" [routerLink]="['/operador/entrada-produtos']"><i class="fas fa-plus-circle"></i>
+              Entrada</a>
+            <a class="dropdown-item" [routerLink]="['/operador/produtos']"><i class="fab fa-product-hunt"></i>
+              Produto</a>
           </div>
         </li>
         <li class="nav-item dropdown active">
@@ -40,7 +42,7 @@
             aria-haspopup="true" aria-expanded="false"><i class="fas fa-dollar-sign"></i> Financeiro
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#"><i class="fas fa-search-dollar"></i> Acompanhar Caixa</a>
+            <a class="dropdown-item" [routerLink]="['/operador/acompanhar-caixa']"><i class="fas fa-hand-holding-usd"></i> Acompanhar Situação do Caixa</a>
             <a class="dropdown-item" [routerLink]="['/operador/contas-a-pagar-receber']"><i
                 class="fas fa-plus-circle"></i> Conta à Pagar ou Receber</a>
           </div>
@@ -50,12 +52,10 @@
             aria-haspopup="true" aria-expanded="false"><i class="fas fa-tools"></i> Cadastros
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="['#']"><i class="fas fa-plus-circle"></i> Fornecedor</a>
-            <a class="dropdown-item" [routerLink]="['#']"><i class="fas fa-plus-circle"></i> Centro de Custo</a>
+            <a class="dropdown-item" [routerLink]="['/operador/fornecedores']"><i class="fas fa-plus-circle"></i> Fornecedor</a>
+            <a class="dropdown-item" [routerLink]="['/operador/centro-custo']"><i class="fas fa-plus-circle"></i> Centro de Custo</a>
             <a class="dropdown-item" [routerLink]="['/operador/clientes']"><i class="fas fa-plus-circle"></i>
               Cliente</a>
-            <a class="dropdown-item" [routerLink]="['/operador/produtos']"><i class="fas fa-plus-circle"></i>
-              Produto</a>
             <a class="dropdown-item" [routerLink]="['/operador/servicos']"><i class="fas fa-plus-circle"></i>
               Serviço</a>
           </div>

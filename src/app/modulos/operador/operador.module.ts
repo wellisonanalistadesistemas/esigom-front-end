@@ -32,9 +32,20 @@ import { CadastrarEEditarContaPagarReceberComponent } from './contas-pagar-receb
 import { EntradaProdutoComponent } from './entrada-produto/entrada-produto.component';
 import { ListEntradaProdutoComponent } from './entrada-produto/list-entrada-produto/list-entrada-produto.component';
 import { CadastrarEditarEntradaProdutoComponent } from './entrada-produto/cadastrar-editar-entrada-produto/cadastrar-editar-entrada-produto.component';
+import { FornecedorComponent } from './fornecedor/fornecedor.component';
+import { CadastrarEEditarFornecedorComponent } from './fornecedor/cadastrar-e-editar-fornecedor/cadastrar-e-editar-fornecedor.component';
+import { ListFornecedorComponent } from './fornecedor/list-fornecedor/list-fornecedor.component';
+import { CentroCustoComponent } from './centro-custo/centro-custo.component';
+import { CadastrarEEditarCentroCustoComponent } from './centro-custo/cadastrar-e-editar-centro-custo/cadastrar-e-editar-centro-custo.component';
+import { ListCentroCustoComponent } from './centro-custo/list-centro-custo/list-centro-custo.component';
+import { CompraComponent } from './compra/compra.component';
+import { CadastrarEEditarCompraComponent } from './compra/cadastrar-e-editar-compra/cadastrar-e-editar-compra.component';
+import { ListCompraComponent } from './compra/list-compra/list-compra.component';
+import { CaixaComponent } from './caixa/caixa.component';
+import { ListCaixaComponent } from './caixa/list-caixa/list-caixa.component';
 
 @NgModule({
-  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent, ServicoComponent, ProdutosComponent, ListarServicoComponent, CadastrarEEditarServicoComponent, ListarProdutoComponent, CadastrarEEditarProdutoComponent, OrcamentoComponent, CadastrarEEditarOrcamentoComponent, ListarOrcamentoComponent, OrdemServicoComponent, ListarOrdemServicoComponent, ConcluirOrdemServicoComponent, ContasPagarReceberComponent, ListarContaPagarReceberComponent, CadastrarEEditarContaPagarReceberComponent, EntradaProdutoComponent, ListEntradaProdutoComponent, CadastrarEditarEntradaProdutoComponent],
+  declarations: [ClientesComponent, CadastrarEditarClienteComponent, ListarClienteComponent, ServicoComponent, ProdutosComponent, ListarServicoComponent, CadastrarEEditarServicoComponent, ListarProdutoComponent, CadastrarEEditarProdutoComponent, OrcamentoComponent, CadastrarEEditarOrcamentoComponent, ListarOrcamentoComponent, OrdemServicoComponent, ListarOrdemServicoComponent, ConcluirOrdemServicoComponent, ContasPagarReceberComponent, ListarContaPagarReceberComponent, CadastrarEEditarContaPagarReceberComponent, EntradaProdutoComponent, ListEntradaProdutoComponent, CadastrarEditarEntradaProdutoComponent, FornecedorComponent, CadastrarEEditarFornecedorComponent, ListFornecedorComponent, CentroCustoComponent, CadastrarEEditarCentroCustoComponent, ListCentroCustoComponent, CompraComponent, CadastrarEEditarCompraComponent, ListCompraComponent, CaixaComponent, ListCaixaComponent],
   imports: [
     CommonModule,
     ComponentsModule,

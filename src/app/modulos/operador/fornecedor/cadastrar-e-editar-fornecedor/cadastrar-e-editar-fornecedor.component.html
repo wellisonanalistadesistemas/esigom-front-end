@@ -1,0 +1,39 @@
+<nb-card class="status-success">
+    <nb-card-header>
+        <h5>CADASTRAR FORNECEDOR</h5>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-card class="status-success">
+            <nb-card-header>
+                <h6>Dados Básicos:</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <form>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <div class="form-group">
+                                <label class="col-form-label">* Descrição</label>
+                                <input autocomplete="off" class="form-control" placeholder="Nome do Produto"
+                                    value="objeto.descricao" name="nome" [(ngModel)]="objeto.descricao" uppercase>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
+                        class="fas fa-save"></i>
+                    Salvar Cadastro</button>
+                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
+                        class="fa fa-times"></i>
+                    Limpar</button>
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/fornecedores']">
+                    <i class="fas fa-backward"></i>
+                    Voltar
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
