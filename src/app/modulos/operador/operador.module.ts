@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NbCardModule, NbMenuModule, NbListModule } from '@nebular/theme';
+import { NbCardModule, NbMenuModule, NbListModule, NbButtonModule, NbRadioModule, NbSelectModule } from '@nebular/theme';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BsDropdownModule } from 'ngx-bootstrap';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { PipeModule } from 'src/app/pipe/pipe.module';
@@ -52,6 +52,9 @@ import { ListCaixaComponent } from './caixa/list-caixa/list-caixa.component';
     RouterModule,
     NbCardModule,
     NgSelectModule,
+    NbRadioModule,
+    NbButtonModule,
+    NbSelectModule,
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),

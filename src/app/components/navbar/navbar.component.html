@@ -20,7 +20,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" [routerLink]="['/operador/orcamentos']"><i class="fas fa-search-plus"></i>
               Orçamento</a>
-            <a class="dropdown-item"> <i class="fas fa-cart-plus"></i> Compra</a>
+            <a class="dropdown-item" [routerLink]="['/operador/compras']"> <i class="fas fa-cart-plus"></i> Compra</a>
             <a class="dropdown-item" [routerLink]="['operador/ordens-servicos']"><i class="fas fa-clipboard-list"></i>
               Ordem de Serviço</a>
           </div>
@@ -72,9 +72,9 @@
 
           </div>
         </li>
-        <li class="nav-item active">
+        <!-- <li class="nav-item active">
           <a class="nav-link" href="#"><i class="far fa-file-pdf"></i> Relatórios</a>
-        </li>
+        </li> -->
       </ul>
     </div>
 

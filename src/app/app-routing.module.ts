@@ -26,6 +26,7 @@ import { CadastrarEEditarCentroCustoComponent } from './modulos/operador/centro-
 import { FornecedorComponent } from './modulos/operador/fornecedor/fornecedor.component';
 import { CadastrarEEditarFornecedorComponent } from './modulos/operador/fornecedor/cadastrar-e-editar-fornecedor/cadastrar-e-editar-fornecedor.component';
 import { CaixaComponent } from './modulos/operador/caixa/caixa.component';
+import { CadastrarEEditarCompraComponent } from './modulos/operador/compra/cadastrar-e-editar-compra/cadastrar-e-editar-compra.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
@@ -78,6 +79,34 @@ const routes: Routes = [
       }
     ]
   },
+
+  {
+    path: 'operador/compras',
+    data: {
+      breadcrumbs: 'Compras'
+    },
+    children: [
+      // {
+      //   path: '', component: OrcamentoComponent
+      // },
+      {
+        path: 'cadastrar',
+        data: {
+          breadcrumbs: 'Nova Compra'
+        },
+        component: CadastrarEEditarCompraComponent
+      },
+      {
+        path: 'editar/:id',
+        data: {
+          breadcrumbs: 'Editar Compra'
+        },
+        component: CadastrarEEditarCompraComponent
+      },
+
+    ]
+  },
+
 
 
 

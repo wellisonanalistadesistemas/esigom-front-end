@@ -1,1 +1,259 @@
-<p>cadastrar-e-editar-compra works!</p>
+<nb-card class="status-success">
+    <nb-card-header>
+        <h5>CADASTRAR COMPRA</h5>
+    </nb-card-header>
+    <nb-card-body>
+
+
+        <nb-card>
+            <nb-card-header>
+                <h6>Listagem de Produto(s):</h6>
+            </nb-card-header>
+            <nb-card-body>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="m-1 btn btn-sm btn-info btn-pesquisar"
+                            (click)="abrirModalAdicionarProduto(layoutModalAdicionarProduto, 'lg')">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Produto</button>
+                    </div>
+                    <div *ngIf="objeto.produtos.length > 0" class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Descrição</th>
+                                    <th class="text-center">Quantidade</th>
+                                    <th class="text-center">Valor Pago por Unidade</th>
+                                    <th class="text-center">Valor Total</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let it of objeto.produtos">
+                                    <td scope="col">{{it.produto.descricao}}</td>
+                                    <td scope="col" class="text-center">{{it.quantidade}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.valorUnidade | currency:'BRL':true:'1.2-2'}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.valorUnidade*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
+                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                            (click)="excluirProduto(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">Total da Compra:
+                        {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
+        <nb-card class="status-success">
+            <nb-card-header>
+                <h6>Informações da Compra:</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <form>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2">
+                            <div class="form-group">
+                                <label class="label col-form-label">Data Entrada</label>
+                                <input nbinput type="text" class="form-control" bsDatepicker locale="pt-br"
+                                    [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
+                                    [(ngModel)]="objeto.dataEntrada" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                            <div class="form-group">
+                                <label class="label col-form-label">Fornecedor</label>
+                                <ng-select class="custom" [items]="listaFornecedores" [selectOnTab]="true"
+                                    [(ngModel)]="objeto.fornecedor" bindLabel="descricao" bindValue="id"
+                                    notFoundText="Busca sem correspondência" name="fornecedor">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+                            <div class="form-group">
+                                <label class="label col-form-label">Centro de Custo</label>
+                                <ng-select class="custom" [items]="listaCentroDeCustos" [selectOnTab]="true"
+                                    bindLabel="descricao" [(ngModel)]="objeto.centroCusto" bindValue="id"
+                                    notFoundText="Busca sem correspondência" name="centroCusto">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+                            <div class="form-group">
+                                <label class="label col-form-label">Formas de Pagamento</label>
+                                <ng-select class="custom" [items]="listaFormasPagamento" [selectOnTab]="true"
+                                    bindLabel="descricao" [(ngModel)]="objeto.formaPagamento" bindValue="id"
+                                    notFoundText="Busca sem correspondência" name="formaPagamento">
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                            <div class="form-group">
+                                <label class="label col-form-label">Nota Fiscal</label>
+                                <input [(ngModel)]="objeto.notaFiscal" autocomplete="off" class="form-control"
+                                    name="notaFiscal">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                            <label class="label col-form-label">Pagamento da Venda</label>
+                            <div class="checkbox">
+                                <input class="input-checkbox radio-venda" (change)="aplicarTipoPagamentoVenda(false)"
+                                    type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                <label class="check-label" for="exampleRadios1">
+                                    À vista
+                                </label>
+                                <input class="input-checkbox radio-venda" (change)="aplicarTipoPagamentoVenda(true)"
+                                    type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Parcelado
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+
+        <nb-card class="status-success" *ngIf="parcelamento">
+            <nb-card-header>
+                <h6>Listagem de Parcela(s):</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
+                        <div class="form-group">
+                            <label class="label col-form-label">Ordem</label>
+                            <input [(ngModel)]="compraParcela.ordem" autocomplete="off" class="form-control"
+                                name="valor">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Número Documento</label>
+                            <input [(ngModel)]="compraParcela.documento" autocomplete="off" class="form-control"
+                                name="documento">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Data de Vencimento</label>
+                            <input nbinput type="text" class="form-control" bsDatepicker locale="pt-br"
+                                [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
+                                [(ngModel)]="compraParcela.dataVencimento" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Valor Parcela</label>
+                            <input [(ngModel)]="compraParcela.valor" autocomplete="off" class="form-control"
+                                name="valor">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 btn-add">
+                        <div class="form-group">
+                            <button nbButton status="primary" size="small" hero class="m-1"
+                                (click)="adicionarParcela()">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="objeto.parcelas.length > 0" class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Ordem</th>
+                                    <th class="text-center">Data de Vencimento</th>
+                                    <th class="text-center">Número Documento</th>
+                                    <th class="text-center">Valor Parcela</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let it of objeto.parcelas">
+                                    <td scope="col" class="text-center">{{it.ordem}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.dataVencimento  | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+                                    <td scope="col" class="text-center">{{it.documento}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                            (click)="excluirParcela(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">Total das Parcelas:
+                        {{valorTotalParcelas | currency:'BRL':true:'1.2-2'}}</div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
+                        class="fas fa-save"></i>
+                    Salvar Cadastro</button>
+                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
+                        class="fa fa-times"></i>
+                    Limpar</button>
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/fornecedores']">
+                    <i class="fas fa-backward"></i>
+                    Voltar
+                </button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+
+
+
+<!-- Modal Adicionar Produto -->
+<ng-template #layoutModalAdicionarProduto let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Adicionar Produto</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-7">
+                <div class="form-group">
+                    <label class="label col-form-label">Produto</label>
+                    <ng-select (change)="selecionarProduto($event)" class="custom" [items]="listaCompraProdutos"
+                        [selectOnTab]="true" bindLabel="descricao" bindValue="id"
+                        notFoundText="Busca sem correspondência" name="formaPagamento">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                <div class="form-group">
+                    <label class="label col-form-label">Quantidade</label>
+                    <input [(ngModel)]="compraProduto.quantidade" autocomplete="off" class="form-control"
+                        name="quantidade">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="label col-form-label">Valor Pago por Unidade</label>
+                    <input [(ngModel)]="compraProduto.valorUnidade" autocomplete="off" class="form-control"
+                        name="valorUnidade">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Adicionar</button>
+    </div>
+</ng-template>

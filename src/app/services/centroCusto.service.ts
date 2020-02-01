@@ -12,7 +12,7 @@ export class CentroCustoService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<CentroCusto> {
-    return this.http.get<CentroCusto>(`centrosCusto/todos`);
+    return this.http.get<CentroCusto>(`centrosCusto/`);
   }
   pesquisar(params) {
     return this.http.get(`centrosCusto`, { params });
