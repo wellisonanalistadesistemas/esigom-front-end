@@ -10,7 +10,6 @@ export class Compra {
     public centroCusto: CentroCusto;
     public formaPagamento: FormaPagamento;
     public dataEntrada: Date;
-    public valor: number;
     public notaFiscal: string;
     public parcelas = new Array<CompraParcela>();
     public produtos = new Array<CompraProduto>();
@@ -23,7 +22,6 @@ export class Compra {
         this.parcelas = new Array<CompraParcela>();
         this.produtos = new Array<CompraProduto>();
         this.dataEntrada = null;
-        this.valor = null;
         this.notaFiscal = null;
     }
 

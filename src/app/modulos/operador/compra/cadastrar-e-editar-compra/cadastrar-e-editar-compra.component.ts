@@ -71,13 +71,18 @@ export class CadastrarEEditarCompraComponent implements OnInit {
     });
   }
 
+  public adicionarProduto() {
+    this.objeto.produtos.push(this.compraProduto);
+    this.valorTotalProdutos += Number(this.compraProduto.valorUnidade * this.compraProduto.quantidade);
+  }
+
+  // Selecionar Produto (Modal)
   public selecionarProduto(produto) {
     this.compraProduto.produto = produto;
   }
 
-  public adicionarProduto() {
-    this.objeto.produtos.push(this.compraProduto);
-    this.valorTotalProdutos += Number(this.compraProduto.valorUnidade * this.compraProduto.quantidade);
+  public selecionarCentroCusto(centroCusto) {
+    this.objeto.centroCusto = centroCusto;
   }
 
   public excluirProduto(produto) {
@@ -95,7 +100,11 @@ export class CadastrarEEditarCompraComponent implements OnInit {
     // novo objeto
     this.compraParcela = new CompraParcela();
   }
-  ca
+
+  public selecionarFornecedor(fornecedor) {
+    this.objeto.fornecedor = fornecedor;
+  }
+
   public excluirParcela(parcela) {
     const index = this.objeto.parcelas.indexOf(parcela);
     // ao localizar
@@ -105,38 +114,15 @@ export class CadastrarEEditarCompraComponent implements OnInit {
     }
   }
 
+  public selecionarFormaPagamento(formaPagamento) {
+    this.objeto.formaPagamento = formaPagamento;
+  }
+
   public aplicarTipoPagamentoVenda(option) {
     this.parcelamento = option;
     if (option) {
       this.compraParcela = new CompraParcela();
     }
-  }
-
-
-
-  public salvarOuAlterar() {
-    console.log(this.objeto);
-
-    // if (this.objeto.id) {
-    //   this._compraService.alterar(this.objeto.id, this.objeto)
-    //     .subscribe(retorno => {
-    //       if (!retorno) {
-    //         this._router.navigate(['/operador/compras']);
-    //         this._toastr.success('Compra editada com sucesso.');
-    //       } else {
-    //         this._toastr.error('Erro ao cadastrar.');
-    //       }
-    //     });
-    // } else {
-    //   this._compraService.salvar(this.objeto).subscribe(retorno => {
-    //     if (!retorno) {
-    //       this._router.navigate(['/operador/compras']);
-    //       this._toastr.success('Compra cadastrada com sucesso.');
-    //     } else {
-    //       this._toastr.error('Erro ao cadastrar.');
-    //     }
-    //   });
-    // }
   }
 
   obterListasDropdowns() {
@@ -150,5 +136,31 @@ export class CadastrarEEditarCompraComponent implements OnInit {
       this.listaFormasPagamento = data;
     })
   }
+
+
+  public salvarOuAlterar() {
+    if (this.objeto.id) {
+      this._compraService.alterar(this.objeto.id, this.objeto)
+        .subscribe(retorno => {
+          if (!retorno) {
+            this._router.navigate(['/operador/compras']);
+            this._toastr.success('Compra editada com sucesso.');
+          } else {
+            this._toastr.error('Erro ao cadastrar.');
+          }
+        });
+    } else {
+      this._compraService.salvar(this.objeto).subscribe(retorno => {
+        if (!retorno) {
+          this._router.navigate(['/operador/compras']);
+          this._toastr.success('Compra cadastrada com sucesso.');
+        } else {
+          this._toastr.error('Erro ao cadastrar.');
+        }
+      });
+    }
+  }
+
+
 }
 

@@ -1,98 +1,79 @@
 <nb-card class="status-success">
     <nb-card-header>
-        <h5>CADASTRAR ORÇAMENTO DE VENDA</h5>
+        <h5>CADASTRAR ORÇAMENTO</h5>
     </nb-card-header>
     <nb-card-body>
-        <div class="row">
-            <div class="col-md-6">
-                <nb-card class="status-success">
-                    <nb-card-header>
-                        <h6>Dados do Cliente:</h6>
-                    </nb-card-header>
-                    <nb-card-body>
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                                <div class="form-group">
-                                    <label class="col-form-label">CPF:</label>
-                                    <input (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf" autocomplete="off"
-                                        placeholder="CPF" class="form-control" name="cpf">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-8">
-                                <div class="form-group">
-                                    <label class="col-form-label">Nome:</label>
-                                    <input class="form-control" placeholder="Nome" name="nome"
-                                        [(ngModel)]="objeto.cliente.nome" autocomplete="off" disabled>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                <div class="form-group">
-                                    <label class="col-form-label">E-mail:</label>
-                                    <input class="form-control" placeholder="E-mail" name="email"
-                                        [(ngModel)]="objeto.cliente.email" autocomplete="off" disabled>
-                                </div>
-                            </div>
+        <nb-card class="status-success">
+            <nb-card-header>
+                <h6>Informações do Cliente:</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">CPF:</label>
+                            <input (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf" autocomplete="off"
+                                class="form-control" name="cpf">
                         </div>
-                    </nb-card-body>
-                </nb-card>
-            </div>
-            <div class="col-md-6">
-                <nb-card class="status-success">
-                    <nb-card-header>
-                        <h6>Dados do Veículo:</h6>
-                    </nb-card-header>
-                    <nb-card-body>
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                                <div class="form-group">
-                                    <label class="col-form-label">Veículo Placa:</label>
-                                    <input class="form-control" placeholder="Placa" name="veiculoPlaca"
-                                        [(ngModel)]="objeto.veiculoPlaca" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                                <div class="form-group">
-                                    <label class="col-form-label">Marca:</label>
-                                    <input class="form-control" placeholder="Marca" name="marca"
-                                        [(ngModel)]="objeto.marca" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                                <div class="form-group">
-                                    <label class="col-form-label">Modelo:</label>
-                                    <input class="form-control" placeholder="Modelo" name="Modelo"
-                                        [(ngModel)]="objeto.modelo" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                                <div class="form-group">
-                                    <label class="col-form-label">Cor:</label>
-                                    <input class="form-control" placeholder="Cor" name="cor" [(ngModel)]="objeto.cor"
-                                        autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                                <div class="form-group">
-                                    <label class="col-form-label">Ano:</label>
-                                    <input class="form-control" placeholder="Ano" name="ano" [(ngModel)]="objeto.ano"
-                                        autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                                <div class="form-group">
-                                    <label class="col-form-label">Quilometragem:</label>
-                                    <input class="form-control" placeholder="Quilometragem" name="km"
-                                        [(ngModel)]="objeto.km" autocomplete="off">
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="form-group">
+                            <label class="label col-form-label">Nome:</label>
+                            <input class="form-control" name="nome" [(ngModel)]="objeto.cliente.nome" autocomplete="off"
+                                disabled>
                         </div>
-                    </nb-card-body>
-                </nb-card>
-            </div>
-        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="form-group">
+                            <label class="label col-form-label">E-mail:</label>
+                            <input class="form-control" name="email" [(ngModel)]="objeto.cliente.email"
+                                autocomplete="off" disabled>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Veículo Placa:</label>
+                            <input class="form-control" name="veiculoPlaca" [(ngModel)]="objeto.veiculoPlaca"
+                                autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Marca:</label>
+                            <input class="form-control" name="marca" [(ngModel)]="objeto.marca" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="form-group">
+                            <label class="label col-form-label">Modelo:</label>
+                            <input class="form-control" name="Modelo" [(ngModel)]="objeto.modelo" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Cor:</label>
+                            <input class="form-control" name="cor" [(ngModel)]="objeto.cor" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
+                        <div class="form-group">
+                            <label class="label col-form-label">Ano:</label>
+                            <input class="form-control" name="ano" [(ngModel)]="objeto.ano" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Quilometragem:</label>
+                            <input class="form-control" name="km" [(ngModel)]="objeto.km" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
         <nb-card>
             <nb-card-header>
-                <h6>Itens:</h6>
+                <h6>Listagem de Itens:</h6>
             </nb-card-header>
             <nb-card-body>
                 <nb-card>
@@ -197,8 +178,8 @@
             <nb-card-body>
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="col-form-label">Situação do Orçamento:</label>
-                        <div class="checkbox">
+                            <label class="label col-form-label">Situação do Orçamento:</label>
+                        <div class="checkbox" class="checkAndRadio">
                             <input class="input-checkbox" (change)="aplicarAcaoOrcamento(1)" type="radio"
                                 name="exampleRadios" id="exampleRadios1" value="option1" checked>
                             <label class="check-label" for="exampleRadios1">
@@ -222,11 +203,11 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="col-form-label">Forma(s) de Pagamento:</label>
+                            <label class="label col-form-label">Forma(s) de Pagamento:</label>
                         <div class="checkbox">
-                            <label *ngFor="let it of formasPagamento">
+                            <label *ngFor="let it of formasPagamento" class="checkAndRadio">
                                 <input class="input-checkbox" type="checkbox" (change)="adicionarFormaPagamento(it)">
-                                <span class="checkbox-material">
+                                <span class="checkbox-material ">
                                     <span class="check"></span>
                                 </span> {{it.descricao}}
                             </label>
@@ -235,7 +216,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <label class="col-form-label">Observações:</label>
+                            <label class="label col-form-label">Observações:</label>
                         <textarea class="form-control" rows="3" [(ngModel)]="objeto.obs"></textarea>
                     </div>
                 </div>

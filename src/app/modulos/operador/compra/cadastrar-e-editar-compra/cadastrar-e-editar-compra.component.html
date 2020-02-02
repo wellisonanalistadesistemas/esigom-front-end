@@ -3,8 +3,6 @@
         <h5>CADASTRAR COMPRA</h5>
     </nb-card-header>
     <nb-card-body>
-
-
         <nb-card>
             <nb-card-header>
                 <h6>Listagem de Produto(s):</h6>
@@ -70,27 +68,29 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                             <div class="form-group">
                                 <label class="label col-form-label">Fornecedor</label>
-                                <ng-select class="custom" [items]="listaFornecedores" [selectOnTab]="true"
-                                    [(ngModel)]="objeto.fornecedor" bindLabel="descricao" bindValue="id"
-                                    notFoundText="Busca sem correspondência" name="fornecedor">
+                                <ng-select class="custom" (change)="selecionarFornecedor($event)"
+                                    [items]="listaFornecedores" [(ngModel)]="objeto.fornecedor" [selectOnTab]="true"
+                                    bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
+                                    name="fornecedor">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <label class="label col-form-label">Centro de Custo</label>
-                                <ng-select class="custom" [items]="listaCentroDeCustos" [selectOnTab]="true"
-                                    bindLabel="descricao" [(ngModel)]="objeto.centroCusto" bindValue="id"
-                                    notFoundText="Busca sem correspondência" name="centroCusto">
+                                <ng-select class="custom" (change)="selecionarCentroCusto($event)"
+                                    [items]="listaCentroDeCustos" [(ngModel)]="objeto.centroCusto" [selectOnTab]="true"
+                                    bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
+                                    name="centroCusto">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <label class="label col-form-label">Formas de Pagamento</label>
-                                <ng-select class="custom" [items]="listaFormasPagamento" [selectOnTab]="true"
-                                    bindLabel="descricao" [(ngModel)]="objeto.formaPagamento" bindValue="id"
-                                    notFoundText="Busca sem correspondência" name="formaPagamento">
+                                <ng-select class="custom" (change)="selecionarFormaPagamento($event)"
+                                    [items]="listaFormasPagamento" [(ngModel)]="objeto.formaPagamento"  [selectOnTab]="true" bindLabel="descricao"
+                                    bindValue="id" notFoundText="Busca sem correspondência" name="formaPagamento">
                                 </ng-select>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                             <label class="label col-form-label">Pagamento da Venda</label>
-                            <div class="checkbox">
+                            <div class="checkbox checkAndRadio">
                                 <input class="input-checkbox radio-venda" (change)="aplicarTipoPagamentoVenda(false)"
                                     type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                 <label class="check-label" for="exampleRadios1">
@@ -129,18 +129,18 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
                         <div class="form-group">
-                            <label class="label col-form-label">Ordem</label>
+                            <label class="label col-form-label">Número</label>
                             <input [(ngModel)]="compraParcela.ordem" autocomplete="off" class="form-control"
                                 name="valor">
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                    <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Número Documento</label>
                             <input [(ngModel)]="compraParcela.documento" autocomplete="off" class="form-control"
                                 name="documento">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Data de Vencimento</label>
@@ -168,9 +168,9 @@
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th class="text-center">Ordem</th>
+                                    <th class="text-center">Número da Parcela</th>
                                     <th class="text-center">Data de Vencimento</th>
-                                    <th class="text-center">Número Documento</th>
+                                    <!-- <th class="text-center">Número Documento</th> -->
                                     <th class="text-center">Valor Parcela</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
@@ -179,8 +179,8 @@
                                 <tr *ngFor="let it of objeto.parcelas">
                                     <td scope="col" class="text-center">{{it.ordem}}</td>
                                     <td scope="col" class="text-center">
-                                        {{it.dataVencimento  | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-                                    <td scope="col" class="text-center">{{it.documento}}</td>
+                                        {{it.dataVencimento  | date: 'dd/MM/yyyy'}}</td>
+                                    <!-- <td scope="col" class="text-center">{{it.documento}}</td> -->
                                     <td scope="col" class="text-center">
                                         {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
                                     <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
@@ -207,7 +207,7 @@
                 <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
                         class="fa fa-times"></i>
                     Limpar</button>
-                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/fornecedores']">
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/compras']">
                     <i class="fas fa-backward"></i>
                     Voltar
                 </button>

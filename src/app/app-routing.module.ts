@@ -27,6 +27,7 @@ import { FornecedorComponent } from './modulos/operador/fornecedor/fornecedor.co
 import { CadastrarEEditarFornecedorComponent } from './modulos/operador/fornecedor/cadastrar-e-editar-fornecedor/cadastrar-e-editar-fornecedor.component';
 import { CaixaComponent } from './modulos/operador/caixa/caixa.component';
 import { CadastrarEEditarCompraComponent } from './modulos/operador/compra/cadastrar-e-editar-compra/cadastrar-e-editar-compra.component';
+import { CompraComponent } from './modulos/operador/compra/compra.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
@@ -86,9 +87,9 @@ const routes: Routes = [
       breadcrumbs: 'Compras'
     },
     children: [
-      // {
-      //   path: '', component: OrcamentoComponent
-      // },
+      {
+        path: '', component: CompraComponent
+      },
       {
         path: 'cadastrar',
         data: {
