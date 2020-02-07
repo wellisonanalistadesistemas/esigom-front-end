@@ -60,6 +60,26 @@ export class CompraComponent implements OnInit {
     this.buscarCompras();
   }
 
+  public abrirModalContabilizarEmEstoque(Id, template) {
+    this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Dismissed ${this.incluirEmEstoque(Id)}`;
+    }, (reason) => {
+      this.closeResult = `Closed with: ${reason}`;
+    });
+  }
+
+  public incluirEmEstoque(id) {
+    this._compraService.incluirEmEstoque(id).subscribe(data => {
+      if (data) {
+        this.toastr.success('Inclusão realizada com sucesso.');
+      } else {
+        this.toastr.success('Erro ao incluir.');
+      };
+      this.buscarCompras();
+
+    });
+  }
+
   public abrirModalExclusao(Id, template) {
     this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Dismissed ${this.excluir(Id)}`;

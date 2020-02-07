@@ -34,6 +34,10 @@ export class CompraService {
     return this.http.delete(`compras/` + id);
   }
 
+  incluirEmEstoque(id: number) {
+    return this.http.post(`compras/incluirEmEstoque/` + id, "");
+  }
+
   buscarPeloId(id: number) {
     return this.http.get<Compra>(`compras/` + id);
   }

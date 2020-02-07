@@ -51,24 +51,24 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <nb-card class="status-success" *ngIf="listaContas">
-                    <div class="alert alert-primary" style="margin: 5px" *ngIf="listaContas && listaContas.total == 0"
-                        role="alert">
-                        Nenhuma remessa encontrada!
-                    </div>
+                <nb-card class="status-success">
                     <nb-card-header>
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listaContas.recordsTotal > 0">
                             <app-listar-conta-pagar-receber [lista]="listaContas" (eventoOrdenar)="ordenar($event)"
-                                (eventoAlterarSenha)="abrirModalAlterarSenha($event, alterarSenha)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-listar-conta-pagar-receber>
                         </div>
+                        <div class="alert alert-primary" style="margin: 5px" *ngIf="listaContas.recordsTotal == 0"
+                            role="alert">
+                            Nenhuma conta foi encontrada!
+                        </div>
                     </nb-card-body>
                 </nb-card>
+
             </div>
         </div>
     </nb-card-body>

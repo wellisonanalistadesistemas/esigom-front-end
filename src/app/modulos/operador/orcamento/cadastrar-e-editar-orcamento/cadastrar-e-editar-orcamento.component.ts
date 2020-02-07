@@ -32,13 +32,21 @@ export class CadastrarEEditarOrcamentoComponent {
   public formasPagamento: any;
   public listaOrcamentoProdutos: any;
   public listaOrcamentoServicos: any;
-  // Total
   public valorTotalGeral = 0;
   public valorTotalProdutos = 0;
   public valorTotalServicos = 0;
 
-  constructor(private http: HttpClient,
-    private cd: ChangeDetectorRef, private _produtoService: ProdutoService, private _servicoService: ServicoService, private modalService: NgbModal, private _formaPagamentoService: FormaPagamentoService, private _clienteService: ClienteService, private _orcamentoService: OrcamentoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private _produtoService: ProdutoService,
+    private _servicoService: ServicoService,
+    private modalService: NgbModal,
+    private _formaPagamentoService: FormaPagamentoService,
+    private _clienteService: ClienteService,
+    private _orcamentoService: OrcamentoService,
+    private toastr: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     // Obter Formas de pagamento

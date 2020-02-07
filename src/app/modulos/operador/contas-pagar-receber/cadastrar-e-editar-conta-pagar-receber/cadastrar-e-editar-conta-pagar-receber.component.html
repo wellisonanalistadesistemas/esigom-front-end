@@ -8,26 +8,140 @@
                 <h6>Dados Básicos:</h6>
             </nb-card-header>
             <nb-card-body>
-                <form>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                            <div class="form-group">
-                                <label class="col-form-label">* Descrição</label>
-                                <input autocomplete="off" class="form-control" placeholder="Nome do Produto"
-                                    value="objeto.descricao" name="nome" [(ngModel)]="objeto.descricao" uppercase>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                            <div class="form-group">
-                                <label class="col-form-label">* Valor</label>
-                                <input currencyMask autocomplete="off" class="form-control" placeholder="Valor do Produto"
-                                    value="objeto.valor" name="valor" [(ngModel)]="objeto.valor" uppercase>
-                            </div>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <label class="label col-form-label">Tipo da Conta</label>
+                        <div class="checkbox checkAndRadio">
+                            <input class="input-checkbox radio-venda" (change)="aplicarTipoConta(true)" type="radio"
+                                name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <label class="check-label" for="exampleRadios1">
+                                À Pagar
+                            </label>
+                            <input class="input-checkbox radio-venda" (change)="aplicarTipoConta(false)" type="radio"
+                                name="exampleRadios" id="exampleRadios2" value="option2">
+                            <label class="form-check-label" for="exampleRadios2">
+                                À Receber
+                            </label>
                         </div>
                     </div>
-                </form>
+                    <div *ngIf="!contaPagar" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">CPF:</label>
+                            <input (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf" autocomplete="off"
+                                class="form-control" name="cpf">
+                        </div>
+                    </div>
+                    <div *ngIf="!contaPagar" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="form-group">
+                            <label class="label col-form-label">Nome:</label>
+                            <input class="form-control" name="nome" [(ngModel)]="objeto.cliente.nome" autocomplete="off"
+                                disabled>
+                        </div>
+                    </div>
+                    <div *ngIf="contaPagar" class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                        <div class="form-group">
+                            <label class="label col-form-label">Fornecedor</label>
+                            <ng-select class="custom" (change)="selecionarFornecedor($event)"
+                                [items]="listaFornecedores" [(ngModel)]="objeto.fornecedor" [selectOnTab]="true"
+                                bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
+                                name="fornecedor">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+                        <div class="form-group">
+                            <label class="label col-form-label">Centro de Custo</label>
+                            <ng-select class="custom" (change)="selecionarCentroCusto($event)"
+                                [items]="listaCentroDeCustos" [(ngModel)]="objeto.centroCusto" [selectOnTab]="true"
+                                bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
+                                name="centroCusto">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Documento:</label>
+                            <input class="form-control" name="numeroDocumento" [(ngModel)]="objeto.numeroDocumento"
+                                autocomplete="off">
+                        </div>
+                    </div>
+                </div>
             </nb-card-body>
         </nb-card>
+        <nb-card class="status-success">
+            <nb-card-header>
+                <h6>Listagem de Parcela(s):</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Número Parcela</label>
+                            <input [(ngModel)]="parcela.ordem" autocomplete="off" class="form-control" name="ordem">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                        <div class="form-group">
+                            <label class="label col-form-label">Descrição</label>
+                            <input [(ngModel)]="parcela.descricao" autocomplete="off" class="form-control" name="ordem">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Data de Vencimento</label>
+                            <input nbinput type="text" autocomplete="off" name="dataVencimento" class="form-control"
+                                bsDatepicker locale="pt-br"
+                                [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
+                                [(ngModel)]="parcela.dataVencimento" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div class="form-group">
+                            <label class="label col-form-label">Valor Parcela</label>
+                            <input [(ngModel)]="parcela.valor" autocomplete="off" class="form-control" name="valor">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-2 btn-add">
+                        <div class="form-group">
+                            <button nbButton status="primary" size="small" hero class="m-1"
+                                (click)="adicionarParcela()">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngIf="objeto.parcelas.length > 0" class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Número da Parcela</th>
+                                    <th class="text-center">Descrição</th>
+                                    <th class="text-center">Data de Vencimento</th>
+                                    <th class="text-center">Valor Parcela</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let it of objeto.parcelas">
+                                    <td scope="col" class="text-center">{{it.ordem}}</td>
+                                    <td scope="col" class="text-center">{{it.descricao}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.dataVencimento  | date: 'dd/MM/yyyy'}}</td>
+                                    <td scope="col" class="text-center">
+                                        {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
+                                            (click)="excluirParcela(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">Qtde. Parcelas: {{quantidadeParcelas}} - Valor Total:
+                        {{valorTotal | currency:'BRL':true:'1.2-2'}}</div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+
         <div class="row">
             <div class="col-md-12">
                 <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
@@ -36,9 +150,9 @@
                 <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
                         class="fa fa-times"></i>
                     Limpar</button>
-                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/produtos']">
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/contas-a-pagar-receber']">
                     <i class="fas fa-backward"></i>
-                    Voltar à Consulta de Produtos
+                    Voltar
                 </button>
             </div>
         </div>

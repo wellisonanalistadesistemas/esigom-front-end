@@ -5,13 +5,17 @@
             </th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center"
                 (click)="ordenar('nome')">
-                Data de Entrada</th>
+                Data Entrada</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
                 Fornecedor</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
-                Forma de Pagamento</th>
+                Forma Pagamento</th>
             <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
-                (click)="ordenar('dthInclusao')">Quantidade de Produtos</th>
+                (click)="ordenar('dthInclusao')">Qtde. Produtos</th>
+            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
+                (click)="ordenar('dthInclusao')">Contabilizado em Estoque</th>
+            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
+                (click)="ordenar('dthInclusao')">Situação</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
@@ -22,13 +26,15 @@
             <td scope="col">{{it.fornecedor.descricao}}</td>
             <td scope="col" class="text-center">{{it.formaPagamento.descricao}}</td>
             <td scope="col" class="text-center">{{it.quantidadeProdutos}}</td>
+            <td scope="col" class="text-center">Não</td>
+            <td scope="col" class="text-center">Quitado</td>
             <td scope="col" class="text-center" nowrap>
                 <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/compras/editar/',it.id]"> <i
                         class="fas fa-pencil-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
                         class="far fa-trash-alt"></i></button>
-                <!-- <button class="m-1 btn btn-sm btn-info" (click)="excluir(it.id)"> <i class="fas fa-eye"></i></button> -->
-
+                <button class="m-1 btn btn-sm btn-success" (click)="contabilizarEmEstoque(it.id)"> <i
+                        class="fas fa-plus-circle"></i></button>
             </td>
         </tr>
     </tbody>
