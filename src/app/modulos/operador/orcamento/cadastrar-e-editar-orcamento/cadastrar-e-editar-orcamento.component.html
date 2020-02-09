@@ -178,7 +178,7 @@
             <nb-card-body>
                 <div class="row">
                     <div class="col-md-6">
-                            <label class="label col-form-label">Situação do Orçamento:</label>
+                        <label class="label col-form-label">Situação do Orçamento:</label>
                         <div class="checkbox" class="checkAndRadio">
                             <input class="input-checkbox" (change)="aplicarAcaoOrcamento(1)" type="radio"
                                 name="exampleRadios" id="exampleRadios1" value="option1" checked>
@@ -203,7 +203,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                            <label class="label col-form-label">Forma(s) de Pagamento:</label>
+                        <label class="label col-form-label">Forma(s) de Pagamento:</label>
                         <div class="checkbox">
                             <label *ngFor="let it of formasPagamento" class="checkAndRadio">
                                 <input class="input-checkbox" type="checkbox" (change)="adicionarFormaPagamento(it)">
@@ -216,7 +216,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                            <label class="label col-form-label">Observações:</label>
+                        <label class="label col-form-label">Observações:</label>
                         <textarea class="form-control" rows="3" [(ngModel)]="objeto.obs"></textarea>
                     </div>
                 </div>
@@ -266,6 +266,14 @@
                     <input ui-br-phone-number [(ngModel)]="orcamentoProduto.quantidade" autocomplete="off"
                         placeholder="Telefone" class="form-control" name="descricaoProduto">
                 </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <label class="checkAndRadio">
+                    <input class="input-checkbox" type="checkbox">
+                    <span class="checkbox-material ">
+                        <span class="check"></span>
+                    </span> Cliente Deseja Levar Produto Trocado
+                </label>
             </div>
         </div>
     </div>

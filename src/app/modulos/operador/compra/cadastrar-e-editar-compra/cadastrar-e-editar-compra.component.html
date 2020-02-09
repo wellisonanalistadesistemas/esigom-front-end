@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 text-right">Total da Compra:
+                    <div class="col-md-12 text-right">Total Geral:
                         {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</div>
                 </div>
             </nb-card-body>
@@ -89,8 +89,9 @@
                             <div class="form-group">
                                 <label class="label col-form-label">Formas de Pagamento</label>
                                 <ng-select class="custom" (change)="selecionarFormaPagamento($event)"
-                                    [items]="listaFormasPagamento" [(ngModel)]="objeto.formaPagamento"  [selectOnTab]="true" bindLabel="descricao"
-                                    bindValue="id" notFoundText="Busca sem correspondência" name="formaPagamento">
+                                    [items]="listaFormasPagamento" [(ngModel)]="objeto.formaPagamento"
+                                    [selectOnTab]="true" bindLabel="descricao" bindValue="id"
+                                    notFoundText="Busca sem correspondência" name="formaPagamento">
                                 </ng-select>
                             </div>
                         </div>
