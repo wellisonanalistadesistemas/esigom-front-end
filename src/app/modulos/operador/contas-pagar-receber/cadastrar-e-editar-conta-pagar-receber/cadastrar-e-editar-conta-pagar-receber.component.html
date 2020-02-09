@@ -11,15 +11,16 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <label class="label col-form-label">Tipo da Conta</label>
+                        <!-- TODO:Verificar Check na Edição -->
                         <div class="checkbox checkAndRadio">
                             <input class="input-checkbox radio-venda" (change)="aplicarTipoConta(true)" type="radio"
-                                name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                name="exampleRadios" id="exampleRadios1" value="option1" [checked]="contaPagar">
                             <label class="check-label" for="exampleRadios1">
                                 À Pagar
                             </label>
                             <input class="input-checkbox radio-venda" (change)="aplicarTipoConta(false)" type="radio"
-                                name="exampleRadios" id="exampleRadios2" value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
+                                name="exampleRadios" id="exampleRadios2" value="option2" [checked]="!contaPagar">
+                                 <label class="form-check-label" for="exampleRadios2">
                                 À Receber
                             </label>
                         </div>
@@ -41,9 +42,9 @@
                     <div *ngIf="contaPagar" class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="form-group">
                             <label class="label col-form-label">Fornecedor</label>
-                            <ng-select class="custom" (change)="selecionarFornecedor($event)"
-                                [items]="listaFornecedores" [(ngModel)]="objeto.fornecedor" [selectOnTab]="true"
-                                bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
+                            <ng-select (change)="selecionarFornecedor($event)" [items]="listaFornecedores"
+                                [selectOnTab]="true" [(ngModel)]="objeto.fornecedor" bindLabel="descricao"
+                                placeholder="Busque por um Fornecedor" notFoundText="Busca sem correspondência"
                                 name="fornecedor">
                             </ng-select>
                         </div>
@@ -53,8 +54,7 @@
                             <label class="label col-form-label">Centro de Custo</label>
                             <ng-select class="custom" (change)="selecionarCentroCusto($event)"
                                 [items]="listaCentroDeCustos" [(ngModel)]="objeto.centroCusto" [selectOnTab]="true"
-                                bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
-                                name="centroCusto">
+                                bindLabel="descricao" notFoundText="Busca sem correspondência" name="centroCusto">
                             </ng-select>
                         </div>
                     </div>
@@ -150,7 +150,8 @@
                 <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
                         class="fa fa-times"></i>
                     Limpar</button>
-                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/contas-a-pagar-receber']">
+                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar"
+                    [routerLink]="['/operador/contas-a-pagar-receber']">
                     <i class="fas fa-backward"></i>
                     Voltar
                 </button>

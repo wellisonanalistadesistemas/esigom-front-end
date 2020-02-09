@@ -56,13 +56,13 @@
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12" *ngIf="listaContas.recordsTotal > 0">
+                        <div class="col-m2-12" *ngIf="listaContas && listaContas.recordsTotal > 0">
                             <app-listar-conta-pagar-receber [lista]="listaContas" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-listar-conta-pagar-receber>
                         </div>
-                        <div class="alert alert-primary" style="margin: 5px" *ngIf="listaContas.recordsTotal == 0"
+                        <div class="alert alert-primary" style="margin: 5px" *ngIf="listaContas && listaContas.recordsTotal == 0"
                             role="alert">
                             Nenhuma conta foi encontrada!
                         </div>

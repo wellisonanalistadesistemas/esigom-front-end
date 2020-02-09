@@ -51,6 +51,9 @@ export class CadastrarEEditarContaPagarReceberComponent implements OnInit {
             this.valorTotal += Number(obj.valor);
             this.quantidadeParcelas += 1;
           });
+          if (this.objeto.cliente) {
+            this.contaPagar = false;
+          }
         });
       }
     })
@@ -116,9 +119,6 @@ export class CadastrarEEditarContaPagarReceberComponent implements OnInit {
   }
 
   salvarOuAlterar() {
-
-    console.log(this.objeto);
-
     if (this.objeto.id) {
       this._contaService.alterar(this.objeto.id, this.objeto).subscribe(retorno => {
         if (retorno) {
