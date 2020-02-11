@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Conta } from '../model/conta';
+import { ContaParcela } from '../model/contaParcela';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class ContaService {
     return this.http.put(`contas/` + id, dto);
   }
 
+  alterarContaParcela(id: number, dto: ContaParcela) {
+    return this.http.put(`contas/alterarContaParcela/` + id, dto);
+  }
+
+
   salvar(conta: Conta): Observable<Conta> {
     return this.http.post<Conta>(`contas`, conta);
   }
@@ -29,5 +35,10 @@ export class ContaService {
   buscarPeloId(id: number) {
     return this.http.get<Conta>(`contas/` + id);
   }
+
+
+
+
+
 
 }

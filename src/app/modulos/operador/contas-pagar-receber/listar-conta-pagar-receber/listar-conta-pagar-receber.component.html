@@ -9,7 +9,7 @@
                 (click)="ordenar('nome')">
                 Descrição</th>
             <th style="cursor: pointer;" title="Ordenar pelo Login" class="text-center" (click)="ordenar('login')">
-               Sacado/Cedente
+                Sacado/Cedente
             </th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
                 Data de Vencimento</th>
@@ -30,15 +30,16 @@
             <td scope="col">{{it.pessoa}}</td>
             <td scope="col" class="text-center">{{it.dataVencimento | date: 'dd/MM/yyyy h:mm:ss'}}</td>
             <td scope="col" class="text-center">{{it.valor | currency:'BRL':true:'1.2-2'}}</td>
-               <td scope="col" class="text-center">{{it.situacao}}</td>
+            <td scope="col" class="text-center">{{it.situacao}}</td>
             <td scope="col" class="text-center">
-                <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/contas-a-pagar-receber/editar/',it.idConta]"> <i
+                <button class="m-1 btn btn-sm btn-warning"
+                    [routerLink]="['/operador/contas-a-pagar-receber/editar/',it.conta.id]"> <i
                         class="fas fa-pencil-alt"></i></button>
-                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
+                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 'remocaoPagamento')"> <i
                         class="far fa-trash-alt"></i></button>
-                <button class="m-1 btn btn-sm btn-success" [routerLink]="['/operador/contas-a-pagar-receber/editar/',it.idConta]"> <i
+                <button *ngIf="it.situacaoId != 2" class="m-1 btn btn-sm btn-success" (click)="informarPagamento(it)"> <i
                         class="fas fa-check"></i></button>
-                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i class="fa fa-times"></i></button>
+                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 'exclusao')"> <i class="fa fa-times"></i></button>
             </td>
         </tr>
     </tbody>

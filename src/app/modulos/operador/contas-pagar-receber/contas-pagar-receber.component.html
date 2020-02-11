@@ -59,11 +59,12 @@
                         <div class="col-m2-12" *ngIf="listaContas && listaContas.recordsTotal > 0">
                             <app-listar-conta-pagar-receber [lista]="listaContas" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
-                                (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
+                                (eventoInformarPagamento)="abrirModalInformarPagamento($event, 'lg', informarPagamento)"
+                                (eventoExcluir)="abrirModalCancelarPagamentoOuDelete($event, confirmacao)">
                             </app-listar-conta-pagar-receber>
                         </div>
-                        <div class="alert alert-primary" style="margin: 5px" *ngIf="listaContas && listaContas.recordsTotal == 0"
-                            role="alert">
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listaContas && listaContas.recordsTotal == 0" role="alert">
                             Nenhuma conta foi encontrada!
                         </div>
                     </nb-card-body>
@@ -81,7 +82,53 @@
         </button>
     </div>
     <div class="modal-body">
-        <p>Deseja realmente excluir a conta selecionada?</p>
+        <p>{{textoModalReaproveitada}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Sim</button>
+    </div>
+</ng-template>
+
+<ng-template #informarPagamento let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">Informar Pagamento de Parcela</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                <div class="form-group">
+                    <label class="label col-form-label">Código Parcela</label>
+                    <input [(ngModel)]="objContaInformarPagamento.id" autocomplete="off" class="form-control" name="cod"
+                        disabled>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                <div class="form-group">
+                    <label class="label col-form-label">Descrição</label>
+                    <input [(ngModel)]="objContaInformarPagamento.descricao" autocomplete="off" class="form-control"
+                        name="cod" disabled>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                <div class="form-group">
+                    <label class="label col-form-label">Data do Pagamento</label>
+                    <input nbinput type="text" autocomplete="off" name="dataPagamento" class="form-control" bsDatepicker
+                        locale="pt-br"
+                        [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
+                        [(ngModel)]="objContaInformarPagamento.dataPagamento" [ngModelOptions]="{standalone: true}">
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                <div class="form-group">
+                    <label class="label col-form-label">Valor Pago (R$)</label>
+                    <input [(ngModel)]="objContaInformarPagamento.valorPago" autocomplete="off" class="form-control"
+                        name="valorPago">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Sim</button>

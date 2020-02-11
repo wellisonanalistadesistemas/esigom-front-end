@@ -5,6 +5,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ContaService } from 'src/app/services/conta.service.';
+import { Conta } from 'src/app/model/conta';
+import { ContaParcela } from 'src/app/model/contaParcela';
 
 
 @Component({
@@ -23,6 +25,9 @@ export class ContasPagarReceberComponent implements OnInit {
   modalConfirmacao: any;
   idExcluir: any;
   closeResult: string;
+  objContaInformarPagamento = new ContaParcela();
+  textoModalReaproveitada: string;
+  exclusao: boolean;
 
   ngOnInit() {
     this.novoForm();
@@ -65,18 +70,59 @@ export class ContasPagarReceberComponent implements OnInit {
     this.buscarContas();
   }
 
-  public abrirModalExclusao(Id, template) {
+
+  public abrirModalCancelarPagamentoOuDelete(objeto, template) {
+    if (objeto.acao == 'exclusao') {
+      this.exclusao = true;
+      this.textoModalReaproveitada = "Deseja realmente excluir a conta selecionada?";
+    } else if (objeto.acao == 'remocaoPagamento') {
+      this.objContaInformarPagamento = objeto.it;
+      this.exclusao = false;
+      this.textoModalReaproveitada = "Deseja realmente cancelar o pagamento realizado?";
+    }
     this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Dismissed ${this.excluir(Id)}`;
+      this.closeResult = `Dismissed ${this.excluirOuCancelarPagamento(objeto)}`;
     }, (reason) => {
       this.closeResult = `Closed with: ${reason}`;
     });
   }
 
-  public excluir(id) {
-    this._contaService.excluir(id).subscribe(data => {
+  public excluirOuCancelarPagamento(objeto) {
+    if (this.exclusao) {
+      this._contaService.excluir(objeto.it.id).subscribe(data => {
+        this.toastr.success('Conta excluída com sucesso.');
+        this.buscarContas();
+      });
+    } else {
+      // Situação "Em Aberto"
+      this.objContaInformarPagamento.situacao = 1;
+      this.objContaInformarPagamento.dataPagamento = null;
+      this.objContaInformarPagamento.valorPago = null;
+      this._contaService.alterarContaParcela(this.objContaInformarPagamento.id, this.objContaInformarPagamento).subscribe(data => {
+        this.toastr.success('Pagamento cancelado com sucesso.');
+        this.buscarContas();
+      });
+    }
+
+  }
+
+
+  public abrirModalInformarPagamento(obj, size, template) {
+    if (obj != null) {
+      this.objContaInformarPagamento = obj;
+    }
+    this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Dismissed ${this.informarPagamento()}`;
+    }, (reason) => {
+      this.closeResult = `Closed with: ${reason}`;
+    });
+  }
+
+  public informarPagamento() {
+    this.objContaInformarPagamento.situacao = 2;
+    this._contaService.alterarContaParcela(this.objContaInformarPagamento.id, this.objContaInformarPagamento).subscribe(data => {
       this.buscarContas();
-      this.toastr.success('Conta excluída com sucesso.');
+      this.toastr.success('Pagamento informado com sucesso.');
     });
   }
 }

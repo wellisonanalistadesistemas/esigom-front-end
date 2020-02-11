@@ -15,6 +15,7 @@ export class ListarContaPagarReceberComponent implements OnInit {
   @Output() eventoPaginar = new EventEmitter();
   @Output() eventoOrdenar = new EventEmitter();
   @Output() eventoExcluir = new EventEmitter();
+  @Output() eventoInformarPagamento = new EventEmitter();
   @Output() eventoAlterarSenha = new EventEmitter();
 
   parametrosPaginacao = ({}) as BuscaEntity;
@@ -37,8 +38,13 @@ export class ListarContaPagarReceberComponent implements OnInit {
     this.eventoOrdenar.emit(params);
   }
 
-  public excluir(Id) {
-    this.eventoExcluir.emit(Id);
+  public excluir(it, acao) {
+    this.eventoExcluir.emit({ it, acao });
+  }
+
+  public informarPagamento(obj) {
+    this.eventoInformarPagamento.emit(obj);
+    console.log(obj);
   }
 }
 
