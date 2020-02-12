@@ -67,11 +67,15 @@
             <h6>Resultado da Pesquisa:</h6>
           </nb-card-header>
           <nb-card-body>
-            <div class="col-m2-12">
+            <div class="col-m2-12" *ngIf="listaUsuarios && listaUsuarios.recordsTotal > 0">
               <app-listar-usuario [lista]="listaUsuarios" (eventoOrdenar)="ordenar($event)"
                 (eventoAlterarSenha)="abrirModalAlterarSenha($event, alterarSenha)" (eventoPaginar)="paginar($event)"
                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
               </app-listar-usuario>
+            </div>
+            <div class="alert alert-primary" style="margin: 5px"
+              *ngIf="listaUsuarios && listaUsuarios.recordsTotal == 0" role="alert">
+              Nenhum Usuário foi encontrado!
             </div>
           </nb-card-body>
         </nb-card>

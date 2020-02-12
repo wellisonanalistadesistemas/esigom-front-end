@@ -3,6 +3,10 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServicoBuscaEntity } from '../servicos/servicos.component';
 import { CompraService } from 'src/app/services/compra.service';
+import { CompraParcela } from 'src/app/model/compraParcela';
+import { BsLocaleService, defineLocale, ptBrLocale, BsDatepickerConfig } from 'ngx-bootstrap';
+import { DatePipe } from '@angular/common';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-compra',
@@ -11,14 +15,24 @@ import { CompraService } from 'src/app/services/compra.service';
 })
 
 export class CompraComponent implements OnInit {
-  constructor(private _compraService: CompraService, private cd: ChangeDetectorRef, private toastr: ToastrService, private modalService: NgbModal) { }
-
+  constructor(
+    private _compraService: CompraService,
+    private cd: ChangeDetectorRef,
+    private toastr: ToastrService,
+    private modalService: NgbModal,
+    private localeService: BsLocaleService
+  ) {
+    defineLocale('ptbr', ptBrLocale);
+    this.localeService.use('ptbr');
+  }
   buscaForm = ({}) as OrcamentoBuscaEntity;
   listaCompras: any;
   paginaAtual: any;
   modalConfirmacao: any;
   idExcluir: any;
   closeResult: string;
+  public listaParcelasCompra: any;
+  habilitarSalvarDados;
 
   ngOnInit() {
     this.novoForm();
@@ -54,6 +68,15 @@ export class CompraComponent implements OnInit {
     this.buscarCompras();
   }
 
+  public editarParcela(it) {
+    if (it.desabilitarEdicao) {
+      it.desabilitarEdicao = false;
+    } else {
+      it.desabilitarEdicao = true;
+    }
+
+  }
+
   public paginar(params) {
     this.buscaForm.offset = (params.page - 1);
     this.paginaAtual = params.page;
@@ -66,6 +89,29 @@ export class CompraComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Closed with: ${reason}`;
     });
+  }
+
+  public abrirModalParcelas(Id, template, size) {
+    this.habilitarSalvarDados = false;
+    this._compraService.obterListaParcelasCompra(Id).subscribe(data => {
+      this.listaParcelasCompra = data;
+    });
+    this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Dismissed ${this.alterarDadosParcela()}`;
+    }, (reason) => {
+      this.closeResult = `Closed with: ${reason}`;
+    });
+  }
+
+  public alterarDadosParcela() {
+    this._compraService.alterarListaCompraParcela(this.listaParcelasCompra).subscribe(data => {
+      this.buscarCompras();
+      this.toastr.success('Informações atualizadas com sucesso.');
+    });
+  }
+
+  public habilitarBotaoSalvar() {
+    this.habilitarSalvarDados = true;
   }
 
   public incluirEmEstoque(id) {
@@ -90,9 +136,14 @@ export class CompraComponent implements OnInit {
 
   public excluir(id) {
     this._compraService.excluir(id).subscribe(data => {
-      this.buscarCompras();
-      this.toastr.success('Orçamento excluído com sucesso.');
+
+      if (data) {
+        this.toastr.success('Compra excluída com sucesso.');
+        this.buscarCompras();
+      }
+
     });
+
   }
 }
 

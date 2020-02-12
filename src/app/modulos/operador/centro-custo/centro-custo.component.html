@@ -46,11 +46,15 @@
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listaCentrosCustos && listaCentrosCustos.recordsTotal > 0">
                             <app-list-centro-custo [lista]="listaCentrosCustos" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-list-centro-custo>
+                        </div>
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listaCentrosCustos && listaCentrosCustos.recordsTotal == 0" role="alert">
+                            Nenhum Centro Custo foi encontrado!
                         </div>
                     </nb-card-body>
                 </nb-card>

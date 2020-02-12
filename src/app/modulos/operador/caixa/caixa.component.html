@@ -34,19 +34,23 @@
         <div class="row">
             <div class="col-md-12">
                 <nb-card class="status-success" *ngIf="listCaixa">
-                    <div class="alert alert-primary" style="margin: 5px"
-                        *ngIf="listCaixa && listCaixa.total == 0" role="alert">
+                    <div class="alert alert-primary" style="margin: 5px" *ngIf="listCaixa && listCaixa.total == 0"
+                        role="alert">
                         Nenhum produto encontrado!
                     </div>
                     <nb-card-header>
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listCaixa && listCaixa.recordsTotal > 0">
                             <app-list-caixa [lista]="listCaixa" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-list-caixa>
+                        </div>
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listCaixa && listCaixa.recordsTotal == 0" role="alert">
+                            Nenhum registro no caixa foi encontrado!
                         </div>
                     </nb-card-body>
                 </nb-card>

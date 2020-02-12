@@ -46,12 +46,17 @@
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listaCompras && listaCompras.recordsTotal > 0">
                             <app-list-compra [lista]="listaCompras" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
+                                (eventoObterParcela)="abrirModalParcelas($event, modalParcelas, 'xl')"
                                 (eventoContabilizarEmEstoque)="abrirModalContabilizarEmEstoque($event, modalContabilizarEstoque)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-list-compra>
+                        </div>
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listaCompras && listaCompras.recordsTotal == 0" role="alert">
+                            Nenhuma compra foi encontrada!
                         </div>
                     </nb-card-body>
                 </nb-card>
@@ -75,8 +80,6 @@
     </div>
 </ng-template>
 
-
-
 <ng-template #modalContabilizarEstoque let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Confirmação</h4>
@@ -89,5 +92,59 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Sim</button>
+    </div>
+</ng-template>
+
+<ng-template #modalParcelas let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Listagem de Parcelas</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th style="width: 3.00%" class="text-center">Código</th>
+                    <th style="width: 24.00%" class="text-center">Data Vencimento</th>
+                    <th style="width: 15.00%" class="text-center">Valor Total</th>
+                    <th style="width: 11.00%" class="text-center">Situação</th>
+                    <th style="width: 24.00%" class="text-center">Data Pagamento</th>
+                    <th style="width: 18.00%" class="text-center">Valor Pago</th>
+                    <th style="width: 3.00%" class="text-center">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let it of listaParcelasCompra">
+                    <td scope="col" class="text-center">{{it.id}}</td>
+                    <td scope="col" class="text-center">{{it.dataVencimento | date: 'dd/MM/yyyy'}}</td>
+                    <td scope="col" class="text-center">
+                        {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+                    <td scope="col" class="text-center">{{it.situacao}}</td>
+                    <td scope="col" class="text-center">
+                        <input (blur)="habilitarBotaoSalvar()" nbinput type="text" class="form-control" bsDatepicker
+                            locale="pt-br" value="{{ it.dataPagamento | date: 'dd/MM/yyyy' }}"
+                            [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
+                            [(ngModel)]="it.dataPagamento" [ngModelOptions]="{standalone: true}"
+                            [disabled]="it.desabilitarEdicao">
+                    </td>
+                    <td scope="col" class="text-center">
+                        <input (blur)="habilitarBotaoSalvar()" [(ngModel)]="it.valorPago" autocomplete="off"
+                            class="form-control" name="valor" [disabled]="it.desabilitarEdicao">
+                    </td>
+
+                    <td scope="col" class="text-center">
+                        <button class="m-1 btn" (click)="editarParcela(it)"> <i
+                                [ngClass]="(it.desabilitarEdicao)?'btn-sm btn-warning fas fa-pencil-alt':'btn-sm btn-success fas fa-check'"></i></button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]="!habilitarSalvarDados" class="btn btn-sm btn-primary"
+            (click)="modal.close('Save click')">Salvar Dados</button>
     </div>
 </ng-template>

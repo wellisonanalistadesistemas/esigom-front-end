@@ -15,6 +15,7 @@ export class ListCompraComponent implements OnInit {
   @Output() eventoOrdenar = new EventEmitter();
   @Output() eventoExcluir = new EventEmitter();
   @Output() eventoAlterarSenha = new EventEmitter();
+  @Output() eventoObterParcela = new EventEmitter();
   @Output() eventoContabilizarEmEstoque = new EventEmitter();
 
   parametrosPaginacao = ({}) as BuscaEntity;
@@ -43,6 +44,10 @@ export class ListCompraComponent implements OnInit {
 
   public contabilizarEmEstoque(Id) {
     this.eventoContabilizarEmEstoque.emit(Id);
+  }
+
+  public obterParcelas(Id) {
+    this.eventoObterParcela.emit(Id);
   }
 
   public alterarSenha(id, nome) {

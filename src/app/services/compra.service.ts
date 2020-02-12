@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Compra } from '../model/compra';
+import { CompraParcela } from '../model/compraParcela';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,12 @@ export class CompraService {
     return this.http.put(`compras/` + id, compra);
   }
 
+
+  alterarListaCompraParcela(lista: Array<CompraParcela>) {
+    return this.http.put(`compras/alterarListaCompraParcelas`, lista);
+  }
+
+
   salvar(compra: Compra): Observable<Compra> {
     return this.http.post<Compra>(`compras`, compra);
   }
@@ -40,6 +47,10 @@ export class CompraService {
 
   buscarPeloId(id: number) {
     return this.http.get<Compra>(`compras/` + id);
+  }
+
+  obterListaParcelasCompra(id: number) {
+    return this.http.get<CompraParcela>(`compras/obterListaParcelasCompra/` + id);
   }
 
 }

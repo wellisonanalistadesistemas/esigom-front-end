@@ -46,11 +46,15 @@
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listaPerfis && listaPerfis.recordsTotal > 0">
                             <app-listar-perfil [lista]="listaPerfis" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-listar-perfil>
+                        </div>
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listaPerfis && listaPerfis.recordsTotal == 0" role="alert">
+                            Nenhum Perfil foi encontrado!
                         </div>
                     </nb-card-body>
                 </nb-card>

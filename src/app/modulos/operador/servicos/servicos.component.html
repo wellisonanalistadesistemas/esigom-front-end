@@ -53,11 +53,15 @@
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listaServicos && listaServicos.recordsTotal > 0">
                             <app-listar-servico [lista]="listaServicos" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-listar-servico>
+                        </div>
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listaServicos && listaServicos.recordsTotal == 0" role="alert">
+                            Nenhum Cliente foi encontrado!
                         </div>
                     </nb-card-body>
                 </nb-card>

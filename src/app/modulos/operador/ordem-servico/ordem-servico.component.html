@@ -17,13 +17,6 @@
                                     [(ngModel)]="buscaForm.id">
                             </div>
                         </div>
-                        <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-                            <div class="form-group">
-                                <label class="col-form-label">Valor do Produto</label>
-                                <input autocomplete="off" placeholder="Valor do Produto" class="form-control"
-                                    name="valor" [(ngModel)]="buscaForm.valor">
-                            </div>
-                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col text-right">
@@ -49,11 +42,15 @@
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listaOrdensServicos && listaOrdensServicos.recordsTotal > 0">
                             <app-listar-ordem-servico [lista]="listaOrdensServicos" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-listar-ordem-servico>
+                        </div>
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listaOrdensServicos && listaOrdensServicos.recordsTotal == 0" role="alert">
+                            Nenhuma Ordem de Serviço foi encontrada!
                         </div>
                     </nb-card-body>
                 </nb-card>

@@ -1,7 +1,9 @@
+import { Compra } from './compra';
+
 export class CompraParcela {
 
     public id: number;
-    public compra: any
+    public compra: Compra;
     public dataVencimento: Date;
     public valor: number;
     public ordem: number;
@@ -10,7 +12,7 @@ export class CompraParcela {
     constructor() {
         this.id = null;
         this.ordem = null;
-        this.compra = null;
+        this.compra = new Compra();
         this.dataVencimento = null;
         this.valor = null;
         this.documento = null

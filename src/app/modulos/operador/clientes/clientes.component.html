@@ -60,12 +60,16 @@
                         <h6>Resultado da Pesquisa:</h6>
                     </nb-card-header>
                     <nb-card-body>
-                        <div class="col-m2-12">
+                        <div class="col-m2-12" *ngIf="listaClientes && listaClientes.recordsTotal > 0">
                             <app-listar-cliente [lista]="listaClientes" (eventoOrdenar)="ordenar($event)"
-                                (eventoAlterarSenha)="abrirModalAlterarSenha($event, alterarSenha)"
-                                (eventoPaginar)="paginar($event)"
-                                (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
-                            </app-listar-cliente>
+                            (eventoAlterarSenha)="abrirModalAlterarSenha($event, alterarSenha)"
+                            (eventoPaginar)="paginar($event)"
+                            (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
+                        </app-listar-cliente>
+                        </div>
+                        <div class="alert alert-primary" style="margin: 5px"
+                            *ngIf="listaClientes && listaClientes.recordsTotal == 0" role="alert">
+                            Nenhum Cliente foi encontrado!
                         </div>
                     </nb-card-body>
                 </nb-card>

@@ -70,8 +70,7 @@
                                 <label class="label col-form-label">Fornecedor</label>
                                 <ng-select class="custom" (change)="selecionarFornecedor($event)"
                                     [items]="listaFornecedores" [(ngModel)]="objeto.fornecedor" [selectOnTab]="true"
-                                    bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
-                                    name="fornecedor">
+                                    bindLabel="descricao" notFoundText="Busca sem correspondência" name="fornecedor">
                                 </ng-select>
                             </div>
                         </div>
@@ -80,8 +79,7 @@
                                 <label class="label col-form-label">Centro de Custo</label>
                                 <ng-select class="custom" (change)="selecionarCentroCusto($event)"
                                     [items]="listaCentroDeCustos" [(ngModel)]="objeto.centroCusto" [selectOnTab]="true"
-                                    bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
-                                    name="centroCusto">
+                                    bindLabel="descricao" notFoundText="Busca sem correspondência" name="centroCusto">
                                 </ng-select>
                             </div>
                         </div>
@@ -90,8 +88,8 @@
                                 <label class="label col-form-label">Formas de Pagamento</label>
                                 <ng-select class="custom" (change)="selecionarFormaPagamento($event)"
                                     [items]="listaFormasPagamento" [(ngModel)]="objeto.formaPagamento"
-                                    [selectOnTab]="true" bindLabel="descricao" bindValue="id"
-                                    notFoundText="Busca sem correspondência" name="formaPagamento">
+                                    [selectOnTab]="true" bindLabel="descricao" notFoundText="Busca sem correspondência"
+                                    name="formaPagamento">
                                 </ng-select>
                             </div>
                         </div>
@@ -197,9 +195,6 @@
                 </div>
             </nb-card-body>
         </nb-card>
-
-
-
         <div class="row">
             <div class="col-md-12">
                 <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
@@ -216,8 +211,6 @@
         </div>
     </nb-card-body>
 </nb-card>
-
-
 
 <!-- Modal Adicionar Produto -->
 <ng-template #layoutModalAdicionarProduto let-modal>

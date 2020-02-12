@@ -16,7 +16,6 @@ export class ContaParcela {
         this.id = null;
         this.ordem = null;
         this.conta = new Conta();
-        this.conta = null;
         this.dataVencimento = null;
         this.dataPagamento = null;
         this.valorPago = null;

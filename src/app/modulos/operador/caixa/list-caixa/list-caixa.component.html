@@ -24,7 +24,7 @@
             <td scope="col" class="text-center">{{it.dataPagamento  | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
             <td scope="col" class="text-center">{{it.valor | currency:'BRL':true:'1.2-2'}}</td>
             <td scope="col" class="text-center">{{it.tipo}}</td>
-            <td scope="col">{{it.centroCusto.descricao}}</td>
+            <td scope="col" class="text-center">{{it.centroCusto.descricao}}</td>
         </tr>
     </tbody>
 </table>
