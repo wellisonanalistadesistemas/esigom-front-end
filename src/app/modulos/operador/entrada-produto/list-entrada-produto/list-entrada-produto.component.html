@@ -5,7 +5,13 @@
             </th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
                 (click)="ordenar('descricao')">
-                Valor da Entrada</th>
+                Nota Fiscal</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
+                (click)="ordenar('descricao')">
+                Fornecedor</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
+                (click)="ordenar('descricao')">
+                Valor Pago</th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Produto" class="text-center"
                 (click)="ordenar('descricao')">
                 Qtde. Produtos</th>
@@ -15,13 +21,17 @@
     <tbody>
         <tr *ngFor="let it of lista.lista">
             <td scope="col" class="text-center">{{it.id}}</td>
-            <td scope="col" class="text-center">{{it.id}}</td>
+            <td scope="col" class="text-center">{{it.notaFiscal}}</td>
+            <td scope="col" class="text-center">{{it.fornecedor.descricao}}</td>
+            <td scope="col" class="text-center">{{it.valorEntrada | currency:'BRL':true:'1.2-2'}}</td>
             <td scope="col" class="text-center">{{it.qtdeProdutos}}</td>
             <td scope="col" class="text-center" class="text-center">
                 <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/entrada-produtos/editar/',it.id]">
                     <i class="fas fa-pencil-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
                         class="far fa-trash-alt"></i></button>
+                <button class="m-1 btn btn-sm btn-info" (click)="obterProdutos(it)"> <i
+                        class="fas fa-list"></i></button>
             </td>
         </tr>
     </tbody>

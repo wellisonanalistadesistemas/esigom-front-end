@@ -34,7 +34,7 @@
                                 (click)="iniciarForm()"> <i class="fa fa-times"></i>
                                 Limpar</button>
                             <button class=" m-1 btn btn-sm btn-success btn-pesquisar" [routerLink]="'cadastrar'">
-                                <i class="fa fa-user"></i>
+                                <i class="fas fa-plus"></i>
                                 Cadastrar Entrada
                             </button>
                         </div>
@@ -56,6 +56,7 @@
                         <div class="col-m2-12" *ngIf="listaEntradas && listaEntradas.recordsTotal > 0">
                             <app-list-entrada-produto [lista]="listaEntradas" (eventoOrdenar)="ordenar($event)"
                                 (eventoPaginar)="paginar($event)"
+                                (eventoObterProdutos)="abrirModalObterProdutos($event, modalProdutos, 'lg')"
                                 (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
                             </app-list-entrada-produto>
                         </div>
@@ -83,4 +84,68 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-primary" (click)="modal.close('Save click')">Sim</button>
     </div>
+</ng-template>
+
+<ng-template #modalProdutos let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">Adicionar/Visualizar Produtos da Entrada</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th style="width: 50.00%" class="text-center">Produto</th>
+                    <th style="width: 14.00%" class="text-center">Quantidade</th>
+                    <th style="width: 18.00%" class="text-center">Valor Unitário</th>
+                    <th style="width: 18.00%" class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ng-select (change)="selecionarProduto($event)" [items]="listaEntradaProdutos"
+                            [selectOnTab]="true" [(ngModel)]="entradaProduto.produto" bindLabel="descricao" notFoundText="Busca sem correspondência"
+                            name="produto">
+                        </ng-select>
+                    </td>
+                    <td> <input ui-br-phone-number [(ngModel)]="entradaProduto.quantidade" autocomplete="off"
+                            class="form-control" name="descricaoProduto"></td>
+                    <td> <input ui-br-phone-number [(ngModel)]="entradaProduto.valorUnitario" autocomplete="off"
+                            class="form-control" name="valorUnitario"></td>
+                    <td> <button class="m-1 btn btn-sm btn-info" (click)="adicionarProduto()"><i
+                                class="fas fa-plus"></i> Adicionar Produto</button></td>
+                </tr>
+                <tr *ngFor="let it of listaProdutosEntrada">
+                    <td scope="col">{{it.produto.descricao}}</td>
+
+                    <td scope="col" class="text-center">
+                        <input (blur)="habilitarBotaoSalvar()" [(ngModel)]="it.quantidade" autocomplete="off"
+                            class="form-control" name="quantidade" [disabled]="it.desabilitarEdicao">
+                    </td>
+                    <td scope="col" class="text-center">
+                        <input (blur)="habilitarBotaoSalvar()" [(ngModel)]="it.valorUnitario" autocomplete="off"
+                            class="form-control" name="valor" [disabled]="it.desabilitarEdicao">
+                    </td>
+                    <td scope="col" class="text-center">
+                        <button
+                            [ngClass]="(it.desabilitarEdicao)?'m-1 btn btn-sm btn-warning':'m-1 btn btn-sm btn-success'"
+                            (click)="editarEntradaProduto(it)"><i
+                                [ngClass]="(it.desabilitarEdicao)?'fas fa-pencil-alt':'fas fa-check'"></i></button>
+
+                        <button class="m-1 btn btn-sm btn-danger" (click)="excluirProdutoEntrada(it)"><i
+                                class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <p>Valor Total: {{valorTotalPago | currency:'BRL':true:'1.2-2'}} / Total de Produtos: {{valorTotalProdutos}}</p>
+    </div>
+
+
+
 </ng-template>

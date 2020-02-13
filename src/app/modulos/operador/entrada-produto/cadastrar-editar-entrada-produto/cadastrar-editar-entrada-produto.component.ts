@@ -1,22 +1,15 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { Cliente } from 'src/app/model/cliente';
+
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
-import { ClienteService } from 'src/app/services/cliente.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Orcamento } from 'src/app/model/orcamento';
-import { Produto } from 'src/app/model/produto';
-import { Servico } from 'src/app/model/servico';
-import { OrcamentoService } from 'src/app/services/orcamento.service';
-import { FormaPagamento } from 'src/app/model/formaPagamento';
-import { FormaPagamentoService } from 'src/app/services/formaPagamento';
 import { ProdutoService } from 'src/app/services/produto';
-import { ServicoService } from 'src/app/services/servico';
 import { Entrada } from 'src/app/model/entrada';
 import { EntradaProduto } from 'src/app/model/entradaProduto';
 import { FornecedorService } from 'src/app/services/fornecedor.service';
 import { EntradaService } from 'src/app/services/entrada.service';
+import { BsLocaleService, defineLocale, ptBrLocale } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-cadastrar-editar-entrada-produto',
@@ -38,8 +31,21 @@ export class CadastrarEditarEntradaProdutoComponent {
   public valorTotalProdutos = 0;
   public qtdeTotalProdutos = 0;
 
-  constructor(private http: HttpClient,
-    private cd: ChangeDetectorRef, private _fornecedorService: FornecedorService, private _produtoService: ProdutoService, private _entradaService: EntradaService, private modalService: NgbModal, private _formaPagamentoService: FormaPagamentoService, private _clienteService: ClienteService, private _orcamentoService: OrcamentoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private http: HttpClient,
+    private cd: ChangeDetectorRef,
+    private _fornecedorService: FornecedorService,
+    private _produtoService: ProdutoService,
+    private _entradaService: EntradaService,
+    private modalService: NgbModal,
+    private toastr: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private localeService: BsLocaleService) {
+
+    defineLocale('ptbr', ptBrLocale);
+    this.localeService.use('ptbr');
+  }
 
   ngOnInit() {
     // Obter Formas de pagamento
@@ -59,8 +65,8 @@ export class CadastrarEditarEntradaProdutoComponent {
     });
   }
 
-  public selecionarFornecedor() {
-
+  public selecionarFornecedor(fornecedor) {
+    this.objeto.fornecedor = fornecedor;
   }
 
   abrirModal(template, size) {
@@ -91,17 +97,16 @@ export class CadastrarEditarEntradaProdutoComponent {
   }
 
   salvarOuAlterar() {
-
     console.log(this.objeto);
-    // this._entradaService.salvar(this.objeto).subscribe(retorno => {
-    //   if (!retorno && !this.objeto.id) {
-    //     this.redirencionar('Registo cadastrado com sucesso.');
-    //   } else if (!retorno && this.objeto.id) {
-    //     this.redirencionar('Registo editado com sucesso.');
-    //   } else {
-    //     this.toastr.error('Erro ao cadastrar.');
-    //   }
-    // });
+    this._entradaService.salvar(this.objeto).subscribe(retorno => {
+      if (!retorno && !this.objeto.id) {
+        this.redirencionar('Registo cadastrado com sucesso.');
+      } else if (!retorno && this.objeto.id) {
+        this.redirencionar('Registo editado com sucesso.');
+      } else {
+        this.toastr.error('Erro ao cadastrar.');
+      }
+    });
   }
 
   redirencionar(string) {

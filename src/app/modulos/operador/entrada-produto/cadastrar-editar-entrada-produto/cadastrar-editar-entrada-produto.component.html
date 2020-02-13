@@ -40,10 +40,6 @@
                         </table>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col-md-12 text-right">Total:
-                        {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</div>
-                </div> -->
             </nb-card-body>
         </nb-card>
 
@@ -55,30 +51,31 @@
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
-                            <label class="col-form-label">Data Entrada:</label>
-                            <input [(ngModel)]="objeto.dataEntrada" autocomplete="off" placeholder="Data Entrada"
-                                class="form-control" name="dataEntrada">
+                            <label class="label col-form-label">Número Nota Fiscal:</label>
+                            <input [(ngModel)]="objeto.notaFiscal" autocomplete="off" class="form-control"
+                                name="notaFiscal">
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2">
                         <div class="form-group">
-                            <label class="col-form-label">Número Nota Fiscal:</label>
-                            <input [(ngModel)]="objeto.notaFiscal" autocomplete="off" placeholder="Número Nota Fiscal"
-                                class="form-control" name="notaFiscal">
+                            <label class="label col-form-label">Data Entrada</label>
+                            <input nbinput type="text" class="form-control" bsDatepicker locale="pt-br"
+                                [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
+                                [(ngModel)]="objeto.dataEntrada" [ngModelOptions]="{standalone: true}">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="form-group">
-                            <label class="col-form-label">Fornecedor</label>
+                            <label class="label col-form-label">Fornecedor:</label>
                             <ng-select (change)="selecionarFornecedor($event)" [items]="listFornecedores"
-                                [selectOnTab]="true" bindLabel="descricao" placeholder="Busque por um Fornecedor"
-                                bindValue="id" notFoundText="Busca sem correspondência" name="fornecedor">
+                                [selectOnTab]="true" bindLabel="descricao" notFoundText="Busca sem correspondência"
+                                name="fornecedor">
                             </ng-select>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
-                            <label class="col-form-label">Qtde de Produtos:</label>
+                            <label class="label col-form-label">Qtde. Produtos:</label>
                             <span scope="col" class="form-control fundo">
                                 {{qtdeTotalProdutos}}</span>
                         </div>
@@ -86,7 +83,7 @@
 
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
-                            <label class="col-form-label">Total Geral:</label>
+                                <label class="label col-form-label">Total Geral:</label>
                             <span scope="col" class="form-control fundo">
                                 {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</span>
                         </div>
@@ -126,8 +123,7 @@
                 <div class="form-group">
                     <label class="col-form-label">Produto</label>
                     <ng-select (change)="selecionarProduto($event)" [items]="listaEntradaProdutos" [selectOnTab]="true"
-                        bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência"
-                        placeholder="Busque por um produto" name="produto">
+                        bindLabel="descricao" bindValue="id" notFoundText="Busca sem correspondência" name="produto">
                     </ng-select>
                 </div>
             </div>
@@ -135,14 +131,14 @@
                 <div class="form-group">
                     <label class="col-form-label">Quantidade</label>
                     <input ui-br-phone-number [(ngModel)]="entradaProduto.quantidade" autocomplete="off"
-                        placeholder="Telefone" class="form-control" name="descricaoProduto">
+                        class="form-control" name="descricaoProduto">
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                 <div class="form-group">
                     <label class="col-form-label">Valor Pago por Unidade</label>
                     <input ui-br-phone-number [(ngModel)]="entradaProduto.valorUnitario" autocomplete="off"
-                        placeholder="Valor Unitário" class="form-control" name="valorUnitario">
+                        class="form-control" name="valorUnitario">
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@ export class ListEntradaProdutoComponent implements OnInit {
   @Output() eventoPaginar = new EventEmitter();
   @Output() eventoOrdenar = new EventEmitter();
   @Output() eventoExcluir = new EventEmitter();
+  @Output() eventoObterProdutos = new EventEmitter();
 
   parametrosPaginacao = ({}) as BuscaEntity;
   paginaAtual: any;
@@ -34,6 +35,10 @@ export class ListEntradaProdutoComponent implements OnInit {
 
   public ordenar(params) {
     this.eventoOrdenar.emit(params);
+  }
+
+  public obterProdutos(it) {
+    this.eventoObterProdutos.emit(it);
   }
 
   public excluir(Id) {
