@@ -32,6 +32,8 @@
                         class="far fa-trash-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-info" (click)="obterProdutos(it)"> <i
                         class="fas fa-list"></i></button>
+                <button [routerLink]="['/operador/entrada-produtos/visualizar', it.id]" class="m-1 btn btn-sm btn-info">
+                    <i class="fa fa-search"></i></button>
             </td>
         </tr>
     </tbody>

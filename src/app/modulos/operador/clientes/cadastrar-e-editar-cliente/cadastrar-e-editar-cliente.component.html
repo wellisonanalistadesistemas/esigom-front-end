@@ -13,23 +13,23 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
-                                <label class="col-form-label">* Nome</label>
-                                <input class="form-control" placeholder="Informe o Nome" name="nome" value="objeto.nome"
+                                <label class="label col-form-label">Nome:</label>
+                                <input [disabled]="rotaVisualizar" class="form-control" name="nome" value="objeto.nome"
                                     [(ngModel)]="objeto.nome" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
-                                <label class="col-form-label">CPF</label>
-                                <input autocomplete="off" class="form-control" placeholder="CPF" name="cpf"
+                                <label class="label col-form-label">CPF:</label>
+                                <input [disabled]="rotaVisualizar" autocomplete="off" class="form-control" name="cpf"
                                     value="objeto.cpf" [(ngModel)]="objeto.cpf" uppercase>
                             </div>
                         </div>
 
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
-                                <label class="col-form-label">E-mail</label>
-                                <input autocomplete="off" class="form-control" placeholder="Email" name="email"
+                                <label class="label col-form-label">E-mail:</label>
+                                <input [disabled]="rotaVisualizar" autocomplete="off" class="form-control" name="email"
                                     value="objeto.email" [(ngModel)]="objeto.email">
                             </div>
                         </div>
@@ -37,44 +37,14 @@
                 </form>
             </nb-card-body>
         </nb-card>
-        <nb-card>
-            <nb-card-header>
-                <h6>Telefone(s):</h6>
-            </nb-card-header>
-            <nb-card-body>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="m-1 btn btn-sm btn-info btn-pesquisar"
-                            (click)="abrirModal(addTelefone, 'sm', 1)"> <i class="fas fa-plus"></i>
-                            Adicionar Telefone</button>
-                    </div>
-                    <div *ngIf="objeto.telefones.length > 0" class="col-md-12">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th class="text-center">Número Telefone</th>
-                                    <th class="text-center">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let it of objeto.telefones">
-                                    <td scope="col" class="text-center">{{it.numero}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </nb-card-body>
-        </nb-card>
+
         <nb-card>
             <nb-card-header>
                 <h6>Endereço(s):</h6>
             </nb-card-header>
             <nb-card-body>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div *ngIf="!rotaVisualizar" class="col-md-12">
                         <button class="m-1 btn btn-sm btn-info btn-pesquisar" (click)="abrirModal(addEndereco,'lg')"> <i
                                 class="fas fa-plus"></i>
                             Adicionar Endereço</button>
@@ -89,7 +59,7 @@
                                     <th class="text-center">Bairro</th>
                                     <th class="text-center">Cidade</th>
                                     <th class="text-center">Estado</th>
-                                    <th class="text-center">Ações</th>
+                                    <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,8 +70,41 @@
                                     <td scope="col" class="text-center">{{it.bairro}}</td>
                                     <td scope="col" class="text-center">{{it.cidade}}</td>
                                     <td scope="col" class="text-center">{{it.uf}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluir(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                    <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
+                                            class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
+                                                class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                <h6>Telefone(s):</h6>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div *ngIf="!rotaVisualizar" class="col-md-12">
+                        <button class="m-1 btn btn-sm btn-info btn-pesquisar"
+                            (click)="abrirModal(addTelefone, 'sm', 1)"> <i class="fas fa-plus"></i>
+                            Adicionar Telefone</button>
+                    </div>
+                    <div *ngIf="objeto.telefones.length > 0" class="col-md-12">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th class="text-center">Número Telefone</th>
+                                    <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let it of objeto.telefones">
+                                    <td scope="col" class="text-center">{{it.numero}}</td>
+                                    <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
+                                            class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 1)"> <i
+                                                class="far fa-trash-alt"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -111,11 +114,11 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
-                        class="fas fa-save"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-success btn-pesquisar"
+                    (click)="salvarOuAlterar()"> <i class="fas fa-save"></i>
                     Salvar Cadastro</button>
-                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
-                        class="fa fa-times"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
+                    (click)="iniciarForm()"> <i class="fa fa-times"></i>
                     Limpar</button>
                 <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/clientes']">
                     <i class="fas fa-backward"></i>

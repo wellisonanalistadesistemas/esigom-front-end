@@ -8,9 +8,8 @@
                 <h6>Listagem de Produto(s):</h6>
             </nb-card-header>
             <nb-card-body>
-
                 <div class="row">
-                    <div class="col-md-12">
+                    <div *ngIf="!rotaVisualizar" class="col-md-12">
                         <button class="m-1 btn btn-sm btn-info btn-pesquisar"
                             (click)="abrirModalAdicionarProduto(layoutModalAdicionarProduto, 'lg')">
                             <i class="fas fa-plus"></i>
@@ -24,7 +23,7 @@
                                     <th class="text-center">Quantidade</th>
                                     <th class="text-center">Valor Pago por Unidade</th>
                                     <th class="text-center">Valor Total</th>
-                                    <th class="text-center">Ações</th>
+                                    <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,8 +34,9 @@
                                         {{it.valorUnidade | currency:'BRL':true:'1.2-2'}}</td>
                                     <td scope="col" class="text-center">
                                         {{it.valorUnidade*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluirProduto(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                    <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
+                                            class="m-1 btn btn-sm btn-danger" (click)="excluirProduto(it)"> <i
+                                                class="far fa-trash-alt"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -59,7 +59,8 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2">
                             <div class="form-group">
                                 <label class="label col-form-label">Data Entrada</label>
-                                <input nbinput type="text" class="form-control" bsDatepicker locale="pt-br"
+                                <input [disabled]="rotaVisualizar" nbinput type="text" class="form-control" bsDatepicker
+                                    locale="pt-br"
                                     [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
                                     [(ngModel)]="objeto.dataEntrada" [ngModelOptions]="{standalone: true}">
                             </div>
@@ -68,48 +69,52 @@
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                             <div class="form-group">
                                 <label class="label col-form-label">Fornecedor</label>
-                                <ng-select class="custom" (change)="selecionarFornecedor($event)"
-                                    [items]="listaFornecedores" [(ngModel)]="objeto.fornecedor" [selectOnTab]="true"
-                                    bindLabel="descricao" notFoundText="Busca sem correspondência" name="fornecedor">
+                                <ng-select [disabled]="rotaVisualizar" class="custom"
+                                    (change)="selecionarFornecedor($event)" [items]="listaFornecedores"
+                                    [(ngModel)]="objeto.fornecedor" [selectOnTab]="true" bindLabel="descricao"
+                                    notFoundText="Busca sem correspondência" name="fornecedor">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <label class="label col-form-label">Centro de Custo</label>
-                                <ng-select class="custom" (change)="selecionarCentroCusto($event)"
-                                    [items]="listaCentroDeCustos" [(ngModel)]="objeto.centroCusto" [selectOnTab]="true"
-                                    bindLabel="descricao" notFoundText="Busca sem correspondência" name="centroCusto">
+                                <ng-select [disabled]="rotaVisualizar" class="custom"
+                                    (change)="selecionarCentroCusto($event)" [items]="listaCentroDeCustos"
+                                    [(ngModel)]="objeto.centroCusto" [selectOnTab]="true" bindLabel="descricao"
+                                    notFoundText="Busca sem correspondência" name="centroCusto">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
                             <div class="form-group">
                                 <label class="label col-form-label">Formas de Pagamento</label>
-                                <ng-select class="custom" (change)="selecionarFormaPagamento($event)"
-                                    [items]="listaFormasPagamento" [(ngModel)]="objeto.formaPagamento"
-                                    [selectOnTab]="true" bindLabel="descricao" notFoundText="Busca sem correspondência"
-                                    name="formaPagamento">
+                                <ng-select [disabled]="rotaVisualizar" class="custom"
+                                    (change)="selecionarFormaPagamento($event)" [items]="listaFormasPagamento"
+                                    [(ngModel)]="objeto.formaPagamento" [selectOnTab]="true" bindLabel="descricao"
+                                    notFoundText="Busca sem correspondência" name="formaPagamento">
                                 </ng-select>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                             <div class="form-group">
                                 <label class="label col-form-label">Nota Fiscal</label>
-                                <input [(ngModel)]="objeto.notaFiscal" autocomplete="off" class="form-control"
-                                    name="notaFiscal">
+                                <input [disabled]="rotaVisualizar" [(ngModel)]="objeto.notaFiscal" autocomplete="off"
+                                    class="form-control" name="notaFiscal">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                             <label class="label col-form-label">Pagamento da Venda</label>
                             <div class="checkbox checkAndRadio">
-                                <input class="input-checkbox radio-venda" (change)="aplicarTipoPagamentoVenda(false)"
-                                    type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                <input [disabled]="rotaVisualizar" class="input-checkbox radio-venda"
+                                    (change)="aplicarTipoPagamentoVenda(false)" type="radio" name="exampleRadios"
+                                    id="exampleRadios1" value="option1" checked>
                                 <label class="check-label" for="exampleRadios1">
                                     À vista
                                 </label>
-                                <input class="input-checkbox radio-venda" (change)="aplicarTipoPagamentoVenda(true)"
-                                    type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                <input [disabled]="rotaVisualizar" class="input-checkbox radio-venda"
+                                    (change)="aplicarTipoPagamentoVenda(true)" type="radio" name="exampleRadios"
+                                    id="exampleRadios2" value="option2">
                                 <label class="form-check-label" for="exampleRadios2">
                                     Parcelado
                                 </label>
@@ -125,7 +130,7 @@
                 <h6>Listagem de Parcela(s):</h6>
             </nb-card-header>
             <nb-card-body>
-                <div class="row">
+                <div *ngIf="!rotaVisualizar" class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
                         <div class="form-group">
                             <label class="label col-form-label">Número</label>
@@ -171,7 +176,7 @@
                                     <th class="text-center">Data de Vencimento</th>
                                     <!-- <th class="text-center">Número Documento</th> -->
                                     <th class="text-center">Valor Parcela</th>
-                                    <th class="text-center">Ações</th>
+                                    <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -182,8 +187,9 @@
                                     <!-- <td scope="col" class="text-center">{{it.documento}}</td> -->
                                     <td scope="col" class="text-center">
                                         {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluirParcela(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                    <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
+                                            class="m-1 btn btn-sm btn-danger" (click)="excluirParcela(it)"> <i
+                                                class="far fa-trash-alt"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -197,15 +203,15 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
-                        class="fas fa-save"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-success btn-pesquisar"
+                    (click)="salvarOuAlterar()"> <i class="fas fa-save"></i>
                     Salvar Cadastro</button>
-                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
-                        class="fa fa-times"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
+                    (click)="iniciarForm()"> <i class="fa fa-times"></i>
                     Limpar</button>
                 <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/compras']">
                     <i class="fas fa-backward"></i>
-                    Voltar
+                    Voltar à Consulta de Compras
                 </button>
             </div>
         </div>

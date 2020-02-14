@@ -21,6 +21,7 @@ export class CadastrarEditarClienteComponent {
   public endereco = new Endereco();
   public telefone = new Telefone();
   closeResult: string;
+  rotaVisualizar: boolean;
 
 
   constructor(private http: HttpClient, private animateScrollService: NgAnimateScrollService,
@@ -34,6 +35,13 @@ export class CadastrarEditarClienteComponent {
         this._clienteService.buscarPeloId(params.id).subscribe(data => this.objeto = data);
       }
     })
+
+    this.route.url.subscribe(url => {
+      if (url[0].path == "visualizar") {
+        this.rotaVisualizar = true;
+      }
+    })
+
   }
 
   /* ! Adicionar/Excluir Telefone e/ou Endereço !  */

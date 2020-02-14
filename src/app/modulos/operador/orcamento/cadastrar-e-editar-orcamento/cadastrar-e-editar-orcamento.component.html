@@ -12,8 +12,8 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">CPF:</label>
-                            <input (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf" autocomplete="off"
-                                class="form-control" name="cpf">
+                            <input [disabled]="rotaVisualizar" (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf"
+                                autocomplete="off" class="form-control" name="cpf">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
@@ -33,38 +33,43 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Veículo Placa:</label>
-                            <input class="form-control" name="veiculoPlaca" [(ngModel)]="objeto.veiculoPlaca"
-                                autocomplete="off">
+                            <input [disabled]="rotaVisualizar" class="form-control" name="veiculoPlaca"
+                                [(ngModel)]="objeto.veiculoPlaca" autocomplete="off">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Marca:</label>
-                            <input class="form-control" name="marca" [(ngModel)]="objeto.marca" autocomplete="off">
+                            <input [disabled]="rotaVisualizar" class="form-control" name="marca"
+                                [(ngModel)]="objeto.marca" autocomplete="off">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                         <div class="form-group">
                             <label class="label col-form-label">Modelo:</label>
-                            <input class="form-control" name="Modelo" [(ngModel)]="objeto.modelo" autocomplete="off">
+                            <input [disabled]="rotaVisualizar" class="form-control" name="Modelo"
+                                [(ngModel)]="objeto.modelo" autocomplete="off">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Cor:</label>
-                            <input class="form-control" name="cor" [(ngModel)]="objeto.cor" autocomplete="off">
+                            <input [disabled]="rotaVisualizar" class="form-control" name="cor" [(ngModel)]="objeto.cor"
+                                autocomplete="off">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-1">
                         <div class="form-group">
                             <label class="label col-form-label">Ano:</label>
-                            <input class="form-control" name="ano" [(ngModel)]="objeto.ano" autocomplete="off">
+                            <input [disabled]="rotaVisualizar" class="form-control" name="ano" [(ngModel)]="objeto.ano"
+                                autocomplete="off">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Quilometragem:</label>
-                            <input class="form-control" name="km" [(ngModel)]="objeto.km" autocomplete="off">
+                            <input [disabled]="rotaVisualizar" class="form-control" name="km" [(ngModel)]="objeto.km"
+                                autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -82,7 +87,7 @@
                     </nb-card-header>
                     <nb-card-body>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div *ngIf="!rotaVisualizar" class="col-md-12">
                                 <button class="m-1 btn btn-sm btn-info btn-pesquisar"
                                     (click)="abrirModal(addProduto, 'lg', 1)">
                                     <i class="fas fa-plus"></i>
@@ -94,9 +99,10 @@
                                         <tr>
                                             <th class="text-center">Descrição</th>
                                             <th class="text-center">Quantidade</th>
+                                            <th class="text-center">Cliente Levará Produto Substituído</th>
                                             <th class="text-center">Valor Unitário</th>
                                             <th class="text-center">Valor Total</th>
-                                            <th class="text-center">Ações</th>
+                                            <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,10 +110,12 @@
                                             <td scope="col">{{it.produto.descricao}}</td>
                                             <td scope="col" class="text-center">{{it.quantidade}}</td>
                                             <td scope="col" class="text-center">
+                                                {{it.clienteLevaPeca == true ? 'Sim':'Não se aplica'}}</td>
+                                            <td scope="col" class="text-center">
                                                 {{it.produto.valor | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center">
                                                 {{it.produto.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
-                                            <td scope="col" class="text-center"><button
+                                            <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
                                                     class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 1)"> <i
                                                         class="far fa-trash-alt"></i></button></td>
                                         </tr>
@@ -127,7 +135,7 @@
                     </nb-card-header>
                     <nb-card-body>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div *ngIf="!rotaVisualizar" class="col-md-12">
                                 <button class="m-1 btn btn-sm btn-info btn-pesquisar"
                                     (click)="abrirModal(addServico,'lg')"> <i class="fas fa-plus"></i>
                                     Adicionar Serviço</button>
@@ -140,7 +148,7 @@
                                             <th class="text-center">Quantidade</th>
                                             <th class="text-center">Valor Unitário</th>
                                             <th class="text-center">Valor Total</th>
-                                            <th class="text-center">Ações</th>
+                                            <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -151,7 +159,7 @@
                                                 {{it.servico.valor | currency:'BRL':true:'1.2-2'}}</td>
                                             <td scope="col" class="text-center">
                                                 {{it.servico.valor*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
-                                            <td scope="col" class="text-center"><button
+                                            <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
                                                     class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
                                                         class="far fa-trash-alt"></i></button></td>
                                         </tr>
@@ -180,23 +188,23 @@
                     <div class="col-md-6">
                         <label class="label col-form-label">Situação do Orçamento:</label>
                         <div class="checkbox" class="checkAndRadio">
-                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(1)" type="radio"
-                                name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <input [disabled]="rotaVisualizar" class="input-checkbox" (change)="aplicarAcaoOrcamento(1)"
+                                type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                             <label class="check-label" for="exampleRadios1">
                                 Vendido
                             </label>
-                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(2)" type="radio"
-                                name="exampleRadios" id="exampleRadios2" value="option2">
+                            <input [disabled]="rotaVisualizar" class="input-checkbox" (change)="aplicarAcaoOrcamento(2)"
+                                type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
                             <label class="form-check-label" for="exampleRadios2">
                                 Aguardando Retorno
                             </label>
-                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(3)" type="radio"
-                                name="exampleRadios" id="exampleRadios3" value="option3">
+                            <input [disabled]="rotaVisualizar" class="input-checkbox" (change)="aplicarAcaoOrcamento(3)"
+                                type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
                             <label class="form-check-label" for="exampleRadios3">
                                 Sem Comunicação
                             </label>
-                            <input class="input-checkbox" (change)="aplicarAcaoOrcamento(4)" type="radio"
-                                name="exampleRadios" id="exampleRadios4" value="option4">
+                            <input [disabled]="rotaVisualizar" class="input-checkbox" (change)="aplicarAcaoOrcamento(4)"
+                                type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
                             <label class="form-check-label" for="exampleRadios4">
                                 Sem Interesse
                             </label>
@@ -206,7 +214,8 @@
                         <label class="label col-form-label">Forma(s) de Pagamento:</label>
                         <div class="checkbox">
                             <label *ngFor="let it of formasPagamento" class="checkAndRadio">
-                                <input class="input-checkbox" type="checkbox" (change)="adicionarFormaPagamento(it)">
+                                <input [disabled]="rotaVisualizar" class="input-checkbox" type="checkbox"
+                                    (change)="adicionarFormaPagamento(it)">
                                 <span class="checkbox-material ">
                                     <span class="check"></span>
                                 </span> {{it.descricao}}
@@ -217,7 +226,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label class="label col-form-label">Observações:</label>
-                        <textarea class="form-control" rows="3" [(ngModel)]="objeto.obs"></textarea>
+                        <textarea [disabled]="rotaVisualizar" class="form-control" rows="3"
+                            [(ngModel)]="objeto.obs"></textarea>
                     </div>
                 </div>
             </nb-card-body>
@@ -225,11 +235,11 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
-                        class="fas fa-save"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-success btn-pesquisar"
+                    (click)="salvarOuAlterar()"> <i class="fas fa-save"></i>
                     Salvar Cadastro</button>
-                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
-                        class="fa fa-times"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
+                    (click)="iniciarForm()"> <i class="fa fa-times"></i>
                     Limpar</button>
                 <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/operador/orcamentos']">
                     <i class="fas fa-backward"></i>
@@ -269,7 +279,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <label class="checkAndRadio">
-                    <input class="input-checkbox" type="checkbox">
+                    <input class="input-checkbox" [(ngModel)]="orcamentoProduto.clienteLevaPeca" type="checkbox">
                     <span class="checkbox-material ">
                         <span class="check"></span>
                     </span> Cliente Deseja Levar Produto Trocado

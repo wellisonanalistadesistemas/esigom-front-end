@@ -12,37 +12,36 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
-                                <label class="col-form-label">* Login</label>
-                                <input name="hidden" class="form-control" value="objeto.login"
-                                    placeholder="Informe o Login" name="login" [(ngModel)]="objeto.login"
-                                    autocomplete="off">
+                                <label class="label col-form-label">Login:</label>
+                                <input [disabled]="rotaVisualizar" name="hidden" class="form-control"
+                                    value="objeto.login" name="login" [(ngModel)]="objeto.login" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-5">
                             <div class="form-group">
-                                <label class="col-form-label">* Nome</label>
-                                <input autocomplete="off" class="form-control" placeholder="Nome" value="objeto.nome"
-                                    name="nome" [(ngModel)]="objeto.nome" uppercase>
+                                <label class="label col-form-label">Nome:</label>
+                                <input [disabled]="rotaVisualizar" autocomplete="off" class="form-control"
+                                    value="objeto.nome" name="nome" [(ngModel)]="objeto.nome" uppercase>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
-                                <label class="col-form-label">* Email</label>
-                                <input autocomplete="off" class="form-control" placeholder="Email" value="objeto.email"
-                                    name="email" [(ngModel)]="objeto.email">
+                                <label class="label col-form-label">E-mail:</label>
+                                <input [disabled]="rotaVisualizar" autocomplete="off" class="form-control"
+                                    value="objeto.email" name="email" [(ngModel)]="objeto.email">
                             </div>
                         </div>
                         <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                             <div class="form-group">
-                                <label class="col-form-label">* Senha</label>
-                                <input autocomplete="off" placeholder="Senha" type="password" [(ngModel)]="objeto.senha"
-                                    class="form-control" name="senha">
+                                <label class="label col-form-label">Senha:</label>
+                                <input [disabled]="rotaVisualizar" autocomplete="off" type="password"
+                                    [(ngModel)]="objeto.senha" class="form-control" name="senha">
                             </div>
                         </div>
                         <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                             <div class="form-group">
-                                <label class="col-form-label">Confirmar Senha</label>
-                                <input autocomplete="off" placeholder="Confirmar Senha" type="password"
+                                <label class="label col-form-label">Confirmar Senha:</label>
+                                <input [disabled]="rotaVisualizar" autocomplete="off" type="password"
                                     class="form-control" name="confirmacaoSenha">
                             </div>
                         </div>
@@ -58,8 +57,9 @@
                 <div class="form-group row">
                     <div class="col-md-12">
                         <div *ngFor="let perfil of perfis; let i = index" class="checkbox-custom">
-                            <input type="checkbox" (change)='selecionarPerfil(perfil.id, $event.target.checked)'
-                                value='{{perfil.id}}' [checked]="verificarCheck(perfil.id)" id="checkbox{{i}}">
+                            <input [disabled]="rotaVisualizar" type="checkbox"
+                                (change)='selecionarPerfil(perfil.id, $event.target.checked)' value='{{perfil.id}}'
+                                [checked]="verificarCheck(perfil.id)" id="checkbox{{i}}">
                             <label for="checkbox{{i}}">
                                 <div>
                                     <i class="fa fa-check"></i>
@@ -72,11 +72,11 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
-                        class="fas fa-save"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-success btn-pesquisar"
+                    (click)="salvarOuAlterar()"> <i class="fas fa-save"></i>
                     Salvar Cadastro</button>
-                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
-                        class="fa fa-times"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
+                    (click)="iniciarForm()"> <i class="fa fa-times"></i>
                     Limpar</button>
                 <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/administracao/usuarios']">
                     <i class="fas fa-backward"></i>

@@ -27,6 +27,7 @@ export class CadastrarEEditarContaPagarReceberComponent implements OnInit {
 
   public quantidadeParcelas = 0;
   public valorTotal = 0;
+  rotaVisualizar: boolean;
 
   constructor(
     public localeService: BsLocaleService,
@@ -55,6 +56,11 @@ export class CadastrarEEditarContaPagarReceberComponent implements OnInit {
             this.contaPagar = false;
           }
         });
+      }
+    });
+    this.route.url.subscribe(url => {
+      if (url[0].path == "visualizar") {
+        this.rotaVisualizar = true;
       }
     })
   }

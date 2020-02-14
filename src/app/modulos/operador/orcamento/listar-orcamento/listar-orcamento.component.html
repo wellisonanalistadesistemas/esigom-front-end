@@ -35,6 +35,8 @@
                         class="fas fa-envelope-open-text"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
                         class="fas fa-file-pdf"></i></button>
+                <button [routerLink]="['/operador/orcamentos/visualizar', it.id]" class="m-1 btn btn-sm btn-info">
+                    <i class="fa fa-search"></i></button>
             </td>
         </tr>
     </tbody>

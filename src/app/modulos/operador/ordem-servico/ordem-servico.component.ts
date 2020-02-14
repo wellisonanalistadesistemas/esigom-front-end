@@ -19,6 +19,7 @@ export class OrdemServicoComponent implements OnInit {
   modalConfirmacao: any;
   idExcluir: any;
   closeResult: string;
+  titleModalCompartilhada: string;
 
   ngOnInit() {
     this.novoForm();
@@ -41,7 +42,6 @@ export class OrdemServicoComponent implements OnInit {
   buscarOrdensDeServicos() {
     this._ordemServicoService.pesquisar(this.buscaForm).subscribe(data => {
       this.listaOrdensServicos = data;
-      console.log(this.listaOrdensServicos);
     });
   }
 
@@ -61,18 +61,20 @@ export class OrdemServicoComponent implements OnInit {
     this.buscarOrdensDeServicos();
   }
 
-  public abrirModalExclusao(Id, template) {
+  public abrirModalAlteracaoStatus(obj, template) {
+    this.titleModalCompartilhada = 'Deseja Realmente Alterar a Situação da Ordem de Serviço de Número: ' + obj.id + ' para "A Realizar"?';
     this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Dismissed ${this.excluir(Id)}`;
+      this.closeResult = `Dismissed ${this.realizarAlteracaoStatus(obj)}`;
     }, (reason) => {
       this.closeResult = `Closed with: ${reason}`;
     });
   }
 
-  public excluir(id) {
-    this._ordemServicoService.excluir(id).subscribe(data => {
+  public realizarAlteracaoStatus(obj) {
+    obj.codStatus = 1;
+    this._ordemServicoService.alterar(obj.id, obj).subscribe(data => {
       this.buscarOrdensDeServicos();
-      this.toastr.success('Orçamento excluído com sucesso.');
+      this.toastr.success('Status alterado com sucesso.');
     });
   }
 }

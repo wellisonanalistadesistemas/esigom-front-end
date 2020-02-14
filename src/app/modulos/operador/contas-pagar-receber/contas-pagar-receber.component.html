@@ -10,24 +10,22 @@
             <nb-card-body>
                 <form (ngSubmit)="buscarContas()">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                             <div class="form-group">
-                                <label class="col-form-label">Nome do Funcionário</label>
-                                <input autocomplete="off" placeholder="Nome do Funcionário" class="form-control"
-                                    name="nome" [(ngModel)]="buscaForm.nome">
+                                <label class="label col-form-label">Nome do Sacado/Cedente:</label>
+                                <input autocomplete="off" class="form-control" name="nome" [(ngModel)]="buscaForm.nome">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                             <div class="form-group">
-                                <label class="col-form-label">CPF</label>
-                                <input autocomplete="off" placeholder="CPF" class="form-control" name="cpf"
-                                    [(ngModel)]="buscaForm.cpf">
+                                <label class="label col-form-label">CPF:</label>
+                                <input autocomplete="off" class="form-control" name="cpf" [(ngModel)]="buscaForm.cpf">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
-                                <label class="col-form-label">Email</label>
-                                <input autocomplete="off" placeholder="Email" class="form-control" name="email"
+                                <label class="label col-form-label">E-mail:</label>
+                                <input autocomplete="off" class="form-control" name="email"
                                     [(ngModel)]="buscaForm.email">
                             </div>
                         </div>

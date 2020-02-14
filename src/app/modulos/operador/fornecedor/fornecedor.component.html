@@ -10,10 +10,10 @@
             <nb-card-body>
                 <form (ngSubmit)="buscarProdutos()">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-5">
                             <div class="form-group">
-                                <label class="col-form-label">Nome do Produto</label>
-                                <input autocomplete="off" placeholder="Nome do Produto" class="form-control" name="nome"
+                                <label class="label col-form-label">Descrição do Fornecedor:</label>
+                                <input autocomplete="off" class="form-control" name="nome"
                                     [(ngModel)]="buscaForm.descricao">
                             </div>
                         </div>
@@ -48,9 +48,9 @@
                     <nb-card-body>
                         <div class="col-m2-12" *ngIf="listaFornecedores && listaFornecedores.recordsTotal > 0">
                             <app-list-fornecedor [lista]="listaFornecedores" (eventoOrdenar)="ordenar($event)"
-                            (eventoPaginar)="paginar($event)"
-                            (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
-                        </app-list-fornecedor>
+                                (eventoPaginar)="paginar($event)"
+                                (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
+                            </app-list-fornecedor>
                         </div>
                         <div class="alert alert-primary" style="margin: 5px"
                             *ngIf="listaFornecedores && listaFornecedores.recordsTotal == 0" role="alert">

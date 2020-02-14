@@ -14,6 +14,7 @@ export class ListarOrdemServicoComponent implements OnInit {
   @Output() eventoPaginar = new EventEmitter();
   @Output() eventoOrdenar = new EventEmitter();
   @Output() eventoExcluir = new EventEmitter();
+  @Output() eventoAlterarStatus = new EventEmitter();
 
   parametrosPaginacao = ({}) as BuscaEntity;
   paginaAtual: any;
@@ -37,6 +38,10 @@ export class ListarOrdemServicoComponent implements OnInit {
 
   public excluir(Id) {
     this.eventoExcluir.emit(Id);
+  }
+
+  public alterarStatus(Id) {
+    this.eventoAlterarStatus.emit(Id);
   }
 }
 

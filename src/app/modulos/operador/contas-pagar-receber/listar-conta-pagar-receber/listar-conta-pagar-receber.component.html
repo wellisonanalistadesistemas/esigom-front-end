@@ -4,7 +4,7 @@
             <th style="cursor: pointer;" title="Ordenar pelo Código" class="text-center" (click)="ordenar('id')"> Código
             </th>
             <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
-                (click)="ordenar('dthInclusao')">Tipo de Conta</th>
+                (click)="ordenar('dthInclusao')">Tipo</th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center"
                 (click)="ordenar('nome')">
                 Descrição</th>
@@ -12,9 +12,13 @@
                 Sacado/Cedente
             </th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
-                Data de Vencimento</th>
+                Data Vencimento</th>
             <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
-                (click)="ordenar('dthInclusao')">Valor a ser Pago</th>
+                (click)="ordenar('dthInclusao')">Valor Total</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
+                Data Pagamento</th>
+            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
+                (click)="ordenar('dthInclusao')">Valor Pago</th>
 
             <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
                 (click)="ordenar('dthInclusao')">Situação</th>
@@ -28,8 +32,14 @@
             <td scope="col" class="text-center">{{it.tipo}}</td>
             <td scope="col">{{it.descricao}}</td>
             <td scope="col">{{it.pessoa}}</td>
-            <td scope="col" class="text-center">{{it.dataVencimento | date: 'dd/MM/yyyy h:mm:ss'}}</td>
+            <td scope="col" class="text-center">{{it.dataVencimento | date: 'dd/MM/yyyy'}}</td>
             <td scope="col" class="text-center">{{it.valor | currency:'BRL':true:'1.2-2'}}</td>
+
+            <td scope="col" class="text-center">
+                {{it.dataPagamento == null ? '-' : it.dataPagamento | date: 'dd/MM/yyyy'}}</td>
+
+            <td scope="col" class="text-center">
+                {{it.valorPago == null ? '-' : it.valorPago | currency:'BRL':true:'1.2-2'}}</td>
             <td scope="col" class="text-center">{{it.situacao}}</td>
             <td scope="col" class="text-center">
                 <button class="m-1 btn btn-sm btn-warning"
@@ -37,9 +47,13 @@
                         class="fas fa-pencil-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 'remocaoPagamento')"> <i
                         class="far fa-trash-alt"></i></button>
-                <button *ngIf="it.situacaoId != 2" class="m-1 btn btn-sm btn-success" (click)="informarPagamento(it)"> <i
-                        class="fas fa-check"></i></button>
-                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 'exclusao')"> <i class="fa fa-times"></i></button>
+                <button *ngIf="it.situacaoId != 2" class="m-1 btn btn-sm btn-success" (click)="informarPagamento(it)">
+                    <i class="fas fa-check"></i></button>
+                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 'exclusao')"> <i
+                        class="fa fa-times"></i></button>
+                <button [routerLink]="['/operador/contas-a-pagar-receber/visualizar', it.id]"
+                    class="m-1 btn btn-sm btn-info">
+                    <i class="fa fa-search"></i></button>
             </td>
         </tr>
     </tbody>

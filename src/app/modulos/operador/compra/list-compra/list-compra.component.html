@@ -10,10 +10,8 @@
                 Fornecedor</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
                 Forma Pagamento</th>
-            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
-                (click)="ordenar('dthInclusao')">Qtde. Produtos</th>
-            <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
-                (click)="ordenar('dthInclusao')">Contabilizado em Estoque</th>
+            <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
+                Produtos em Estoque</th>
             <th style="cursor: pointer;" title="Ordenar pela Data de Criação" scope="col" class="text-center"
                 (click)="ordenar('dthInclusao')">Situação</th>
             <th class="text-center">Ações</th>
@@ -25,18 +23,23 @@
             <td scope="col" class="text-center">{{it.dataEntrada | date: 'dd/MM/yyyy'}}</td>
             <td scope="col">{{it.fornecedor.descricao}}</td>
             <td scope="col" class="text-center">{{it.formaPagamento.descricao}}</td>
-            <td scope="col" class="text-center">{{it.quantidadeProdutos}}</td>
+            <!-- <td scope="col" class="text-center">{{it.quantidadeProdutos}}</td>
+            <td scope="col" class="text-center">{{it.quantidadeParcelas}}</td> -->
             <td scope="col" class="text-center">Não</td>
-            <td scope="col" class="text-center">Quitado</td>
+            <td scope="col" class="text-center">Em Aberto</td>
             <td scope="col" class="text-center" nowrap>
                 <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/operador/compras/editar/',it.id]"> <i
                         class="fas fa-pencil-alt"></i></button>
-                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
-                        class="far fa-trash-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-info" (click)="obterParcelas(it.id)"> <i
                         class="fas fa-list"></i></button>
+                <button class="m-1 btn btn-sm btn-primary" (click)="obterProdutos(it.id)"> <i
+                        class="fas fa-parking"></i></button>
                 <button class="m-1 btn btn-sm btn-success" (click)="contabilizarEmEstoque(it.id)"> <i
                         class="fas fa-plus-circle"></i></button>
+                <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
+                        class="far fa-trash-alt"></i></button>
+                <button [routerLink]="['/operador/compras/visualizar', it.id]" class="m-1 btn btn-sm btn-info">
+                    <i class="fa fa-search"></i></button>
             </td>
         </tr>
     </tbody>

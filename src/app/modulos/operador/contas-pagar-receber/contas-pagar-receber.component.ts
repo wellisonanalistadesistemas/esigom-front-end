@@ -78,7 +78,7 @@ export class ContasPagarReceberComponent implements OnInit {
     } else if (objeto.acao == 'remocaoPagamento') {
       this.objContaInformarPagamento = objeto.it;
       this.exclusao = false;
-      this.textoModalReaproveitada = "Deseja realmente cancelar o pagamento realizado?";
+      this.textoModalReaproveitada = "Deseja realmente remover o Valor Pago?";
     }
     this.modalService.open(template, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Dismissed ${this.excluirOuCancelarPagamento(objeto)}`;
@@ -114,6 +114,8 @@ export class ContasPagarReceberComponent implements OnInit {
     this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Dismissed ${this.informarPagamento()}`;
     }, (reason) => {
+      obj.valorPago = null;
+      obj.dataPagamento = null;
       this.closeResult = `Closed with: ${reason}`;
     });
   }

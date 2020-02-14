@@ -16,6 +16,7 @@ export class CadastrarEditarUsuarioComponent implements OnInit {
   public perfis: any;
   public perfil = new Perfil();
   public visualizar: boolean;
+  rotaVisualizar: boolean;
 
   constructor(public _usuarioService: UsuarioService, public _perfilService: PerfilService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
   }
@@ -26,6 +27,11 @@ export class CadastrarEditarUsuarioComponent implements OnInit {
       if (params.id != null) {
         this.visualizar = true;
         this._usuarioService.buscarPeloId(params.id).subscribe(data => this.objeto = data);
+      }
+    });
+    this.route.url.subscribe(url => {
+      if (url[0].path == "visualizar") {
+        this.rotaVisualizar = true;
       }
     })
   }

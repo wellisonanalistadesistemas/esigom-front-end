@@ -9,7 +9,7 @@
             </nb-card-header>
             <nb-card-body>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div *ngIf="!rotaVisualizar" class="col-md-12">
                         <button class="m-1 btn btn-sm btn-info btn-pesquisar" (click)="abrirModal(addProduto, 'lg')">
                             <i class="fas fa-plus"></i>
                             Adicionar Produto</button>
@@ -22,7 +22,7 @@
                                     <th class="text-center">Quantidade</th>
                                     <th class="text-center">Valor Pago por Unidade</th>
                                     <th class="text-center">Valor Total</th>
-                                    <th class="text-center">Ações</th>
+                                    <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,8 +33,9 @@
                                         {{it.valorUnitario | currency:'BRL':true:'1.2-2'}}</td>
                                     <td scope="col" class="text-center">
                                         {{it.valorUnitario*it.quantidade | currency:'BRL':true:'1.2-2'}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluir(it, 1)"> <i class="far fa-trash-alt"></i></button></td>
+                                    <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
+                                            class="m-1 btn btn-sm btn-danger" (click)="excluir(it, 1)"> <i
+                                                class="far fa-trash-alt"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -52,14 +53,15 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Número Nota Fiscal:</label>
-                            <input [(ngModel)]="objeto.notaFiscal" autocomplete="off" class="form-control"
-                                name="notaFiscal">
+                            <input [disabled]="rotaVisualizar" [(ngModel)]="objeto.notaFiscal" autocomplete="off"
+                                class="form-control" name="notaFiscal">
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Data Entrada</label>
-                            <input nbinput type="text" class="form-control" bsDatepicker locale="pt-br"
+                            <input [disabled]="rotaVisualizar" nbinput type="text" class="form-control" bsDatepicker
+                                locale="pt-br"
                                 [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
                                 [(ngModel)]="objeto.dataEntrada" [ngModelOptions]="{standalone: true}">
                         </div>
@@ -67,10 +69,13 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="form-group">
                             <label class="label col-form-label">Fornecedor:</label>
-                            <ng-select (change)="selecionarFornecedor($event)" [items]="listFornecedores"
-                                [selectOnTab]="true" bindLabel="descricao" notFoundText="Busca sem correspondência"
-                                name="fornecedor">
+
+                            <ng-select [disabled]="rotaVisualizar" class="custom"
+                                (change)="selecionarFornecedor($event)" [items]="listFornecedores"
+                                [(ngModel)]="objeto.fornecedor" [selectOnTab]="true" bindLabel="descricao"
+                                notFoundText="Busca sem correspondência" name="fornecedor">
                             </ng-select>
+
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
@@ -83,7 +88,7 @@
 
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
-                                <label class="label col-form-label">Total Geral:</label>
+                            <label class="label col-form-label">Total Geral:</label>
                             <span scope="col" class="form-control fundo">
                                 {{valorTotalProdutos | currency:'BRL':true:'1.2-2'}}</span>
                         </div>
@@ -93,16 +98,16 @@
         </nb-card>
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
-                        class="fas fa-save"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-success btn-pesquisar"
+                    (click)="salvarOuAlterar()"> <i class="fas fa-save"></i>
                     Salvar Cadastro</button>
-                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
-                        class="fa fa-times"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
+                    (click)="iniciarForm()"> <i class="fa fa-times"></i>
                     Limpar</button>
                 <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar"
                     [routerLink]="['/operador/entrada-produtos']">
                     <i class="fas fa-backward"></i>
-                    Voltar
+                    Voltar à Consulta
                 </button>
             </div>
         </div>

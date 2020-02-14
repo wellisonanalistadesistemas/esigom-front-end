@@ -13,14 +13,16 @@
                         <label class="label col-form-label">Tipo da Conta</label>
                         <!-- TODO:Verificar Check na Edição -->
                         <div class="checkbox checkAndRadio">
-                            <input class="input-checkbox radio-venda" (change)="aplicarTipoConta(true)" type="radio"
-                                name="exampleRadios" id="exampleRadios1" value="option1" [checked]="contaPagar">
+                            <input [disabled]="rotaVisualizar" class="input-checkbox radio-venda"
+                                (change)="aplicarTipoConta(true)" type="radio" name="exampleRadios" id="exampleRadios1"
+                                value="option1" [checked]="contaPagar">
                             <label class="check-label" for="exampleRadios1">
                                 À Pagar
                             </label>
-                            <input class="input-checkbox radio-venda" (change)="aplicarTipoConta(false)" type="radio"
-                                name="exampleRadios" id="exampleRadios2" value="option2" [checked]="!contaPagar">
-                                 <label class="form-check-label" for="exampleRadios2">
+                            <input [disabled]="rotaVisualizar" class="input-checkbox radio-venda"
+                                (change)="aplicarTipoConta(false)" type="radio" name="exampleRadios" id="exampleRadios2"
+                                value="option2" [checked]="!contaPagar">
+                            <label class="form-check-label" for="exampleRadios2">
                                 À Receber
                             </label>
                         </div>
@@ -28,41 +30,42 @@
                     <div *ngIf="!contaPagar" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">CPF:</label>
-                            <input (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf" autocomplete="off"
-                                class="form-control" name="cpf">
+                            <input [disabled]="rotaVisualizar" (blur)="buscarCliente()" [(ngModel)]="objeto.cliente.cpf"
+                                autocomplete="off" class="form-control" name="cpf">
                         </div>
                     </div>
                     <div *ngIf="!contaPagar" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                         <div class="form-group">
                             <label class="label col-form-label">Nome:</label>
-                            <input class="form-control" name="nome" [(ngModel)]="objeto.cliente.nome" autocomplete="off"
-                                disabled>
+                            <input [disabled]="rotaVisualizar" class="form-control" name="nome"
+                                [(ngModel)]="objeto.cliente.nome" autocomplete="off" disabled>
                         </div>
                     </div>
                     <div *ngIf="contaPagar" class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
                         <div class="form-group">
                             <label class="label col-form-label">Fornecedor</label>
-                            <ng-select (change)="selecionarFornecedor($event)" [items]="listaFornecedores"
-                                [selectOnTab]="true" [(ngModel)]="objeto.fornecedor" bindLabel="descricao"
-                                placeholder="Busque por um Fornecedor" notFoundText="Busca sem correspondência"
-                                name="fornecedor">
+                            <ng-select [disabled]="rotaVisualizar" (change)="selecionarFornecedor($event)"
+                                [items]="listaFornecedores" [selectOnTab]="true" [(ngModel)]="objeto.fornecedor"
+                                bindLabel="descricao" placeholder="Busque por um Fornecedor"
+                                notFoundText="Busca sem correspondência" name="fornecedor">
                             </ng-select>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
                         <div class="form-group">
                             <label class="label col-form-label">Centro de Custo</label>
-                            <ng-select class="custom" (change)="selecionarCentroCusto($event)"
-                                [items]="listaCentroDeCustos" [(ngModel)]="objeto.centroCusto" [selectOnTab]="true"
-                                bindLabel="descricao" notFoundText="Busca sem correspondência" name="centroCusto">
+                            <ng-select [disabled]="rotaVisualizar" class="custom"
+                                (change)="selecionarCentroCusto($event)" [items]="listaCentroDeCustos"
+                                [(ngModel)]="objeto.centroCusto" [selectOnTab]="true" bindLabel="descricao"
+                                notFoundText="Busca sem correspondência" name="centroCusto">
                             </ng-select>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                         <div class="form-group">
                             <label class="label col-form-label">Documento:</label>
-                            <input class="form-control" name="numeroDocumento" [(ngModel)]="objeto.numeroDocumento"
-                                autocomplete="off">
+                            <input [disabled]="rotaVisualizar" class="form-control" name="numeroDocumento"
+                                [(ngModel)]="objeto.numeroDocumento" autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -73,7 +76,7 @@
                 <h6>Listagem de Parcela(s):</h6>
             </nb-card-header>
             <nb-card-body>
-                <div class="row">
+                <div *ngIf="!rotaVisualizar" class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                         <div class="form-group">
                             <label class="label col-form-label">Número Parcela</label>
@@ -117,7 +120,7 @@
                                     <th class="text-center">Descrição</th>
                                     <th class="text-center">Data de Vencimento</th>
                                     <th class="text-center">Valor Parcela</th>
-                                    <th class="text-center">Ações</th>
+                                    <th *ngIf="!rotaVisualizar" class="text-center">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -128,8 +131,9 @@
                                         {{it.dataVencimento  | date: 'dd/MM/yyyy'}}</td>
                                     <td scope="col" class="text-center">
                                         {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
-                                    <td scope="col" class="text-center"><button class="m-1 btn btn-sm btn-danger"
-                                            (click)="excluirParcela(it)"> <i class="far fa-trash-alt"></i></button></td>
+                                    <td *ngIf="!rotaVisualizar" scope="col" class="text-center"><button
+                                            class="m-1 btn btn-sm btn-danger" (click)="excluirParcela(it)"> <i
+                                                class="far fa-trash-alt"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -144,16 +148,16 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button class="m-1 btn btn-sm btn-success btn-pesquisar" (click)="salvarOuAlterar()"> <i
-                        class="fas fa-save"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-success btn-pesquisar"
+                    (click)="salvarOuAlterar()"> <i class="fas fa-save"></i>
                     Salvar Cadastro</button>
-                <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
-                        class="fa fa-times"></i>
+                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
+                    (click)="iniciarForm()"> <i class="fa fa-times"></i>
                     Limpar</button>
                 <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar"
                     [routerLink]="['/operador/contas-a-pagar-receber']">
                     <i class="fas fa-backward"></i>
-                    Voltar
+                    Voltar à Consulta
                 </button>
             </div>
         </div>

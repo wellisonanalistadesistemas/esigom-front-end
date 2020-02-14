@@ -30,6 +30,7 @@ export class CadastrarEditarEntradaProdutoComponent {
   public valorTotalGeral = 0;
   public valorTotalProdutos = 0;
   public qtdeTotalProdutos = 0;
+  rotaVisualizar: boolean;
 
   constructor(
     private http: HttpClient,
@@ -63,6 +64,12 @@ export class CadastrarEditarEntradaProdutoComponent {
         );
       };
     });
+
+    this.route.url.subscribe(url => {
+      if (url[0].path == "visualizar") {
+        this.rotaVisualizar = true;
+      }
+    })
   }
 
   public selecionarFornecedor(fornecedor) {

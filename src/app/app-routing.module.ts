@@ -58,7 +58,13 @@ const routes: Routes = [
         },
         component: CadastrarEEditarOrcamentoComponent
       },
-
+      {
+        path: 'visualizar/:id',
+        data: {
+          breadcrumbs: 'Visualizar Orçamento'
+        },
+        component: CadastrarEEditarOrcamentoComponent
+      },
     ]
   },
 
@@ -75,6 +81,13 @@ const routes: Routes = [
         path: 'concluir/:id',
         data: {
           breadcrumbs: 'Novo Orçamento'
+        },
+        component: ConcluirOrdemServicoComponent
+      },
+      {
+        path: 'visualizar/:id',
+        data: {
+          breadcrumbs: 'Visualizar Ordem de Serviço'
         },
         component: ConcluirOrdemServicoComponent
       }
@@ -104,7 +117,13 @@ const routes: Routes = [
         },
         component: CadastrarEEditarCompraComponent
       },
-
+      {
+        path: 'visualizar/:id',
+        data: {
+          breadcrumbs: 'Visualizar Compra'
+        },
+        component: CadastrarEEditarCompraComponent
+      }
     ]
   },
 
@@ -132,6 +151,13 @@ const routes: Routes = [
         path: 'editar/:id',
         data: {
           breadcrumbs: 'Editar Conta'
+        },
+        component: CadastrarEEditarContaPagarReceberComponent
+      },
+      {
+        path: 'visualizar/:id',
+        data: {
+          breadcrumbs: 'Visualizar Conta'
         },
         component: CadastrarEEditarContaPagarReceberComponent
       },
@@ -173,7 +199,10 @@ const routes: Routes = [
         path: 'editar/:id',
         component: CadastrarEditarClienteComponent
       },
-
+      {
+        path: 'visualizar/:id',
+        component: CadastrarEditarClienteComponent
+      },
     ]
   },
 
@@ -245,6 +274,10 @@ const routes: Routes = [
       },
       {
         path: 'editar/:id',
+        component: CadastrarEditarEntradaProdutoComponent
+      },
+      {
+        path: 'visualizar/:id',
         component: CadastrarEditarEntradaProdutoComponent
       },
 
@@ -327,6 +360,10 @@ const routes: Routes = [
       },
       {
         path: 'editar/:id',
+        component: CadastrarEditarUsuarioComponent
+      },
+      {
+        path: 'visualizar/:id',
         component: CadastrarEditarUsuarioComponent
       },
 

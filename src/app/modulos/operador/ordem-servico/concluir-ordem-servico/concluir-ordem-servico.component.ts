@@ -3,6 +3,7 @@ import { OrdemServicoService } from 'src/app/services/ordemServico';
 import { OrdemServico } from 'src/app/model/ordemServico';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-concluir-ordem-servico',
@@ -12,7 +13,17 @@ import { ToastrService } from 'ngx-toastr';
 export class ConcluirOrdemServicoComponent implements OnInit {
   public ordemServico = new OrdemServico;
   public numeroOrdemDeServico;
-  constructor(private _ordemServicoService: OrdemServicoService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) { }
+  public listaModal: any;
+  public objetoLista: any;
+  public tituloModalGenerica: any;
+  public abertoListaServico;
+  public visualizar = false;
+  constructor(
+    private modalService: NgbModal,
+    private _ordemServicoService: OrdemServicoService,
+    private toastr: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -23,7 +34,42 @@ export class ConcluirOrdemServicoComponent implements OnInit {
         });
       }
     })
+    this.route.url.subscribe(url => {
+      if (url[0].path == "visualizar") {
+        this.visualizar = true;
+      }
+    })
   }
+
+  /* Abrir Modal Genérica */
+  abrirModal(template, size, tipo) {
+    this.listaModal = [];
+    // caso visualize produtos
+    if (tipo == true) {
+      this.abertoListaServico = false;
+      this.tituloModalGenerica = "Listagem de Peça(s) Comprada(s)";
+      this.ordemServico.orcamento.produtos.forEach(obj => {
+        this.objetoLista = new Object();
+        this.objetoLista.quantidade = obj.quantidade;
+        this.objetoLista.descricao = obj.produto.descricao;
+        this.objetoLista.clienteLevaPeca = obj.clienteLevaPeca;
+        this.listaModal.push(this.objetoLista);
+      });
+      // caso visualize ordem de serviço
+    } else {
+      this.abertoListaServico = true;
+      this.tituloModalGenerica = "Listagem de Serviços à Executar";
+      this.ordemServico.orcamento.servicos.forEach(obj => {
+        this.objetoLista = new Object();
+        this.objetoLista.quantidade = obj.quantidade;
+        this.objetoLista.descricao = obj.servico.descricao;
+        this.listaModal.push(this.objetoLista);
+      });
+    }
+    // apresentar em modal
+    this.modalService.open(template, { size: size, ariaLabelledBy: 'modal-basic-title' }).result;
+  }
+
 
   salvar() {
     // Altera Situação para "Finalizado"

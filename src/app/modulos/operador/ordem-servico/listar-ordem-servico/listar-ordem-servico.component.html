@@ -11,7 +11,7 @@
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')"> Data
                 Inclusão</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')"> Data
-                Conclusão</th>
+                Execução</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
                 Veículo</th>
             <th style="cursor: pointer;" title="Ordenar pelo Email" class="text-center" (click)="ordenar('email')">
@@ -25,20 +25,23 @@
             <td scope="col" class="text-center"><i [routerLink]="['/operador/orcamentos/editar', it.orcamento.id]"
                     style="cursor: pointer;" class="fas fa-search lupa"></i>
                 {{it.orcamento.id}}</td>
-            <td scope="col" class="text-center"><i *ngIf="it.codStatus == 2" style="cursor: pointer;"
-                    class="fas fa-sync-alt alterar"></i>
-                {{it.status}}</td>
+            <td scope="col" class="text-center">{{it.status}}</td>
             <td scope="col" class="text-center">{{it.dataAbertura | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-            <td scope="col" class="text-center">{{it.dataEntrega | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+            <td scope="col" class="text-center">
+                {{it.dataEntrega == null ? '-' :it.dataEntrega  | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
             <td scope="col" class="text-center">{{it.veiculo}}</td>
             <td scope="col" class="text-center">{{it.orcamento.veiculoPlaca}}</td>
             <td scope="col" class="text-center" nowrap>
-                <button *ngIf="it.codStatus == 1" class="m-1 btn btn-sm btn-success" [routerLink]="['/operador/ordens-servicos/concluir', it.id]"> <i
-                        class="fas fa-check"></i></button>
-                <button *ngIf="it.codStatus == 2" class="m-1 btn btn-sm btn-success" (click)="excluir(it.id)"> <i
+                <button *ngIf="it.codStatus == 1" class="m-1 btn btn-sm btn-success"
+                    [routerLink]="['/operador/ordens-servicos/concluir', it.id]"> <i class="fas fa-check"></i></button>
+                <button *ngIf="it.codStatus == 2" class="m-1 btn btn-sm btn-secondary" (click)="excluir(it.id)"> <i
                         class="fas fa-envelope-open-text"></i></button>
-                <button *ngIf="it.codStatus == 2" class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
+                <button *ngIf="it.codStatus == 2" [routerLink]="['/operador/ordens-servicos/visualizar', it.id]"
+                    class="m-1 btn btn-sm btn-info"> <i class="fa fa-search"></i></button>
+                <button *ngIf="it.codStatus == 2" class="m-1 btn btn-sm btn-danger" (click)="excluir(it)"> <i
                         class="fas fa-file-pdf"></i></button>
+                <button *ngIf="it.codStatus == 2" class="m-1 btn btn-sm btn-warning" (click)="alterarStatus(it)"> <i
+                        class="fas fa-sync-alt"></i></button>
             </td>
         </tr>
     </tbody>

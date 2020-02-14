@@ -35,6 +35,7 @@ export class CadastrarEEditarOrcamentoComponent {
   public valorTotalGeral = 0;
   public valorTotalProdutos = 0;
   public valorTotalServicos = 0;
+  public rotaVisualizar = false;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -71,6 +72,12 @@ export class CadastrarEEditarOrcamentoComponent {
         );
       };
     });
+
+    this.route.url.subscribe(url => {
+      if (url[0].path == "visualizar") {
+        this.rotaVisualizar = true;
+      }
+    })
   }
 
   public aplicarAcaoOrcamento(parametro) {

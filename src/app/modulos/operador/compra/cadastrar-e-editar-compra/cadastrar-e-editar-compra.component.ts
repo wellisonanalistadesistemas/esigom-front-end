@@ -33,6 +33,7 @@ export class CadastrarEEditarCompraComponent implements OnInit {
   public valorTotalProdutos = 0;
   public valorTotalParcelas = 0;
   public parcelamento = false;
+  public rotaVisualizar = false;
 
   constructor(
     private localeService: BsLocaleService,
@@ -58,6 +59,12 @@ export class CadastrarEEditarCompraComponent implements OnInit {
         this._compraService.buscarPeloId(params.id).subscribe(data => this.objeto = data);
       }
     });
+
+    this._route.url.subscribe(url => {
+      if (url[0].path == "visualizar") {
+        this.rotaVisualizar = true;
+      }
+    })
     this.obterListasDropdowns();
 
   }
