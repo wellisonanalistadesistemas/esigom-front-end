@@ -1,0 +1,41 @@
+<div class="row positionRow">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <nb-card>
+            <nb-card-header>
+                <h4 class="text-center">Login</h4>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <!-- <div class="col-md-12 text-center"></div>
+                        <p>Olá! Entre com seu Login e Senha.</p>
+                    </div> -->
+                    <div class="col-md-12">
+                        <input [(ngModel)]="usuario.login" type="text" nbInput fullWidth placeholder="Digite seu Login"
+                            class="m-2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input [(ngModel)]="usuario.senha" type="password" nbInput fullWidth
+                            placeholder="Digite sua Senha" class="m-2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button (click)="autenticar()" nbButton status="primary" size="small" hero class="m-2">Acessar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-link px-o esqueciSenha" href="#" target="_blank"> Esqueci minha senha.</a>
+                    </div>
+                </div>
+                <div class="row ultimoRow">
+                    <div class="col-md-12 text-center"><a class="btn btn-link px-0" target="_blank" href="#">Ainda
+                            não sou cadastrado.</a>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-md-4"></div>
+</div>

@@ -1,6 +1,6 @@
 <nb-card class="status-success">
     <nb-card-header>
-        <h5>CADASTRAR USUÁRIO</h5>
+        <h4>Cadastrar Usuário</h4>
     </nb-card-header>
     <nb-card-body>
         <nb-card class="status-success">
@@ -71,20 +71,15 @@
             </nb-card-body>
         </nb-card>
         <div class="row">
-            <div class="col-md-12">
-                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-success btn-pesquisar"
-                    (click)="salvarOuAlterar()"> <i class="fas fa-save"></i>
-                    Salvar Cadastro</button>
-                <button *ngIf="!rotaVisualizar" class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
-                    (click)="iniciarForm()"> <i class="fa fa-times"></i>
-                    Limpar</button>
-                <button class=" m-1 btn btn-sm btn-secondary btn-pesquisar" [routerLink]="['/administracao/usuarios']">
-                    <i class="fas fa-backward"></i>
-                    Voltar à Consulta de Usuários
-                </button>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-left">
+                <button *ngIf="!rotaVisualizar" nbButton status="primary" size="small" hero class="m-1"
+                    (click)="salvarOuAlterar()"><i class="fas fa-save"></i>&nbsp;Salvar</button>
+                <button *ngIf="!rotaVisualizar" nbButton status="basic" size="small" class="m-1"
+                    (click)="resetForm()"><i class="fa fa-times"></i>&nbsp;Limpar</button>
+                <button [routerLink]="['/administracao/usuarios']" nbButton status="basic" size="small" class="m-1"><i
+                        class="fas fa-backward"></i>&nbsp;Consulta</button>
             </div>
         </div>
-        <!-- </form> -->
     </nb-card-body>
 </nb-card>
 

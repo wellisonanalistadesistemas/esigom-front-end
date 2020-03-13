@@ -22,8 +22,8 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "baseHref": "/",
-            "deployUrl": "/",
+            "baseHref": "/sigom/",
+            "deployUrl": "/sigom/",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -56,8 +56,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "baseHref": "/",
-              "deployUrl": "/",
+              "baseHref": "/sigom/",
+              "deployUrl": "/sigom/",
               "budgets": [
                 {
                   "type": "initial",
@@ -82,8 +82,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "baseHref": "/",
-              "deployUrl": "/",
+              "baseHref": "/sigom/",
+              "deployUrl": "/sigom/",
               "budgets": [
                 {
                   "type": "initial",
@@ -108,8 +108,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "baseHref": "/",
-              "deployUrl": "/",
+              "baseHref": "/sigom/",
+              "deployUrl": "/sigom/",
               "budgets": [
                 {
                   "type": "initial",
@@ -134,8 +134,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "baseHref": "/",
-              "deployUrl": "/",              
+              "baseHref": "/sigom/",
+              "deployUrl": "/sigom/",          
               "budgets": [
                 {
                   "type": "initial",

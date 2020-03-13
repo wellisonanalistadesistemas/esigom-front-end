@@ -9,7 +9,7 @@ export class CaixaService {
   constructor(private http: HttpClient) { }
 
   pesquisar(params) {
-    return this.http.get(`caixas`, { params });
+    return this.http.get(`operador/caixas`, { params });
   }
 
 }

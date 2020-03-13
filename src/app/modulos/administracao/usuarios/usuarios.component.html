@@ -1,88 +1,71 @@
 <nb-card class="status-success">
   <nb-card-header>
-    <h5>CONSULTAR USUÁRIOS</h5>
+    <h4>Consulta de Usuários</h4>
   </nb-card-header>
   <nb-card-body>
-    <nb-card class="status-success">
-      <nb-card-header>
-        <h6>Filtros de Busca:</h6>
-      </nb-card-header>
-      <nb-card-body>
-        <form (ngSubmit)="buscarUsuarios()">
-          <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-              <div class="form-group">
-                  <label class="label col-form-label">Nome:</label>
-                <input autocomplete="off" placeholder="Nome do Funcionário" class="form-control" name="nome"
-                  [(ngModel)]="buscaForm.nome">
-              </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
-              <div class="form-group">
-                  <label class="label col-form-label">Login:</label>
-                <input autocomplete="off" placeholder="Login" class="form-control" name="login"
-                  [(ngModel)]="buscaForm.login">
-              </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-              <div class="form-group">
-                  <label class="label col-form-label">E-mail:</label>
-                <input autocomplete="off" placeholder="Email" class="form-control" name="email"
-                  [(ngModel)]="buscaForm.email">
-              </div>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-              <div class="form-group">
-                  <label class="label col-form-label">Data de Inclusão:</label>
-                <input autocomplete="off" type="text" class="form-control" placeholder="DD/MM/YYYY" bsDatepicker
-                  [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [(ngModel)]="buscaForm.dataFinalEnvio"
-                  [minDate]="buscaForm.dthInclusao" name="dataFinalEnvio">
-              </div>
-            </div>
+    <form (ngSubmit)="buscarUsuarios()">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+          <div class="form-group">
+            <label class="label col-form-label">Nome:</label>
+            <input autocomplete="off" class="form-control" name="nome" [(ngModel)]="buscaForm.nome">
           </div>
-          <div class="row">
-            <div class="col text-right">
-              <button class="m-1 btn btn-sm btn-primary btn-pesquisar" type="submit"> <i class="fa fa-search"></i>
-                Pesquisar</button>
-              <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button" (click)="iniciarForm()"> <i
-                  class="fa fa-times"></i>
-                Limpar</button>
-              <button class=" m-1 btn btn-sm btn-success btn-pesquisar" [routerLink]="'cadastrar'">
-                <i class="fa fa-user"></i>
-                Cadastrar Usuário
-              </button>
-            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+          <div class="form-group">
+            <label class="label col-form-label">Login:</label>
+            <input autocomplete="off" class="form-control" name="login" [(ngModel)]="buscaForm.login">
           </div>
-        </form>
-      </nb-card-body>
-    </nb-card>
-    <div class="row">
-      <div class="col-md-12">
-        <nb-card class="status-success" *ngIf="listaUsuarios">
-          <div class="alert alert-primary" style="margin: 5px" *ngIf="listaUsuarios && listaUsuarios.total == 0"
-            role="alert">
-            Nenhuma remessa encontrada!
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+          <div class="form-group">
+            <label class="label col-form-label">E-mail:</label>
+            <input autocomplete="off" class="form-control" name="email" [(ngModel)]="buscaForm.email">
           </div>
-          <nb-card-header>
-            <h6>Resultado da Pesquisa:</h6>
-          </nb-card-header>
-          <nb-card-body>
-            <div class="col-m2-12" *ngIf="listaUsuarios && listaUsuarios.recordsTotal > 0">
-              <app-listar-usuario [lista]="listaUsuarios" (eventoOrdenar)="ordenar($event)"
-                (eventoAlterarSenha)="abrirModalAlterarSenha($event, alterarSenha)" (eventoPaginar)="paginar($event)"
-                (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
-              </app-listar-usuario>
-            </div>
-            <div class="alert alert-primary" style="margin: 5px"
-              *ngIf="listaUsuarios && listaUsuarios.recordsTotal == 0" role="alert">
-              Nenhum Usuário foi encontrado!
-            </div>
-          </nb-card-body>
-        </nb-card>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label class="label col-form-label">Data Última Alteração:</label>
+            <input nbinput type="text" class="form-control" bsDatepicker locale="pt-br"
+              [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }"
+              [(ngModel)]="buscaForm.dthInclusao" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
+          <button nbButton status="primary" size="small" hero class="m-1" (click)="pesquisar()"><i
+              class="fa fa-search"></i>&nbsp;Pesquisar</button>
+          <button nbButton status="basic" size="small" class="m-1" (click)="resetForm()"><i
+              class="fa fa-times"></i>&nbsp;Limpar</button>
+          <button [routerLink]="['cadastrar']" nbButton status="success" size="small" class="m-1"><i
+              class="fas fa-plus-circle"></i>&nbsp;Cadastrar Usuário</button>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+<nb-card class="status-success" *ngIf="listaUsuarios">
+  <div class="alert alert-primary" style="margin: 5px" *ngIf="listaUsuarios && listaUsuarios.total == 0" role="alert">
+    Nenhuma remessa encontrada!
+  </div>
+  <nb-card-header>
+    <h6>Resultado da Pesquisa:</h6>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="col-m2-12" *ngIf="listaUsuarios && listaUsuarios.recordsTotal > 0">
+      <app-listar-usuario [lista]="listaUsuarios" (eventoOrdenar)="ordenar($event)"
+        (eventoAlterarSenha)="abrirModalAlterarSenha($event, alterarSenha)" (eventoPaginar)="paginar($event)"
+        (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
+      </app-listar-usuario>
+    </div>
+    <div class="alert alert-primary" style="margin: 5px" *ngIf="listaUsuarios && listaUsuarios.recordsTotal == 0"
+      role="alert">
+      Nenhum Usuário foi encontrado!
     </div>
   </nb-card-body>
 </nb-card>
+
 <ng-template #confirmacao let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Confirmação</h4>

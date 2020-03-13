@@ -12,26 +12,26 @@ export class CentroCustoService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<CentroCusto> {
-    return this.http.get<CentroCusto>(`centrosCusto/`);
+    return this.http.get<CentroCusto>(`operador/centrosCusto/`);
   }
   pesquisar(params) {
-    return this.http.get(`centrosCusto`, { params });
+    return this.http.get(`operador/centrosCusto`, { params });
   }
 
   alterar(id: number, dto: CentroCusto) {
-    return this.http.put(`centrosCusto/` + id, dto);
+    return this.http.put(`operador/centrosCusto/` + id, dto);
   }
 
   salvar(centroCusto: CentroCusto): Observable<CentroCusto> {
-    return this.http.post<CentroCusto>(`centrosCusto`, centroCusto);
+    return this.http.post<CentroCusto>(`operador/centrosCusto`, centroCusto);
   }
 
   excluir(id: number) {
-    return this.http.delete(`centrosCusto/` + id);
+    return this.http.delete(`operador/centrosCusto/` + id);
   }
 
   buscarPeloId(id: number) {
-    return this.http.get<CentroCusto>(`centrosCusto/` + id);
+    return this.http.get<CentroCusto>(`operador/centrosCusto/` + id);
   }
 
 }

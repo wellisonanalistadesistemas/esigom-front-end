@@ -30,7 +30,9 @@ import { CadastrarEEditarCompraComponent } from './modulos/operador/compra/cadas
 import { CompraComponent } from './modulos/operador/compra/compra.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'administracao/usuarios', pathMatch: 'full' },
+
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: 'auth', component: AuthComponent },
   // { path: 'home', component: UsuariosComponent },
   // { path: 'auth', component: AuthComponent },
 

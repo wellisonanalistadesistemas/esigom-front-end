@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
-                                    <label class="label col-form-label">Nome do Fornecedor:</label>
+                                <label class="label col-form-label">Nome do Fornecedor:</label>
                                 <input autocomplete="off" class="form-control" name="nome"
                                     [(ngModel)]="buscaForm.descricao">
                             </div>
@@ -97,7 +97,7 @@
 
 <ng-template #modalParcelas let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Listagem de Parcelas</h4>
+        <h5 class="modal-title" id="modal-basic-title">Gerenciar Parcelas da Compra</h5>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -106,22 +106,52 @@
         <table class="table">
             <thead class="thead-light">
                 <tr>
-                    <th style="width: 3.00%" class="text-center">Código</th>
-                    <th style="width: 24.00%" class="text-center">Data Vencimento</th>
+                    <th style="width: 10.00%" class="text-center">Ordem</th>
+                    <th style="width: 20.00%" class="text-center">Data Vencimento</th>
                     <th style="width: 15.00%" class="text-center">Valor Total</th>
-                    <th style="width: 11.00%" class="text-center">Situação</th>
-                    <th style="width: 24.00%" class="text-center">Data Pagamento</th>
-                    <th style="width: 18.00%" class="text-center">Valor Pago</th>
-                    <th style="width: 3.00%" class="text-center">Ação</th>
+                    <th style="width: 20.00%" class="text-center">Data Pagamento</th>
+                    <th style="width: 15.00%" class="text-center">Valor Pago</th>
+                    <th style="width: 10.00%" class="text-center">Situação</th>
+                    <th style="width: 10.00%" class="text-center">Ação</th>
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td>
+                        <input autocomplete="off" class="form-control" [(ngModel)]="compraParcela.ordem">
+                    </td>
+                    <td>
+                        <input nbinput type="text" class="form-control" bsDatepicker locale="pt-br"
+                            [(ngModel)]="compraParcela.dataVencimento"
+                            [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }">
+                    </td>
+                    <td>
+                        <input autocomplete="off" class="form-control" [(ngModel)]="compraParcela.valor">
+                    </td>
+                    <td>
+                        <input (blur)="habilitarBotaoSalvar()" nbinput type="text" class="form-control" bsDatepicker
+                            locale="pt-br" [(ngModel)]="compraParcela.dataPagamento"
+                            [bsConfig]="{ isAnimated: true , dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-blue' }">
+                    </td>
+                    <td>
+                        <input autocomplete="off" [(ngModel)]="compraParcela.valorPago" class="form-control"
+                            name="valorPago">
+                    </td>
+                    <td>
+                        <span scope="cl" class="form-control corFundoSpan">
+                            <p class="text-center" *ngIf="compraParcela.ordem">
+                                {{compraParcela.valorPago && compraParcela.dataPagamento ? 'Pago' : 'A Pagar'}}</p>
+                        </span>
+                    </td>
+                    <td> <button class="m-1 btn btn-sm btn-info" (click)="adicionarParcela()"><i
+                                class="fas fa-plus"></i> Adicionar Parcela</button></td>
+                </tr>
                 <tr *ngFor="let it of listaParcelasCompra">
-                    <td scope="col" class="text-center">{{it.id}}</td>
+                    <td scope="col" class="text-center">{{it.ordem}}</td>
                     <td scope="col" class="text-center">{{it.dataVencimento | date: 'dd/MM/yyyy'}}</td>
                     <td scope="col" class="text-center">
                         {{it.valor | currency:'BRL':true:'1.2-2'}}</td>
-                    <td scope="col" class="text-center">{{it.situacao}}</td>
+
                     <td scope="col" class="text-center">
                         <input (blur)="habilitarBotaoSalvar()" nbinput type="text" class="form-control" bsDatepicker
                             locale="pt-br" value="{{ it.dataPagamento | date: 'dd/MM/yyyy' }}"
@@ -134,17 +164,24 @@
                             class="form-control" name="valor" [disabled]="it.desabilitarEdicao">
                     </td>
 
+                    <td scope="col" class="text-center">{{it.situacao}}</td>
                     <td scope="col" class="text-center">
-                        <button class="m-1 btn" (click)="editarParcela(it)"> <i
-                                [ngClass]="(it.desabilitarEdicao)?'btn-sm btn-warning fas fa-pencil-alt':'btn-sm btn-success fas fa-check'"></i></button>
-                    </td>
+                        <button
+                            [ngClass]="(it.desabilitarEdicao)?'m-1 btn btn-sm btn-warning':'m-1 btn btn-sm btn-success'"
+                            (click)="editarCompraParcela(it)"><i
+                                [ngClass]="(it.desabilitarEdicao)?'fas fa-pencil-alt':'fas fa-check'"></i></button>
 
+                        <button class="m-1 btn btn-sm btn-danger" (click)="excluirCompraParcela(it)"><i
+                                class="far fa-trash-alt"></i></button>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="modal-footer">
-        <button type="button" [disabled]="!habilitarSalvarDados" class="btn btn-sm btn-primary"
-            (click)="modal.close('Save click')">Salvar Dados</button>
+        <button class="m-1 btn btn-sm btn-secondary" (click)="modal.close('Save click')"
+            [routerLink]="['/operador/compras/editar/',compraVisualizada.id]">
+            <i class="fas fa-pencil-alt"></i>
+            Editar Compra </button>
     </div>
 </ng-template>

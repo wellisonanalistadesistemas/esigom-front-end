@@ -12,35 +12,35 @@ export class EntradaService {
   constructor(private http: HttpClient) { }
 
   pesquisar(params) {
-    return this.http.get(`entradas`, { params });
+    return this.http.get(`operador/entradas`, { params });
   }
 
   obterListaProdutosEntrada(id: number) {
-    return this.http.get<EntradaProduto>(`entradas/obterListaProdutosEntrada/` + id);
+    return this.http.get<EntradaProduto>(`operador/entradas/obterListaProdutosEntrada/` + id);
   }
 
   alterar(id: number, dto: Entrada) {
-    return this.http.put(`entradas/` + id, dto);
+    return this.http.put(`operador/entradas/` + id, dto);
   }
 
   salvar(entrada: Entrada): Observable<Entrada> {
-    return this.http.post<Entrada>(`entradas`, entrada);
+    return this.http.post<Entrada>(`operador/entradas`, entrada);
   }
 
   adicionarProdutoEntrada(entradaProduto: EntradaProduto): Observable<EntradaProduto> {
-    return this.http.post<EntradaProduto>(`entradas/adicionarProdutoEntrada`, entradaProduto);
+    return this.http.post<EntradaProduto>(`operador/entradas/adicionarProdutoEntrada`, entradaProduto);
   }
 
   excluir(id: number) {
-    return this.http.delete(`entradas/` + id);
+    return this.http.delete(`operador/entradas/` + id);
   }
 
   excluirProdutoEntrada(id: number) {
-    return this.http.delete(`entradas/excluirProdutoEntrada/` + id);
+    return this.http.delete(`operador/entradas/excluirProdutoEntrada/` + id);
   }
 
   buscarPeloId(id: number) {
-    return this.http.get<Entrada>(`entradas/` + id);
+    return this.http.get<Entrada>(`operador/entradas/` + id);
   }
 
 }

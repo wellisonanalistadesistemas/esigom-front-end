@@ -1,8 +1,8 @@
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbCardModule, NbListModule, NbButtonModule, NbInputModule } from '@nebular/theme';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -18,6 +18,10 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { AuthComponent } from './auth/auth.component';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { BsDatepickerModule } from 'ngx-bootstrap';
+import { HttpInterceptorModule } from './services/header-interceptor.service';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -33,7 +37,18 @@ registerLocaleData(localePt);
     AppRoutingModule,
     BrowserAnimationsModule,
     NavbarModule,
-    HomeModule,
+    CommonModule,
+    ComponentsModule,
+    RouterModule,
+    NbCardModule,
+    NbInputModule,
+    NgSelectModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NbCardModule,
+    NbListModule,
+    NbButtonModule,
     NbThemeModule.forRoot(),
     AccordionModule.forRoot(),
     ToastrModule.forRoot({
@@ -44,7 +59,8 @@ registerLocaleData(localePt);
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbEvaIconsModule,
-    RouterModule
+    RouterModule,
+    HttpInterceptorModule
   ],
   providers: [
     {

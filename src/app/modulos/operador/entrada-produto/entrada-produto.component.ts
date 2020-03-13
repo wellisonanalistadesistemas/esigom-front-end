@@ -4,8 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProdutoService } from 'src/app/services/produto';
 import { ServicoBuscaEntity } from '../servicos/servicos.component';
 import { EntradaService } from 'src/app/services/entrada.service';
-import { EntradaProduto } from 'src/app/model/entradaProduto';
 import { Entrada } from 'src/app/model/entrada';
+import { EntradaProduto } from 'src/app/model/entradaProduto';
 
 @Component({
   selector: 'app-entrada-produto',

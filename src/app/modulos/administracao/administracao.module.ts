@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NbCardModule, NbMenuModule, NbListModule } from '@nebular/theme';
+import { NbCardModule, NbMenuModule, NbListModule, NbButtonModule } from '@nebular/theme';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -39,6 +39,7 @@ import { CadastrarEEditarPerfilComponent } from './perfil/cadastrar-e-editar-per
     NbMenuModule.forRoot(),
     NbCardModule,
     NbListModule,
+    NbButtonModule
   ],
   exports: [
     UsuariosComponent,

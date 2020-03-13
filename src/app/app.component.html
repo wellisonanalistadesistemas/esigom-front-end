@@ -1,13 +1,13 @@
 <ng-progress></ng-progress>
 <nb-layout>
-  <nb-layout-header fixed>
+  <nb-layout-header fixed [hidden]="esconderBarra()">
     <app-navbar></app-navbar>
   </nb-layout-header>
   <nb-layout-column>
     <router-outlet></router-outlet>
   </nb-layout-column>
   <nb-layout-footer>
-    <div class="container col-md-12 text-left">Desenvolvido em Angular e Spring Boot <i class="fab fa-angular"></i> <i
-        class="fab fa-java"></i> por WAS Sistemas.</div>
+    <div class="container col-md-12 text-left">Sistema SIGOM v.1.0.0.0 de 12/03/2020 por WAS Sistemas <i
+        class="fab fa-angular"></i> <i class="fab fa-java"></i></div>
   </nb-layout-footer>
 </nb-layout>

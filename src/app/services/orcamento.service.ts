@@ -12,23 +12,23 @@ export class OrcamentoService {
   constructor(private http: HttpClient) { }
 
   pesquisar(params) {
-    return this.http.get(`orcamentos`, { params });
+    return this.http.get(`operador/orcamentos`, { params });
   }
 
   alterar(id: number, dto: Orcamento) {
-    return this.http.put(`orcamentos/` + id, dto);
+    return this.http.put(`operador/orcamentos/` + id, dto);
   }
 
   salvar(orcamento: Orcamento): Observable<Orcamento> {
-    return this.http.post<Orcamento>(`orcamentos`, orcamento);
+    return this.http.post<Orcamento>(`operador/orcamentos`, orcamento);
   }
 
   excluir(id: number) {
-    return this.http.delete(`orcamentos/` + id);
+    return this.http.delete(`operador/orcamentos/` + id);
   }
 
   buscarPeloId(id: number) {
-    return this.http.get<Orcamento>(`orcamentos/` + id);
+    return this.http.get<Orcamento>(`operador/orcamentos/` + id);
   }
 
 }

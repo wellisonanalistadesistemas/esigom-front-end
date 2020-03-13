@@ -46,8 +46,8 @@ export class ListCompraComponent implements OnInit {
     this.eventoContabilizarEmEstoque.emit(Id);
   }
 
-  public obterParcelas(Id) {
-    this.eventoObterParcela.emit(Id);
+  public obterParcelas(it) {
+    this.eventoObterParcela.emit(it);
   }
 
   public alterarSenha(id, nome) {

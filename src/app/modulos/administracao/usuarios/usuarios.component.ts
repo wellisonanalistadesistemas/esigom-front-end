@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgAnimateScrollService } from 'ng-animate-scroll';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { defineLocale, ptBrLocale, BsLocaleService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-usuarios',
@@ -11,8 +12,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class UsuariosComponent implements OnInit {
-  constructor(private _usuarioService: UsuarioService, private animateScrollService: NgAnimateScrollService,
-    private cd: ChangeDetectorRef, private toastr: ToastrService, private modalService: NgbModal) { }
+  constructor(
+    private _usuarioService: UsuarioService,
+    private toastr: ToastrService,
+    private modalService: NgbModal,
+    private localeService: BsLocaleService
+  ) {
+    defineLocale('ptbr', ptBrLocale);
+    this.localeService.use('ptbr');
+  }
 
   buscaForm = ({}) as UsuarioBuscaEntity;
   listaUsuarios: any;
@@ -20,8 +28,6 @@ export class UsuariosComponent implements OnInit {
   modalConfirmacao: any;
   idExcluir: any;
   closeResult: string;
-
-  /* Modal Alterar Senha*/
   usuario: string;
   novaSenha: string;
 
@@ -44,6 +50,8 @@ export class UsuariosComponent implements OnInit {
   }
 
   buscarUsuarios() {
+    console.log(this.buscaForm);
+
     this._usuarioService.pesquisar(this.buscaForm).subscribe(data => {
       this.listaUsuarios = data;
     });
@@ -104,8 +112,8 @@ export class UsuarioBuscaEntity {
   coluna?: string;
   tipoOrdenacao?: string;
   descricao?: string;
-  nome: number;
-  login: string;
-  dthInclusao: string;
-  email: string;
+  nome?: string;
+  login?: string;
+  dthInclusao?: Date;
+  email?: string;
 }

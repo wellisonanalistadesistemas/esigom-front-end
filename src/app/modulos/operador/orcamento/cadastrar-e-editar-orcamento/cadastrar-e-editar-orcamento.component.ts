@@ -6,15 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Orcamento } from 'src/app/model/orcamento';
-import { Produto } from 'src/app/model/produto';
-import { Servico } from 'src/app/model/servico';
 import { OrcamentoService } from 'src/app/services/orcamento.service';
-import { FormaPagamento } from 'src/app/model/formaPagamento';
 import { FormaPagamentoService } from 'src/app/services/formaPagamento';
 import { ProdutoService } from 'src/app/services/produto';
 import { ServicoService } from 'src/app/services/servico';
 import { OrcamentoProduto } from 'src/app/model/orcamentoProduto';
 import { OrcamentoServico } from 'src/app/model/OrcamentoServico';
+import { OrcamentoParcela } from 'src/app/model/OrcamentoParcela';
 
 @Component({
   selector: 'app-cadastrar-e-editar-orcamento',
@@ -28,14 +26,15 @@ export class CadastrarEEditarOrcamentoComponent {
   public orcamentoProduto = new OrcamentoProduto();
   public orcamentoServico = new OrcamentoServico();
   public closeResult: string;
-  public formaPagamento = new FormaPagamento();
-  public formasPagamento: any;
   public listaOrcamentoProdutos: any;
   public listaOrcamentoServicos: any;
   public valorTotalGeral = 0;
   public valorTotalProdutos = 0;
   public valorTotalServicos = 0;
   public rotaVisualizar = false;
+  public orcamentoParcela = new OrcamentoParcela();
+  public valorTotalParcelas = 0;
+  public parcelamento = false;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -50,10 +49,6 @@ export class CadastrarEEditarOrcamentoComponent {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // Obter Formas de pagamento
-    this._formaPagamentoService.pesquisar().subscribe(data => {
-      this.formasPagamento = data
-    });
     // Obter pelo ID
     this.route.params.subscribe(params => {
       if (params.id != null) {
@@ -80,21 +75,31 @@ export class CadastrarEEditarOrcamentoComponent {
     })
   }
 
-  public aplicarAcaoOrcamento(parametro) {
-    this.objeto.codStatus = parametro;
+  public adicionarParcela() {
+    this.objeto.parcelas.push(this.orcamentoParcela);
+    this.valorTotalParcelas += Number(this.orcamentoParcela.valor);
+    // novo objeto
+    this.orcamentoParcela = new OrcamentoParcela();
   }
 
-  public adicionarFormaPagamento(obj) {
-    // Se já existe, remover
-    const index = this.objeto.formasPagamento.indexOf(obj);
-    if (index != -1) {
-      this.objeto.formasPagamento.splice(index, 1)
-    } else {
-      // Senão adicionar
-      this.formaPagamento = new FormaPagamento();
-      this.formaPagamento = obj;
-      this.objeto.formasPagamento.push(this.formaPagamento);
+  public excluirParcela(parcela) {
+    const index = this.objeto.parcelas.indexOf(parcela);
+    // ao localizar
+    if (index != null) {
+      this.valorTotalParcelas -= Number(parcela.valor);
+      this.objeto.parcelas.splice(index, 1)
     }
+  }
+
+  public aplicarTipoPagamentoVenda(option) {
+    this.parcelamento = option;
+    if (option) {
+      this.orcamentoParcela = new OrcamentoParcela();
+    }
+  }
+
+  public aplicarAcaoOrcamento(parametro) {
+    this.objeto.codStatus = parametro;
   }
 
   abrirModal(template, size, param) {

@@ -11,6 +11,7 @@ import { ProdutoService } from 'src/app/services/produto';
 import { CompraProduto } from 'src/app/model/compraProduto';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompraParcela } from 'src/app/model/compraParcela';
+import { FormaPagamento } from 'src/app/model/FormaPagamento';
 
 
 @Component({
@@ -33,6 +34,8 @@ export class CadastrarEEditarCompraComponent implements OnInit {
   public valorTotalProdutos = 0;
   public valorTotalParcelas = 0;
   public parcelamento = false;
+  public formaPagamento;
+
   public rotaVisualizar = false;
 
   constructor(
@@ -53,6 +56,8 @@ export class CadastrarEEditarCompraComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this._formaPagamentoService.pesquisar().subscribe(data => this.listaFormasPagamento == data);
     // checa se é edição
     this._route.params.subscribe(params => {
       if (params.id != null) {

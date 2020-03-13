@@ -10,31 +10,31 @@ import { Cliente } from '../model/cliente';
 export class ClienteService {
     constructor(private http: HttpClient) { }
     pesquisar(params) {
-        return this.http.get(`clientes`, { params });
+        return this.http.get(`operador/clientes`, { params });
     }
 
     alterar(id: number, dto: Cliente) {
-        return this.http.put(`clientes/` + id, dto);
+        return this.http.put(`operador/clientes/` + id, dto);
     }
 
     salvar(cliente: Cliente): Observable<Cliente> {
-        return this.http.post<Cliente>(`clientes`, cliente);
+        return this.http.post<Cliente>(`operador/clientes`, cliente);
     }
 
     excluir(id: number) {
-        return this.http.delete(`clientes/` + id);
+        return this.http.delete(`operador/clientes/` + id);
     }
 
     buscarPeloId(id: number) {
-        return this.http.get<Cliente>(`clientes/` + id);
+        return this.http.get<Cliente>(`operador/clientes/` + id);
     }
 
     buscarPeloCpf(cpf: string) {
-        return this.http.get<Cliente>(`clientes/getByCpf/` + cpf);
+        return this.http.get<Cliente>(`operador/clientes/getByCpf/` + cpf);
     }
 
     alterarSenha(id: number, novaSenha: String) {
-        return this.http.put(`clientes/alterarSenha/` + id, novaSenha);
+        return this.http.put(`operador/clientes/alterarSenha/` + id, novaSenha);
     }
 
 

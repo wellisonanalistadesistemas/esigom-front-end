@@ -13,27 +13,27 @@ export class ProdutoService {
   constructor(private http: HttpClient) { }
 
   pesquisar(params?) {
-    return this.http.get(`produtos`, { params });
+    return this.http.get(`operador/produtos`, { params });
   }
 
   getAll() {
-    return this.http.get(`produtos/`);
+    return this.http.get(`operador/produtos/`);
   }
 
   alterar(id: number, dto: Produto) {
-    return this.http.put(`produtos/` + id, dto);
+    return this.http.put(`operador/produtos/` + id, dto);
   }
 
   salvar(produto: Produto): Observable<Perfil> {
-    return this.http.post<Perfil>(`produtos`, produto);
+    return this.http.post<Perfil>(`operador/produtos`, produto);
   }
 
   excluir(id: number) {
-    return this.http.delete(`produtos/` + id);
+    return this.http.delete(`operador/produtos/` + id);
   }
 
   buscarPeloId(id: number) {
-    return this.http.get<Produto>(`produtos/` + id);
+    return this.http.get<Produto>(`operador/produtos/` + id);
   }
 
 }

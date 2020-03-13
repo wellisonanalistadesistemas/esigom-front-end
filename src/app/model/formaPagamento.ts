@@ -6,5 +6,4 @@ export class FormaPagamento {
         this.id = null;
         this.descricao = null;
     }
-
 }

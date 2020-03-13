@@ -11,27 +11,27 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   pesquisar(params) {
-    return this.http.get(`usuarios`, { params });
+    return this.http.get(`adm/usuarios`, { params });
   }
 
   alterar(id: number, dto: Usuario) {
-    return this.http.put(`usuarios/` + id, dto);
+    return this.http.put(`adm/usuarios/` + id, dto);
   }
 
   salvar(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`usuarios`, usuario);
+    return this.http.post<Usuario>(`adm/usuarios`, usuario);
   }
 
   excluir(id: number) {
-    return this.http.delete(`usuarios/` + id);
+    return this.http.delete(`adm/usuarios/` + id);
   }
 
   buscarPeloId(id: number) {
-    return this.http.get<Usuario>(`usuarios/` + id);
+    return this.http.get<Usuario>(`adm/usuarios/` + id);
   }
 
   alterarSenha(id: number, novaSenha: String) {
-    return this.http.put(`usuarios/alterarSenha/` + id, novaSenha);
+    return this.http.put(`adm/usuarios/alterarSenha/` + id, novaSenha);
   }
 
 

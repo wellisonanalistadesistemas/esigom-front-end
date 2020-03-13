@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Servico } from '../model/servico';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class FormaPagamentoService {
+export class AuthService {
   constructor(private http: HttpClient) { }
 
-
-  pesquisar(params?) {
-    return this.http.get(`operador/formasPagamento`, { params });
+  autenticar(usuario) {
+    return this.http.post<Servico>(`login`, JSON.stringify(usuario));
   }
-
-
-
 }

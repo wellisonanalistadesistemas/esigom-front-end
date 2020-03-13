@@ -1,8 +1,8 @@
 import { CentroCusto } from './centroCusto';
 import { Fornecedor } from './fornecedor';
-import { FormaPagamento } from './formaPagamento';
 import { CompraParcela } from './compraParcela';
 import { CompraProduto } from './compraProduto';
+import { FormaPagamento } from './FormaPagamento';
 
 export class Compra {
     public id: number;
