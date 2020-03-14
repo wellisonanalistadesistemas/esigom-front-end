@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Servico } from '../model/servico';
+import { RetornoAuth } from '../model/retornoAuth';
 
 
 @Injectable({
@@ -11,6 +11,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   autenticar(usuario) {
-    return this.http.post<Servico>(`login`, JSON.stringify(usuario));
+    return this.http.post<RetornoAuth>(`login`, JSON.stringify(usuario));
   }
 }

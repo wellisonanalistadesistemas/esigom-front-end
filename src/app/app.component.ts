@@ -15,13 +15,13 @@ export class AppComponent {
 
   ngOnInit() {
     // Em caso de Login Vazio
-    if (localStorage.getItem('token') == null) {
+    if (localStorage.getItem('sigom_auth') == null || JSON.parse(localStorage.getItem('sigom_auth')).access_token == null) {
       this.router.navigate(['auth']);
     }
   }
 
   esconderBarra() {
-    if (localStorage.getItem('token') !== null && localStorage.getItem('token').toString().trim() !== null) {
+    if (localStorage.getItem('sigom_auth') !== null && JSON.parse(localStorage.getItem('sigom_auth')).access_token !== null) {
       return false;
     } else {
       //this.router.navigate(['auth']);

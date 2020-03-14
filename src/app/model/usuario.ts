@@ -5,6 +5,8 @@ export class Usuario {
     public login: string;
     public nome: string;
     public email: string;
+    public funcao: string;
+    public img: string;
     public senha: string;
     public dthInclusao: Date;
     perfis = new Array<Perfil>();

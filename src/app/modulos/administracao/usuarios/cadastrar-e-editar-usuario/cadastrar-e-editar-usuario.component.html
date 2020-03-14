@@ -10,39 +10,60 @@
             <nb-card-body>
                 <form>
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
                             <div class="form-group">
                                 <label class="label col-form-label">Login:</label>
                                 <input [disabled]="rotaVisualizar" name="hidden" class="form-control"
                                     value="objeto.login" name="login" [(ngModel)]="objeto.login" autocomplete="off">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
                             <div class="form-group">
                                 <label class="label col-form-label">Nome:</label>
                                 <input [disabled]="rotaVisualizar" autocomplete="off" class="form-control"
                                     value="objeto.nome" name="nome" [(ngModel)]="objeto.nome" uppercase>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                            <div class="form-group">
+                                <label class="label col-form-label">Função:</label>
+                                <input [disabled]="rotaVisualizar" autocomplete="off" class="form-control"
+                                    value="objeto.funcao" name="funcao" [(ngModel)]="objeto.funcao">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
                                 <label class="label col-form-label">E-mail:</label>
                                 <input [disabled]="rotaVisualizar" autocomplete="off" class="form-control"
                                     value="objeto.email" name="email" [(ngModel)]="objeto.email">
                             </div>
                         </div>
-                        <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
                                 <label class="label col-form-label">Senha:</label>
                                 <input [disabled]="rotaVisualizar" autocomplete="off" type="password"
                                     [(ngModel)]="objeto.senha" class="form-control" name="senha">
                             </div>
                         </div>
-                        <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+                        <div *ngIf="!objeto.id" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
                             <div class="form-group">
                                 <label class="label col-form-label">Confirmar Senha:</label>
                                 <input [disabled]="rotaVisualizar" autocomplete="off" type="password"
                                     class="form-control" name="confirmacaoSenha">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label class="label col-form-label">Imagem:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <span title="Modificar Arquivo Enviado" class="btn btn-primary btn-file">
+                                        <i class="fa fa-upload" aria-hidden="true"></i> Enviar
+                                        <input [disabled]="rotaVisualizar" type="file" accept="image/x-png,image/gif,image/jpeg" (change)="enviarImg($event)" />
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

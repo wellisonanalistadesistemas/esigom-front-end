@@ -5,5 +5,5 @@
 export const environment = {
   production: false,
   apiUrlService: 'http://localhost:8082/sigomapi/',
-  apiUrlIdentity: 'http://tcedigital-protocolo-dev.tce.ms.gov.br/',
+  //apiUrlIdentity: 'http://tcedigital-protocolo-dev.tce.ms.gov.br/',
 };

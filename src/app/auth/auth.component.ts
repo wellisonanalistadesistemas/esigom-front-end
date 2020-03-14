@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Role } from '../model/role';
 
 @Component({
   selector: 'app-auth',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class AuthComponent implements OnInit {
   constructor(private _authService: AuthService, private router: Router, private toastr: ToastrService) { }
   usuario = ({}) as UsuarioEntity;
-
+  roles = new Array<Role>();
+  
   @Output() teste = new EventEmitter();
 
   ngOnInit() {
@@ -24,13 +26,13 @@ export class AuthComponent implements OnInit {
     this._authService.autenticar(this.usuario).subscribe(data => {
 
       /* Variáveis*/
-      var resultado = JSON.parse(JSON.stringify(data));
-      localStorage.setItem("token", resultado.access_token);
-      localStorage.setItem("nome", resultado.nome);
-      localStorage.setItem("funcao", resultado.funcao);
-      localStorage.setItem("roles", resultado.roles);
-
-      this.teste.emit(localStorage);
+      var resposta = JSON.stringify(data);
+      //var roles = JSON.parse(JSON.stringify(data.roles));
+      localStorage.setItem("sigom_auth", resposta);
+      //localStorage.setItem("nome", resultado.nome);
+      //localStorage.setItem("funcao", resultado.funcao);
+      //localStorage.setItem("roles", JSON.stringify(roles));
+      
       this.toastr.success('Login realizado com sucesso.');
       this.router.navigate(['operador/orcamentos']);
     },

@@ -5,7 +5,7 @@
             </th>
             <th style="cursor: pointer;" title="Ordenar pelo Nome do Usuário" class="text-center"
                 (click)="ordenar('descricao')">
-                Nome do Perfil</th>
+                Nome Perfil</th>
             <th class="text-center">Ações</th>
         </tr>
     </thead>
@@ -14,10 +14,11 @@
             <td scope="col" class="text-center">{{it.id}}</td>
             <td scope="col">{{it.descricao}}</td>
             <td scope="col" class="text-center">
-                <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/administracao/perfis/editar/',it.id]"> <i
+                <button type="button" class="m-1 btn btn-sm btn-info"> <i class="fas fa-users"></i></button>
+                <!-- <button class="m-1 btn btn-sm btn-warning" [routerLink]="['/administracao/perfis/editar/',it.id]"> <i
                         class="fas fa-pencil-alt"></i></button>
                 <button class="m-1 btn btn-sm btn-danger" (click)="excluir(it.id)"> <i
-                        class="far fa-trash-alt"></i></button>
+                        class="far fa-trash-alt"></i></button> -->
             </td>
         </tr>
     </tbody>

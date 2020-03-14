@@ -9,8 +9,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './components/navbar/navbar.module';
-import { HomeModule } from './home/home.module';
-import { MyHttpInterceptor } from './http.interceptor';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgProgressModule } from '@ngx-progressbar/core';
@@ -20,8 +18,7 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { BsDatepickerModule } from 'ngx-bootstrap';
-import { HttpInterceptorModule } from './services/header-interceptor.service';
+import { MyHttpInterceptor } from 'src/http.interceptor';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -59,8 +56,7 @@ registerLocaleData(localePt);
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbEvaIconsModule,
-    RouterModule,
-    HttpInterceptorModule
+    RouterModule
   ],
   providers: [
     {

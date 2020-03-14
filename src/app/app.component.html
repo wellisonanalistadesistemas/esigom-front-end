@@ -1,6 +1,6 @@
 <ng-progress></ng-progress>
 <nb-layout>
-  <nb-layout-header fixed [hidden]="esconderBarra()">
+  <nb-layout-header fixed *ngIf="!esconderBarra()">
     <app-navbar></app-navbar>
   </nb-layout-header>
   <nb-layout-column>

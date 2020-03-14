@@ -17,7 +17,7 @@ export class CadastrarEditarUsuarioComponent implements OnInit {
   public perfil = new Perfil();
   public visualizar: boolean;
   rotaVisualizar: boolean;
-
+  public b64Blob: Blob;
   constructor(public _usuarioService: UsuarioService, public _perfilService: PerfilService, private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
   }
 
@@ -35,6 +35,30 @@ export class CadastrarEditarUsuarioComponent implements OnInit {
       }
     })
   }
+
+
+
+  changeFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  enviarImg(event) {
+    if (event.target.value) {
+      const file = event.target.files[0];
+      const type = file.type;
+      this.changeFile(file).then((base64: string): any => {
+        this.objeto.img = base64.split(',')[1];
+      });
+    }
+  }
+
+
+
 
   selecionarPerfil(perfilId: number, isAdicionar) {
     this.perfil = new Perfil();

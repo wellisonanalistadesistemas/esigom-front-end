@@ -1,67 +1,59 @@
 <nb-card class="status-success">
     <nb-card-header>
-        <h5>CONSULTAR PERFIS</h5>
+            <h4>Consulta de Perfis</h4>
     </nb-card-header>
     <nb-card-body>
-        <nb-card class="status-success">
-            <nb-card-header>
-                <h6>Filtros de Busca:</h6>
-            </nb-card-header>
-            <nb-card-body>
-                <form (ngSubmit)="buscarPerfis()">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                            <div class="form-group">
-                                <label class="col-form-label">Nome do Perfil</label>
-                                <input autocomplete="off" placeholder="Nome do Perfil" class="form-control" name="nome"
-                                    [(ngModel)]="buscaForm.descricao">
-                            </div>
-                        </div>
+        <form (ngSubmit)="buscarPerfis()">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                        <label class="label col-form-label">Nome:</label>
+                        <input autocomplete="off" class="form-control" name="nome">
                     </div>
-                    <div class="row">
-                        <div class="col text-right">
-                            <button class="m-1 btn btn-sm btn-primary btn-pesquisar" type="submit"> <i
-                                    class="fa fa-search"></i>
-                                Pesquisar</button>
-                            <button class="m-1 btn btn-sm btn-secondary btn-pesquisar" type="button"
-                                (click)="iniciarForm()"> <i class="fa fa-times"></i>
-                                Limpar</button>
-                            <button class=" m-1 btn btn-sm btn-success btn-pesquisar" [routerLink]="'cadastrar'">
+                </div>
+
+                <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <label class="label col-form-label">Nome:</label>
+                            <input fieldSize="medium" type="text" nbInput fullWidth>
+                        </div> -->
+            </div>
+            <div class="row">
+                <div class="col text-right">
+                    <button (click)="pesquisar()" nbButton status="primary" size="small" hero class="m-2"> <i
+                            class="fa fa-search"></i>&nbsp;Pesquisar</button>
+                    <button nbButton status="basic" size="small" class="m-1" (click)="resetForm()"><i
+                            class="fa fa-times"></i>&nbsp;Limpar</button>
+                    <!-- <button class=" m-1 btn btn-sm btn-success btn-pesquisar" [routerLink]="'cadastrar'">
                                 <i class="fa fa-user"></i>
                                 Cadastrar Perfil
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </nb-card-body>
-        </nb-card>
-        <div class="row">
-            <div class="col-md-12">
-                <nb-card class="status-success" *ngIf="listaPerfis">
-                    <div class="alert alert-primary" style="margin: 5px" *ngIf="listaPerfis && listaPerfis.total == 0"
-                        role="alert">
-                        Nenhum perfil encontrado!
-                    </div>
-                    <nb-card-header>
-                        <h6>Resultado da Pesquisa:</h6>
-                    </nb-card-header>
-                    <nb-card-body>
-                        <div class="col-m2-12" *ngIf="listaPerfis && listaPerfis.recordsTotal > 0">
-                            <app-listar-perfil [lista]="listaPerfis" (eventoOrdenar)="ordenar($event)"
-                                (eventoPaginar)="paginar($event)"
-                                (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
-                            </app-listar-perfil>
-                        </div>
-                        <div class="alert alert-primary" style="margin: 5px"
-                            *ngIf="listaPerfis && listaPerfis.recordsTotal == 0" role="alert">
-                            Nenhum Perfil foi encontrado!
-                        </div>
-                    </nb-card-body>
-                </nb-card>
+                            </button> -->
+                </div>
             </div>
+        </form>
+    </nb-card-body>
+</nb-card>
+<nb-card class="status-success" *ngIf="listaPerfis">
+    <div class="alert alert-primary" style="margin: 5px" *ngIf="listaPerfis && listaPerfis.total == 0" role="alert">
+        Nenhuma remessa encontrada!
+    </div>
+    <nb-card-header>
+        <h6>Resultado da Pesquisa:</h6>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="col-m2-12" *ngIf="listaPerfis && listaPerfis.recordsTotal > 0">
+            <app-listar-perfil [lista]="listaPerfis" (eventoOrdenar)="ordenar($event)" (eventoPaginar)="paginar($event)"
+                (eventoExcluir)="abrirModalExclusao($event, confirmacao)">
+            </app-listar-perfil>
+        </div>
+        <div class="alert alert-primary" style="margin: 5px" *ngIf="listaPerfis && listaPerfis.recordsTotal == 0"
+            role="alert">
+            Nenhum Perfil foi encontrado!
         </div>
     </nb-card-body>
 </nb-card>
+
+
+
 <ng-template #confirmacao let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Confirmação</h4>
