@@ -25,14 +25,9 @@ export class AuthComponent implements OnInit {
   autenticar() {
     this._authService.autenticar(this.usuario).subscribe(data => {
 
-      /* Variáveis*/
       var resposta = JSON.stringify(data);
-      //var roles = JSON.parse(JSON.stringify(data.roles));
       localStorage.setItem("sigom_auth", resposta);
-      //localStorage.setItem("nome", resultado.nome);
-      //localStorage.setItem("funcao", resultado.funcao);
-      //localStorage.setItem("roles", JSON.stringify(roles));
-      
+
       this.toastr.success('Login realizado com sucesso.');
       this.router.navigate(['operador/orcamentos']);
     },

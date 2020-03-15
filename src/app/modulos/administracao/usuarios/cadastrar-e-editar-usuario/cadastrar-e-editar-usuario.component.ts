@@ -52,7 +52,7 @@ export class CadastrarEditarUsuarioComponent implements OnInit {
       const file = event.target.files[0];
       const type = file.type;
       this.changeFile(file).then((base64: string): any => {
-        this.objeto.img = base64.split(',')[1];
+        this.objeto.img = base64;//base64.split(',')[1];
       });
     }
   }

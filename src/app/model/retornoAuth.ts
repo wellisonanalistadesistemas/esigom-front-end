@@ -7,6 +7,7 @@ export class RetornoAuth {
     public login: string;
     public cod_pessoa: number;
     public nome: string;
+    public img_perfil_base64: any;
     public funcao: string;
     public roles = new Array<Role>();
 
